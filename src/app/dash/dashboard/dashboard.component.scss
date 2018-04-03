@@ -1,5 +1,4 @@
-$skin-color: #3b62b8cc;
-$text-color: #eee69f;
+@import '~_variables.scss';
 
 .dashboard {
     height: 100vh;
@@ -13,19 +12,6 @@ $text-color: #eee69f;
     padding-top: 50px;
 }
 
-.card {
-    background-color: $skin-color;
-    margin: 10px;
-    border: 2px solid $text-color;
-    height: 65px;
-    border-radius: 45px;    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    &:hover {
-        background-color: #b6c57350;
-    }    
-}
 
 .status {
     margin: 50px 10px 5px;

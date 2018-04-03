@@ -1,5 +1,5 @@
+import { LoginService } from './../../login.service';
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
 declare var googleyolo: any;
 
 enum Status {
@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   signIn(){
     this.status = Status.Initial;
     this.loginSvc.loginUser().then( (credential)=>{
-      this.statusText = "Welcome " + credential.displayName;
+      this.statusText = "Hi " + credential.displayName;
       this.status = Status.SignedIn;
     }, (error)=> {
       if(error && error.type ==="userCanceled"){
@@ -35,5 +35,4 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-
 }

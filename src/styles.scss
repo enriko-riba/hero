@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Chicle|Yatra+One');
+
 html, body {
     margin: 0;
     padding: 0;
+    font-family: 'Chicle', cursive;
+}
+button, label, p {
+    font-family: 'Chicle', cursive;
 }
 .flex-container{
     display: flex;
