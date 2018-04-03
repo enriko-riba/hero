@@ -1,0 +1,32 @@
+.dashboard {
+    height: 100vh;
+    background-image: url('assets/images/8ec8ee6bc4062316c995a3a9fd8bbb5a.jpg')
+}
+
+.content {
+    padding-top: 50px;
+}
+
+.status {
+    margin: 50px 10px;
+    font-size: 30px;
+    text-align: center;
+    color: #ff6e00;
+    background-color: #99ffffaa;
+    padding: 20px;
+}
+
+.card {
+    background-color: #30aef6e0;
+    //padding: 2px;
+    margin: 10px;
+    border: 3px solid rgb(214, 162, 162);
+    height: 75px;
+    border-radius: 45px;    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        background-color: #b6c57350;
+    }    
+}
