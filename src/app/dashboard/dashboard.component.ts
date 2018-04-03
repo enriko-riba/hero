@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 declare var googleyolo: any;
 
+enum Status {
+  Initial,
+  SignedIn,
+  Canceled
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,14 +15,24 @@ declare var googleyolo: any;
 })
 export class DashboardComponent implements OnInit {
 
-  private status = "You are not signed-in!";
+  public status :Status = Status.Initial;
+  public statusText = "Sign-in required!";
 
   constructor(private loginSvc: LoginService) { }
 
   ngOnInit() {
+    this.signIn();
+  }
+
+  signIn(){
+    this.status = Status.Initial;
     this.loginSvc.loginUser().then( (credential)=>{
-      console.log('sign in: ', credential);
-      this.status = "Welcome " + credential.displayName;
+      this.statusText = "Welcome " + credential.displayName;
+      this.status = Status.SignedIn;
+    }, (error)=> {
+      if(error && error.type ==="userCanceled"){
+        this.status = Status.Canceled;
+      }
     });
   }
 

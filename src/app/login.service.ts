@@ -26,6 +26,8 @@ export class LoginService {
       console.log('hint: ', hintcredential);
       this.credential = hintcredential;
       return hintcredential;
+    }, (error)=>{
+      console.log('hint error: ', error.message);
     });
     return p;
   }
