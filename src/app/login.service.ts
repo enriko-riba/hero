@@ -36,6 +36,7 @@ export class LoginService {
     let p = googleyolo.hint(data);
     p.then((hintcredential) => {
       console.log('hint: ', hintcredential);
+      console.log('token: ',hintcredential.idToken);
       this.loginStatus.next(Status.SignedIn);
       return hintcredential;
     }, (error)=>{
