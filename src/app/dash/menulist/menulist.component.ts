@@ -12,4 +12,7 @@ export class MenulistComponent implements OnInit {
   ngOnInit() {
   }
 
+  startClick() {
+    console.log('start...');
+  }
 }

@@ -1,6 +1,6 @@
-<div class="flex-container row content">
-  <div class="card" [ngClass]="{disabled: !canClick}">Start</div>
-  <div class="card" [ngClass]="{disabled: !canClick}">i2</div>
-  <div class="card" [ngClass]="{disabled: !canClick}">i3</div>
-  <div class="card" [ngClass]="{disabled: !canClick}">i4</div>
+<div class="flex-container row menu">
+  <button [disabled]="!canClick" class="card" [ngClass]="{disabled: !canClick}" (click)="startClick()">Start</button>
+  <button [disabled]="!canClick" class="card" [ngClass]="{disabled: !canClick}">i2</button>
+  <button [disabled]="!canClick" class="card" [ngClass]="{disabled: !canClick}">i3</button>
+  <button [disabled]="!canClick" class="card" [ngClass]="{disabled: !canClick}">i4</button>
 </div>!
