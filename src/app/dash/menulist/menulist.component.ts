@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'menulist',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menulist.component.scss']
 })
 export class MenulistComponent implements OnInit {
-
+  @Input("canClick") canClick = false;
   constructor() { }
 
   ngOnInit() {

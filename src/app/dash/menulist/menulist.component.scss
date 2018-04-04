@@ -8,8 +8,10 @@
     border-radius: 45px;    
     display: flex;
     align-items: center;
-    justify-content: center;
-    &:hover {
-        background-color: #b6c57350;
-    }    
+    justify-content: center;   
 }
+.disabled  {
+    filter: brightness(250%);
+    border: none;
+    opacity: 0.7;
+} 

@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 declare var googleyolo: any;
 
 const data = {
@@ -13,21 +15,33 @@ const data = {
     }]
 };
 
+export enum Status {
+  SignedOut,
+  SignedIn,
+  Canceled,
+  Error
+}
+
 @Injectable()
 export class LoginService {
-
-  private credential: any;
+  private loginStatus : BehaviorSubject<Status> = new BehaviorSubject(Status.SignedOut);
 
   constructor() { }
+
+  get status() {
+    return this.loginStatus.asObservable();
+  }
 
   loginUser(): Promise<any> {
     let p = googleyolo.hint(data);
     p.then((hintcredential) => {
       console.log('hint: ', hintcredential);
-      this.credential = hintcredential;
+      this.loginStatus.next(Status.SignedIn);
       return hintcredential;
     }, (error)=>{
       console.log('hint error: ', error.message);
+      let val = (error.type == 'userCanceled' ? Status.Canceled : Status.Error);
+      this.loginStatus.next(val);
     });
     return p;
   }

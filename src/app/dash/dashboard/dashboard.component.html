@@ -1,9 +1,9 @@
 <div class="dashboard">
   
-  <menulist class="content"></menulist>
+  <menulist class="content" [canClick]="isMenuVisible"></menulist>
 
   <div class="flex-container row">
     <div class="status">{{statusText}}</div>
-    <button class="sign-in" *ngIf="status == 2" (click)="signIn()">Sign in</button>
+    <button class="sign-in" *ngIf="isButtonSignInVisible" (click)="signIn()">Sign in</button>
   </div>
 </div>
