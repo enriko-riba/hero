@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'menulist',
@@ -7,9 +8,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class MenulistComponent implements OnInit {
   @Input("canClick") canClick = false;
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute,) { }
 
   ngOnInit() {
   }
 
+  startClick() {
+    console.log('start...');
+    this.router.navigate(['character/stats']);
+  }
 }

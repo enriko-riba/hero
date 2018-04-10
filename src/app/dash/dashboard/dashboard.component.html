@@ -1,7 +1,7 @@
 <div class="dashboard">
   
-  <menulist class="content" [canClick]="isMenuVisible"></menulist>
-
+  <menulist [canClick]="isMenuVisible"></menulist>
+  
   <div class="flex-container row">
     <div class="status">{{statusText}}</div>
     <button class="sign-in" *ngIf="isButtonSignInVisible" (click)="signIn()">Sign in</button>

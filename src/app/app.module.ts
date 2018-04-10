@@ -1,3 +1,4 @@
+import { CharacterService } from './character.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -17,7 +18,7 @@ import { LoginService } from './login.service';
     AppRoutingModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LoginService],
+  providers: [LoginService, CharacterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

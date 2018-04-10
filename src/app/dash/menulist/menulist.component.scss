@@ -1,17 +1,25 @@
 @import '~_variables.scss';
 
+.menu {
+    padding-top: 100px;
+}
+
 .card {
     background-color: $skin-color;
     margin: 10px;
     border: 2px solid $text-color;
     height: 65px;
+    width: 65px;
     border-radius: 45px;    
     display: flex;
     align-items: center;
-    justify-content: center;   
+    justify-content: center;
+    &:focus {
+        outline: none;
+    }
 }
 .disabled  {
-    filter: brightness(250%);
+    //filter: brightness(80%);
     border: none;
-    opacity: 0.7;
+    opacity: 0.6;
 } 
