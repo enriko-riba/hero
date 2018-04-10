@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 declare var googleyolo: any;
+
+export var clientId  = "679482392778-8gu33hgl4v7jaq8irc4ct9mi3u8o5g59.apps.googleusercontent.com";
 
 const data = {
   supportedAuthMethods: [
@@ -11,7 +14,7 @@ const data = {
   supportedIdTokenProviders: [
     {
       uri: "https://accounts.google.com",
-      clientId: "679482392778-8gu33hgl4v7jaq8irc4ct9mi3u8o5g59.apps.googleusercontent.com"
+      clientId: clientId
     }]
 };
 

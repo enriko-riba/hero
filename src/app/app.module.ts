@@ -8,6 +8,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppComponent } from './app.component';
 import { LoginService } from './login.service';
+import { GameClientService } from './game-client.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { LoginService } from './login.service';
     AppRoutingModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LoginService, CharacterService],
+  providers: [LoginService, CharacterService, GameClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

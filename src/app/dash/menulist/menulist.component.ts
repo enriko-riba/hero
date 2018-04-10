@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { GameClientService } from '../../game-client.service';
 
 @Component({
   selector: 'menulist',
@@ -8,13 +9,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class MenulistComponent implements OnInit {
   @Input("canClick") canClick = false;
-  constructor(private router: Router, private route: ActivatedRoute,) { }
+  constructor(private router: Router, private route: ActivatedRoute, private client: GameClientService) { }
 
   ngOnInit() {
   }
 
   startClick() {
     console.log('start...');
+    this.client.initSocket();
     this.router.navigate(['character/stats']);
   }
 }
