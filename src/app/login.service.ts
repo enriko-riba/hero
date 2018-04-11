@@ -28,7 +28,7 @@ export enum Status {
 export class LoginService {
   private googleStatus: BehaviorSubject<Status> = new BehaviorSubject(Status.Initializing);
 
-  private googleAuth: gapi.auth2.GoogleAuth;
+ // private googleAuth: gapi.auth2.GoogleAuth;
   private loadedPromise: Promise<void>;
 
   constructor(private ngZone: NgZone) {
@@ -39,8 +39,7 @@ export class LoginService {
           scope: 'email profile openid'
         }).then(() => this.ngZone.run(() => {
             //  check google user status
-            this.googleAuth = gapi.auth2.getAuthInstance();
-            if (this.googleAuth.isSignedIn.get())
+            if (gapi.auth2.getAuthInstance().isSignedIn.get())
               this.googleStatus.next(Status.SignedIn);
             else
               this.googleStatus.next(Status.SignedOut);
@@ -57,24 +56,23 @@ export class LoginService {
 
   public get googleAuthObject() {
     let p = this.loadedPromise.then(() => {
-      this.googleAuth = gapi.auth2.getAuthInstance();
-      return this.googleAuth;
+      return gapi.auth2.getAuthInstance();
     });
     return p;
   }
 
   public signInGoogle(): Promise<gapi.auth2.GoogleUser> {
     let p = this.loadedPromise.then(() => {
-      this.googleAuth = gapi.auth2.getAuthInstance();
-      if (this.googleAuth.isSignedIn.get())
-        return this.googleAuth.currentUser.get();
+      let googleAuth = gapi.auth2.getAuthInstance();
+      if (googleAuth.isSignedIn.get())
+        return googleAuth.currentUser.get();
       else
-        return this.googleAuth.signIn();
+        return googleAuth.signIn();
     });
     return p;
   }
 
   public get idToken(){
-    return this.googleAuth.currentUser.get().getAuthResponse().id_token;
+    return gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
   }
 }
