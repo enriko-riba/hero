@@ -1,12 +1,44 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { LoginService } from './login.service';
+import { Subscriber } from 'rxjs/Subscriber';
 
-const SERVER_URL = 'ws://hero-srv.azurewebsites.net/srv';
+const SERVER_URL = 'wss://hero-srv.azurewebsites.net/srv';
 
-export class Message {
-
+export enum MessageType{
+  Sync,
+  Chat
 }
+
+export interface Message {
+  Cid: number;
+  Tick: number;
+  Data: string;
+
+  Type: MessageType;
+  Payload: SyncData | ChatData;
+}
+
+export interface ChatData {
+  sender: string;
+  sendTime: number;
+  message: string;
+}
+
+export interface SyncData {
+  exp: number;
+  gold: number;
+  City: CityData;
+}
+export interface CityData {
+  food: number;
+  wood: number;
+  stone: number;
+  prodFood: number;
+  prodWood: number;
+  prodStone: number;
+}
+
 export enum Event {
   CONNECT = 'connect',
   DISCONNECT = 'disconnect'
@@ -30,9 +62,23 @@ export class GameClientService {
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
-      this.socket.onmessage = (event) => observer.next(event.data);
+      this.socket.onmessage = (event) => this.parseMesage(event.data, observer);
       this.socket.onerror = (event) => observer.error(event.data);
       this.socket.onclose = (event) => observer.complete();
     });
+  }
+
+  private parseMesage(data: string, observer : Subscriber<Message>){
+      const msg = JSON.parse(data);
+      const type = msg.Data.substring(0, 4); 
+      const payload = msg.Data.substring(5); 
+      switch(type)
+      {
+        case "SYNC":
+          msg.Type = MessageType.Sync;
+          msg.Payload = JSON.parse(payload);
+          break;
+      }
+      observer.next(msg);
   }
 }

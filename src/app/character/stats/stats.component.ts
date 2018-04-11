@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GameClientService } from '../../game-client.service';
+import { DecimalPipe } from '@angular/common';
+import { GameClientService, Message, SyncData, CityData } from '../../game-client.service';
 
 @Component({
   selector: 'app-stats',
@@ -8,10 +9,15 @@ import { GameClientService } from '../../game-client.service';
 })
 export class StatsComponent implements OnInit {
 
+  public sd : SyncData;
+  
   constructor(private gcs: GameClientService) { }
 
   ngOnInit() {
-    this.gcs.onMessage().subscribe(data=> console.log(data));
+    this.gcs.onMessage().subscribe(msg=> this.parseSync(msg));
   }
 
+  parseSync(msg: Message) {
+    this.sd = msg.Payload as SyncData;    
+  }
 }
