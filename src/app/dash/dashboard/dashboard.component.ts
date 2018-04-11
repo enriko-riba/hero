@@ -1,7 +1,6 @@
 import { LoginService, Status } from './../../login.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-declare var googleyolo: any;
 declare var gapi: any;
 
 @Component({
@@ -10,7 +9,15 @@ declare var gapi: any;
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  public isButtonSignInVisible : boolean = false;
+  //  google button
+  public isGoogleButtonEnabled : boolean = false;
+  public googleText = "Google loading...";
+
+  //  FB button
+  public isFbButtonEnabled : boolean = false;
+  public fbText = "FB loading...";
+
+
   public isMenuVisible : boolean = false;
   public statusText = "Sign-in required!";
 
@@ -18,39 +25,40 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginSvc.status.subscribe(val => { 
-      this.isButtonSignInVisible = (val != Status.SignedIn); 
-      this.isMenuVisible = !this.isButtonSignInVisible;
+    this.loginSvc.googleStatusState.subscribe(gs => { 
+      console.log('Google status:', gs);
+        this.isGoogleButtonEnabled = (gs != Status.Initializing);  
+        if(gs === Status.SignedOut){
+          this.googleText = "Google Sign in";
+        }else if(gs === Status.SignedIn){
+          this.loginSvc
+              .googleAuthObject
+              .then((auth)=> {
+                let profile = auth.currentUser.get().getBasicProfile();
+                this.googleText = "Continue as " + profile.getName();
+              }
+        )}
     });
-
-    this.signIn();
   }
 
-  signIn(){
-    this.isButtonSignInVisible = false;
+  signInGoogle(){
     this.isMenuVisible = false;
-    this.loginSvc.loginUser().then( (credential)=>{
-      this.statusText = "Hi " + credential.displayName;
+    this.loginSvc.signInGoogle().then( (user)=>{
+      this.statusText = "Hi " + user.getBasicProfile().getName();
+      this.isMenuVisible = true;
     }, (error)=> {
-      if(error && error.type ==="userCanceled"){
-        //this.status = Status.Canceled;
-      }else if(error && error.type ==="noCredentialsAvailable"){
-        gapi.load('auth2', function() {
-          gapi.auth2.authorize({
-            client_id: '679482392778-8gu33hgl4v7jaq8irc4ct9mi3u8o5g59.apps.googleusercontent.com',
-            scope: 'email profile openid',
-            response_type: 'id_token permission'
-          }, (response)=> {
-            if (response.error) {
-              // An error happened!
-              return;
-            }
-            // The user authorized the application for the scopes requested.
-            var accessToken = response.access_token;
-            var idToken = response.id_token;            
-          }); // gapi.auth2.authorize
-      }); //  gapi.load
-      }
+      console.error(error);
     });
+  }  
+
+  signOutGoogle() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+  signInFacebook(){
+
   }
 }

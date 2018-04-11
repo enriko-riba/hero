@@ -1,4 +1,3 @@
-import { CharacterService } from './character.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -19,7 +18,7 @@ import { GameClientService } from './game-client.service';
     AppRoutingModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [LoginService, CharacterService, GameClientService],
+  providers: [LoginService, GameClientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

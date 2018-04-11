@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { LoginService } from './login.service';
 
 const SERVER_URL = 'ws://hero-srv.azurewebsites.net/srv';
 
@@ -15,25 +16,23 @@ export enum Event {
 export class GameClientService {
 
   private socket;
-  constructor() {}
+  constructor(private loginSvc: LoginService) {}
 
   public initSocket(): void {
-    this.socket = new WebSocket(SERVER_URL);
+    const url =  `${SERVER_URL}?idToken=${this.loginSvc.idToken}`;
+    console.log(url);
+    this.socket = new WebSocket(url);    
   }
 
   public send(message: Message): void {
-    this.socket.emit('message', message);
+    this.socket.send(message);
   }
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
-      this.socket.on('message', (data: Message) => observer.next(data));
-    });
-  }
-
-  public onEvent(event: Event): Observable<any> {
-    return new Observable<Event>(observer => {
-      this.socket.on(event, () => observer.next());
+      this.socket.onmessage = (event) => observer.next(event.data);
+      this.socket.onerror = (event) => observer.error(event.data);
+      this.socket.onclose = (event) => observer.complete();
     });
   }
 }

@@ -1,9 +1,14 @@
 <div class="dashboard">
-  
+
   <menulist [canClick]="isMenuVisible"></menulist>
-  
+
   <div class="flex-container row">
     <div class="status">{{statusText}}</div>
-    <button class="sign-in" *ngIf="isButtonSignInVisible" (click)="signIn()">Sign in</button>
+    <div class="sign-in" *ngIf="!isMenuVisible" >
+      <button class="loginBtn loginBtn--google" [disabled]="!isGoogleButtonEnabled" (click)="signInGoogle()">{{googleText}}</button>
+    </div>
+    <div class="sign-in" *ngIf="!isMenuVisible" >
+      <button class="loginBtn loginBtn--facebook" [disabled]="!isFbButtonEnabled" (click)="signInFacebook()">{{fbText}}</button>
+    </div>
   </div>
 </div>

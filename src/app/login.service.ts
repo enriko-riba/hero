@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-declare var googleyolo: any;
+declare var gapi: any;
 
-export var clientId  = "679482392778-8gu33hgl4v7jaq8irc4ct9mi3u8o5g59.apps.googleusercontent.com";
+export var clientId = "679482392778-8gu33hgl4v7jaq8irc4ct9mi3u8o5g59.apps.googleusercontent.com";
 
 const data = {
   supportedAuthMethods: [
@@ -19,34 +19,62 @@ const data = {
 };
 
 export enum Status {
+  Initializing,
   SignedOut,
-  SignedIn,
-  Canceled,
-  Error
+  SignedIn
 }
 
 @Injectable()
 export class LoginService {
-  private loginStatus : BehaviorSubject<Status> = new BehaviorSubject(Status.SignedOut);
+  private googleStatus: BehaviorSubject<Status> = new BehaviorSubject(Status.Initializing);
 
-  constructor() { }
+  private googleAuth: gapi.auth2.GoogleAuth;
+  private loadedPromise: Promise<void>;
 
-  get status() {
-    return this.loginStatus.asObservable();
+  constructor(private ngZone: NgZone) {
+    this.loadedPromise = new Promise((resolve, reject) => {
+      gapi.load('auth2', () => {
+        gapi.auth2.init({
+          client_id: clientId,
+          scope: 'email profile openid'
+        }).then(() => this.ngZone.run(() => {
+            //  check google user status
+            this.googleAuth = gapi.auth2.getAuthInstance();
+            if (this.googleAuth.isSignedIn.get())
+              this.googleStatus.next(Status.SignedIn);
+            else
+              this.googleStatus.next(Status.SignedOut);
+            resolve();
+          }) //  ngZone.run
+        ); //  gapi.auth2.init 
+      }); //  gapi.load('auth2'
+    }); //  new Promise
   }
 
-  loginUser(): Promise<any> {
-    let p = googleyolo.hint(data);
-    p.then((hintcredential) => {
-      console.log('hint: ', hintcredential);
-      console.log('token: ',hintcredential.idToken);
-      this.loginStatus.next(Status.SignedIn);
-      return hintcredential;
-    }, (error)=>{
-      console.log('hint error: ', error.message);
-      let val = (error.type == 'userCanceled' ? Status.Canceled : Status.Error);
-      this.loginStatus.next(val);
+  public get googleStatusState() {
+    return this.googleStatus.asObservable();
+  }
+
+  public get googleAuthObject() {
+    let p = this.loadedPromise.then(() => {
+      this.googleAuth = gapi.auth2.getAuthInstance();
+      return this.googleAuth;
     });
     return p;
+  }
+
+  public signInGoogle(): Promise<gapi.auth2.GoogleUser> {
+    let p = this.loadedPromise.then(() => {
+      this.googleAuth = gapi.auth2.getAuthInstance();
+      if (this.googleAuth.isSignedIn.get())
+        return this.googleAuth.currentUser.get();
+      else
+        return this.googleAuth.signIn();
+    });
+    return p;
+  }
+
+  public get idToken(){
+    return this.googleAuth.currentUser.get().getAuthResponse().id_token;
   }
 }
