@@ -4,13 +4,13 @@ export interface CharData {
 }
 
 export enum EquipmentSlots{
-    RingL,
-    RingR,
     Head,
     Neck,
-    Body,
-    Legs,
-    Boots,
     HandL,
-    HandR
+    Body,
+    HandR,
+    RingL,
+    Legs,
+    RingR,
+    Boots,
 }

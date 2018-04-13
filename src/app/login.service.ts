@@ -37,7 +37,7 @@ export class LoginService {
   private googleProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
   private fbProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
 
-  private googleLoadedPromise: Promise<void>;
+  public googleLoadedPromise: Promise<void>;
 
   constructor(private ngZone: NgZone) {
     this.googleLoadedPromise = new Promise((resolve, reject) => {

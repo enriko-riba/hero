@@ -1,8 +1,27 @@
 <div class="content">
-  <div class="">
-    <!-- <img src="../../../assets/images/char_slots.png" /> -->
+  <div class="equipment-slots">
+    <div class="row">
+      <button class="slot" id="head" (click)="eqClick(0)"></button>
+    </div>
+    <div class="row">
+        <button class="slot" id="neck" (click)="eqClick(1)"></button>
+      </div>
+    <div class="row">
+      <button class="slot" id="handL" (click)="eqClick(2)"></button>
+      <button class="slot" id="body" (click)="eqClick(3)"></button>
+      <button class="slot" id="handR"  (click)="eqClick(4)"></button>
+    </div>
+    <div class="row">
+      <button class="slot" id="ringL"  (click)="eqClick(5)"></button>
+      <button class="slot" id="legs" (click)="eqClick(6)"></button>
+      <button class="slot" id="ringR" (click)="eqClick(7)"></button>
+    </div>   
+    <div class="row">
+      <button class="slot" id="boots" (click)="eqClick(8)"></button>
+    </div>
   </div>
-  <div  class="">
+
+  <div class="">
     <div class="flex-container">
       <label>Food:</label>
       <input readonly [value]="sd?.City.food | number:'1.0-0'" />

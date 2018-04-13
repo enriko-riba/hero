@@ -27,8 +27,11 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.loginSvc.authStatus.subscribe(aus => this.handleProviderChange(aus));
     this.loginSvc.googleStatus.subscribe(status =>this.handleGoogleAccountChange(status));
-  }
 
+    let self = this;
+    this.loginSvc.googleLoadedPromise.then( ()=> setTimeout(self.signInGoogle.bind(self), 1000 ));
+  }
+  
   private handleProviderChange(currentProvider: AuthProvider) {
     if (currentProvider === AuthProvider.None) {
       this.statusText = "Sign-in required!";
@@ -37,11 +40,11 @@ export class DashboardComponent implements OnInit {
       this.isMenuVisible = true;
     }
   }
-
+  
   private handleGoogleAccountChange(status: ProviderStatus) {
     this.isGoogleButtonEnabled = (status != ProviderStatus.Initializing);
     if (status === ProviderStatus.SignedOut) {
-      this.googleText = "Google Sign in";
+      this.googleText = "Sign in with Google";
     } else if (status === ProviderStatus.SignedIn) {
       let profile = this.loginSvc.googleAuthObject.currentUser.get().getBasicProfile();
       this.googleText = "Continue as " + profile.getName();
@@ -51,6 +54,7 @@ export class DashboardComponent implements OnInit {
 
 
   signInGoogle() {
+    console.log('Google sign in...');
     this.isMenuVisible = false;
     this.loginSvc.signInGoogle().then((user) => {
       this.statusText = "Hi " + user.getBasicProfile().getName();

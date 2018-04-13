@@ -10,7 +10,7 @@
     }
     label{
         text-align: left;
-        padding: 5px;
+        padding: 2px;
         margin-left:10px;
         flex: 1;
     }
@@ -18,4 +18,36 @@
         flex: 3;
         margin-right: 10px;
     }
+}
+
+.equipment-slots {
+    padding: 30px 5px 0;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+.row {
+    justify-content: center;
+    display: flex;
+    flex: 1 1 100%;
+    flex-flow: row nowrap;
+}
+.slot {
+    height: 64px;
+    width: 64px;
+    background-image: url('../../../assets/images/slot.png');
+    background-repeat: no-repeat; 
+    margin: 5px;
+    outline: none;
+    border: none;
+    background-color: #a3a3a3e6;
+    overflow: hidden;
+    border-radius: 6px;
+    &:focus {
+        outline: none;
+        border: none;
+
+    }
+
 }

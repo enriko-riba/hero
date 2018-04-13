@@ -22,4 +22,8 @@ export class StatsComponent implements OnInit {
   parseSync(msg: ServerMessage) {
     this.sd = msg.Payload as SyncData;    
   }
+
+  eqClick(id){
+    console.log('clikc, id:', id);
+  }
 }
