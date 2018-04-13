@@ -24,7 +24,7 @@ export class StatsComponent implements OnInit {
 
   parseSync(msg: ServerMessage) {
     this.sd = msg.Payload as SyncData;
-    this.ch = this.sd.Character || {slots: [], equiped: []};    
+    this.ch = this.sd.Character || {slots: [], equipped: []};    
   }
 
   private damageDesc(item: Item){
@@ -37,7 +37,7 @@ export class StatsComponent implements OnInit {
 
   public eqInfo(slotId: EquipmentSlot){
     if(!this.ch) return "";
-    let idx = this.ch.equiped[slotId] || 0;
+    let idx = this.ch.equipped[slotId] || 0;
     if(idx > 0){
       let item : Item = items[idx];
       return `${item.desc} ${this.damageDesc(item)} ${this.armorDesc(item)}`;

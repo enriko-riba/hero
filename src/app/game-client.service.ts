@@ -1,10 +1,11 @@
+import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { LoginService } from './login.service';
 import { Subscriber } from 'rxjs/Subscriber';
 import { ServerMessage, MessageType } from './Messages/Server2Client/ServerMessage';
 
-const SERVER_URL = 'wss://hero-srv.azurewebsites.net/srv';
+//const SERVER_URL = 'wss://hero-srv.azurewebsites.net/srv';
 
 @Injectable()
 export class GameClientService {
@@ -17,7 +18,7 @@ export class GameClientService {
       this.socket.close();
     }
 
-    const url =  `${SERVER_URL}?idToken=${this.loginSvc.token}`;
+    const url =  `${environment.serverUrl}?idToken=${this.loginSvc.token}`;
     console.log(url);
     this.socket = new WebSocket(url);    
   }

@@ -1,6 +1,6 @@
 export interface CharData {
     slots: Array<number>;   //  item for each inventory slot, even empty
-    equiped: Array<number>; //  item for each equipment slot, even empty
+    equipped: Array<number>; //  item for each equipment slot, even empty
 }
 
 export enum EquipmentSlot{

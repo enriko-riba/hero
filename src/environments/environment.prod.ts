@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  serverUrl: "wss://hero-srv.azurewebsites.net/srv"
 };
