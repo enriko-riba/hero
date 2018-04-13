@@ -1,20 +1,20 @@
 {
   "configVersion": 1,
-  "index": "https://enriko.riba.github.io/hero/index.html",
+  "index": "https://enriko-riba.github.io/hero/index.html",
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "https://enriko.riba.github.io/hero/favicon.ico",
-        "https://enriko.riba.github.io/hero/index.html",
-        "https://enriko.riba.github.io/hero/0.bfa40abdfb82935351d0.chunk.js",
-        "https://enriko.riba.github.io/hero/1.60d16cb3f9ab2900175a.chunk.js",
-        "https://enriko.riba.github.io/hero/inline.921c11834d44bef1040d.bundle.js",
-        "https://enriko.riba.github.io/hero/main.31d278571f406dbc55c5.bundle.js",
-        "https://enriko.riba.github.io/hero/polyfills.9173f3cd540ba3575b75.bundle.js",
-        "https://enriko.riba.github.io/hero/styles.03d14de330bb7da4a017.bundle.css"
+        "https://enriko-riba.github.io/hero/favicon.ico",
+        "https://enriko-riba.github.io/hero/index.html",
+        "https://enriko-riba.github.io/hero/0.bfa40abdfb82935351d0.chunk.js",
+        "https://enriko-riba.github.io/hero/1.60d16cb3f9ab2900175a.chunk.js",
+        "https://enriko-riba.github.io/hero/inline.921c11834d44bef1040d.bundle.js",
+        "https://enriko-riba.github.io/hero/main.31d278571f406dbc55c5.bundle.js",
+        "https://enriko-riba.github.io/hero/polyfills.9173f3cd540ba3575b75.bundle.js",
+        "https://enriko-riba.github.io/hero/styles.03d14de330bb7da4a017.bundle.css"
       ],
       "patterns": []
     },
@@ -23,39 +23,39 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "urls": [
-        "https://enriko.riba.github.io/hero/assets/buttons/btn_google.png",
-        "https://enriko.riba.github.io/hero/assets/images/44138e978dd79e777e9b3638f1e3ce0f.jpg",
-        "https://enriko.riba.github.io/hero/assets/images/62b93d2a5b6516f71058937dcc1fdd43.jpg",
-        "https://enriko.riba.github.io/hero/assets/images/7a1f66a7b0ded115351ae8c1ea98103c.jpg",
-        "https://enriko.riba.github.io/hero/assets/images/char_back.png",
-        "https://enriko.riba.github.io/hero/assets/images/char_slots.png",
-        "https://enriko.riba.github.io/hero/assets/images/char_texture.jpg",
-        "https://enriko.riba.github.io/hero/assets/images/cover.jpg",
-        "https://enriko.riba.github.io/hero/assets/images/ff9540b5b7c9e38c42ba6293144d2378.jpg",
-        "https://enriko.riba.github.io/hero/assets/images/slot.png"
+        "https://enriko-riba.github.io/hero/assets/buttons/btn_google.png",
+        "https://enriko-riba.github.io/hero/assets/images/44138e978dd79e777e9b3638f1e3ce0f.jpg",
+        "https://enriko-riba.github.io/hero/assets/images/62b93d2a5b6516f71058937dcc1fdd43.jpg",
+        "https://enriko-riba.github.io/hero/assets/images/7a1f66a7b0ded115351ae8c1ea98103c.jpg",
+        "https://enriko-riba.github.io/hero/assets/images/char_back.png",
+        "https://enriko-riba.github.io/hero/assets/images/char_slots.png",
+        "https://enriko-riba.github.io/hero/assets/images/char_texture.jpg",
+        "https://enriko-riba.github.io/hero/assets/images/cover.jpg",
+        "https://enriko-riba.github.io/hero/assets/images/ff9540b5b7c9e38c42ba6293144d2378.jpg",
+        "https://enriko-riba.github.io/hero/assets/images/slot.png"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://enriko.riba.github.io/hero/0.bfa40abdfb82935351d0.chunk.js": "bbf145e9255830e492a020fec9ea515c252ebaca",
-    "https://enriko.riba.github.io/hero/assets/buttons/btn_google.png": "3f32cdebbd3ccf0803d12a3527e1404d142ab80e",
-    "https://enriko.riba.github.io/hero/1.60d16cb3f9ab2900175a.chunk.js": "2ad16d8168a24caef7b7e7556bc39e0382f2067e",
-    "https://enriko.riba.github.io/hero/assets/images/44138e978dd79e777e9b3638f1e3ce0f.jpg": "b7500a1335fcd4ad424c61301424ab54c538d57d",
-    "https://enriko.riba.github.io/hero/inline.921c11834d44bef1040d.bundle.js": "d2ed34ae42326ef782ee7f5eb1ca86f426a075f5",
-    "https://enriko.riba.github.io/hero/assets/images/62b93d2a5b6516f71058937dcc1fdd43.jpg": "866d93be83cbe75d9b7c059ab3eee785f63c1f63",
-    "https://enriko.riba.github.io/hero/main.31d278571f406dbc55c5.bundle.js": "d2431b74f9bdca52def6f86181467b8a54b11a1d",
-    "https://enriko.riba.github.io/hero/assets/images/7a1f66a7b0ded115351ae8c1ea98103c.jpg": "f543933a744d570e3d23aca24b42ad2c5d2cc648",
-    "https://enriko.riba.github.io/hero/polyfills.9173f3cd540ba3575b75.bundle.js": "4593642ce5e78cfe4f9ed11f6de01041248b5e26",
-    "https://enriko.riba.github.io/hero/assets/images/char_back.png": "b8a690b61cdf7297a659565714c13891c58caa1f",
-    "https://enriko.riba.github.io/hero/styles.03d14de330bb7da4a017.bundle.css": "a865d45dbd7a036a434c74221201bcbfbbbba9ce",
-    "https://enriko.riba.github.io/hero/assets/images/char_slots.png": "24b0e472916ee0dda9c316ec53f29caa0f1e1396",
-    "https://enriko.riba.github.io/hero/favicon.ico": "41e2702f640ea7ea48a51029ccb833d3f597af30",
-    "https://enriko.riba.github.io/hero/assets/images/char_texture.jpg": "c9637aa0cdb32cf9d716215194a5abda5027a2ae",
-    "https://enriko.riba.github.io/hero/index.html": "90e98064f2b0065c2aa9c50ae8969ba1bc06ac06",
-    "https://enriko.riba.github.io/hero/assets/images/cover.jpg": "546767ca87579771d1302a1df122959584acdc21",
-    "https://enriko.riba.github.io/hero/assets/images/ff9540b5b7c9e38c42ba6293144d2378.jpg": "63c9954556ab9363eae2c290c16da142fc09a160",
-    "https://enriko.riba.github.io/hero/assets/images/slot.png": "a8418fbf8b1c220b22f627b0602533160c587e35"
+    "https://enriko-riba.github.io/hero/0.bfa40abdfb82935351d0.chunk.js": "bbf145e9255830e492a020fec9ea515c252ebaca",
+    "https://enriko-riba.github.io/hero/assets/buttons/btn_google.png": "3f32cdebbd3ccf0803d12a3527e1404d142ab80e",
+    "https://enriko-riba.github.io/hero/1.60d16cb3f9ab2900175a.chunk.js": "2ad16d8168a24caef7b7e7556bc39e0382f2067e",
+    "https://enriko-riba.github.io/hero/assets/images/44138e978dd79e777e9b3638f1e3ce0f.jpg": "b7500a1335fcd4ad424c61301424ab54c538d57d",
+    "https://enriko-riba.github.io/hero/inline.921c11834d44bef1040d.bundle.js": "d2ed34ae42326ef782ee7f5eb1ca86f426a075f5",
+    "https://enriko-riba.github.io/hero/assets/images/62b93d2a5b6516f71058937dcc1fdd43.jpg": "866d93be83cbe75d9b7c059ab3eee785f63c1f63",
+    "https://enriko-riba.github.io/hero/main.31d278571f406dbc55c5.bundle.js": "d2431b74f9bdca52def6f86181467b8a54b11a1d",
+    "https://enriko-riba.github.io/hero/assets/images/7a1f66a7b0ded115351ae8c1ea98103c.jpg": "f543933a744d570e3d23aca24b42ad2c5d2cc648",
+    "https://enriko-riba.github.io/hero/polyfills.9173f3cd540ba3575b75.bundle.js": "4593642ce5e78cfe4f9ed11f6de01041248b5e26",
+    "https://enriko-riba.github.io/hero/assets/images/char_back.png": "b8a690b61cdf7297a659565714c13891c58caa1f",
+    "https://enriko-riba.github.io/hero/styles.03d14de330bb7da4a017.bundle.css": "a865d45dbd7a036a434c74221201bcbfbbbba9ce",
+    "https://enriko-riba.github.io/hero/assets/images/char_slots.png": "24b0e472916ee0dda9c316ec53f29caa0f1e1396",
+    "https://enriko-riba.github.io/hero/favicon.ico": "41e2702f640ea7ea48a51029ccb833d3f597af30",
+    "https://enriko-riba.github.io/hero/assets/images/char_texture.jpg": "c9637aa0cdb32cf9d716215194a5abda5027a2ae",
+    "https://enriko-riba.github.io/hero/index.html": "9f5f89afcb74421a6dc8d68972e86669452b6967",
+    "https://enriko-riba.github.io/hero/assets/images/cover.jpg": "546767ca87579771d1302a1df122959584acdc21",
+    "https://enriko-riba.github.io/hero/assets/images/ff9540b5b7c9e38c42ba6293144d2378.jpg": "63c9954556ab9363eae2c290c16da142fc09a160",
+    "https://enriko-riba.github.io/hero/assets/images/slot.png": "a8418fbf8b1c220b22f627b0602533160c587e35"
   }
 }
