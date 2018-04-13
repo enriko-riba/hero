@@ -3,7 +3,7 @@ export interface CharData {
     equiped: Array<number>; //  item for each equipment slot, even empty
 }
 
-export enum EquipmentSlots{
+export enum EquipmentSlot{
     Head,
     Neck,
     HandL,
@@ -13,4 +13,14 @@ export enum EquipmentSlots{
     Legs,
     RingR,
     Boots,
+}
+
+export enum EquipmentType{
+    Head,
+    Neck,
+    Body,
+    Hand,
+    Ring,
+    Leg,
+    Boot,
 }

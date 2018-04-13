@@ -49,5 +49,20 @@
         border: none;
 
     }
+}
 
+.items {
+    display: flex;
+    flex-flow: wrap;
+    label {
+        flex: 1 1 30%;        
+        border: solid 1px silver;
+        padding: 2px 5px 1px 20px;
+    }
+    span {
+        padding: 1px;
+        flex: 1 1 50%;    
+        border: solid 1px silver;
+        background-color: #a3a3a3e6;
+    }
 }
