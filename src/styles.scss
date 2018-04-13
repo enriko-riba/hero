@@ -18,6 +18,9 @@ button, label, p {
         flex:  1 1 auto;
     }
 
+    .center {
+        flex: 0 1 100vw;
+    }
     .row {
         flex-flow:  row;
     }

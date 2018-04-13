@@ -1,0 +1,21 @@
+.content{
+    color: #f3f2a8;
+    background: url('../../../assets/images/char_back.png');
+    background-repeat: no-repeat; 
+    background-size: cover;
+    height: 100vh;
+    img {
+        width: 100%;
+        max-width: 512px;
+    }
+    label{
+        text-align: left;
+        padding: 5px;
+        margin-left:10px;
+        flex: 1;
+    }
+    input {
+        flex: 3;
+        margin-right: 10px;
+    }
+}

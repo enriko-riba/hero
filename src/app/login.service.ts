@@ -18,7 +18,13 @@ const data = {
     }]
 };
 
-export enum Status {
+export enum AuthProvider {
+  None,
+  Google,
+  Facebook
+}
+
+export enum ProviderStatus {
   Initializing,
   SignedOut,
   SignedIn
@@ -26,53 +32,125 @@ export enum Status {
 
 @Injectable()
 export class LoginService {
-  private googleStatus: BehaviorSubject<Status> = new BehaviorSubject(Status.Initializing);
+  private authProviderStatus: BehaviorSubject<AuthProvider> = new BehaviorSubject(AuthProvider.None);
+  private googleProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
+  private fbProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
 
- // private googleAuth: gapi.auth2.GoogleAuth;
-  private loadedPromise: Promise<void>;
+  private googleLoadedPromise: Promise<void>;
 
   constructor(private ngZone: NgZone) {
-    this.loadedPromise = new Promise((resolve, reject) => {
+    this.googleLoadedPromise = new Promise((resolve, reject) => {
       gapi.load('auth2', () => {
         gapi.auth2.init({
           client_id: clientId,
           scope: 'email profile openid'
         }).then(() => this.ngZone.run(() => {
-            //  check google user status
-            if (gapi.auth2.getAuthInstance().isSignedIn.get())
-              this.googleStatus.next(Status.SignedIn);
-            else
-              this.googleStatus.next(Status.SignedOut);
-            resolve();
-          }) //  ngZone.run
+          //  check google user status
+          if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
+            this.googleProviderStatus.next(ProviderStatus.SignedIn);
+          }
+          else {
+            this.googleProviderStatus.next(ProviderStatus.SignedOut);
+          }
+          resolve();
+        }) //  ngZone.run
         ); //  gapi.auth2.init 
       }); //  gapi.load('auth2'
     }); //  new Promise
+
+    //  TODO: check for FB account
   }
 
-  public get googleStatusState() {
-    return this.googleStatus.asObservable();
+
+  //----------------------------------------------//
+  //--------------- google related ---------------//
+  //----------------------------------------------//
+
+  /**
+   * 
+   */
+  public get googleStatus() {
+    return this.googleProviderStatus.asObservable();
   }
 
-  public get googleAuthObject() {
-    let p = this.loadedPromise.then(() => {
-      return gapi.auth2.getAuthInstance();
-    });
-    return p;
+  /**
+   * 
+   */
+  public get googleAuthObject(): gapi.auth2.GoogleAuth {
+    return gapi.auth2.getAuthInstance();
   }
 
+  /**
+   * 
+   */
   public signInGoogle(): Promise<gapi.auth2.GoogleUser> {
-    let p = this.loadedPromise.then(() => {
+    let p = this.googleLoadedPromise.then(() => {
       let googleAuth = gapi.auth2.getAuthInstance();
-      if (googleAuth.isSignedIn.get())
+      if (googleAuth.isSignedIn.get()) {
+        this.authProviderStatus.next(AuthProvider.Google);
+        this.googleProviderStatus.next(ProviderStatus.SignedIn);
         return googleAuth.currentUser.get();
-      else
+      }
+      else {
+        this.googleProviderStatus.next(ProviderStatus.SignedOut);
         return googleAuth.signIn();
+      }
     });
     return p;
   }
+  //----------------------------------------------//
+  //-------------- eof google related ------------//
+  //----------------------------------------------//
 
-  public get idToken(){
-    return gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
+
+
+  //----------------------------------------------//
+  //-------------- facebook related --------------//
+  //----------------------------------------------//
+  
+  //----------------------------------------------//
+  //------------ eof facebook related ------------//
+  //----------------------------------------------//
+
+
+
+  //------------- provider related ---------------//
+
+  /**
+   * 
+   */
+  public get authStatus() {
+    return this.authProviderStatus.asObservable();
+  }
+
+  /**
+   * 
+   */
+  public get token() {
+    let current = this.authProviderStatus.getValue();
+    if (current === AuthProvider.Google) {
+      return gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
+    } else if (current === AuthProvider.Facebook) {
+      //  TODO: FB
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * 
+   */
+  public signOut() {
+    
+    //  todo: check if google or FB signed in
+    let current = this.authProviderStatus.getValue();
+    if (current === AuthProvider.Google) {
+      // this.googleAuthObject.then(auth => auth.signOut());
+      this.googleAuthObject.signOut();
+      this.googleProviderStatus.next(ProviderStatus.SignedOut);
+    } else if (current === AuthProvider.Facebook) {
+      //  TODO: sign out FB
+    }
+    this.authProviderStatus.next(AuthProvider.None);
   }
 }

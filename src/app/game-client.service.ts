@@ -9,23 +9,27 @@ const SERVER_URL = 'wss://hero-srv.azurewebsites.net/srv';
 @Injectable()
 export class GameClientService {
 
-  private socket;
+  private socket: WebSocket;
   constructor(private loginSvc: LoginService) {}
 
   public initSocket(): void {
-    const url =  `${SERVER_URL}?idToken=${this.loginSvc.idToken}`;
+    if(this.socket){
+      this.socket.close();
+    }
+
+    const url =  `${SERVER_URL}?idToken=${this.loginSvc.token}`;
     console.log(url);
     this.socket = new WebSocket(url);    
   }
 
   public send(message: ServerMessage): void {
-    this.socket.send(message);
+    this.socket.send(JSON.stringify(message));
   }
 
   public onMessage(): Observable<ServerMessage> {
     return new Observable<ServerMessage>(observer => {
       this.socket.onmessage = (event) => this.parseMesage(event.data, observer);
-      this.socket.onerror = (event) => observer.error(event.data);
+      this.socket.onerror = (event) => observer.error(event);
       this.socket.onclose = (event) => observer.complete();
     });
   }

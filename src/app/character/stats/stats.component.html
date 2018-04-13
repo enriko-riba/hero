@@ -1,14 +1,19 @@
-<div>
-  <div>
-    <label>Food:</label>
-    <input readonly [value]="sd?.City.food | number:'1.0-0'" />
+<div class="content">
+  <div class="">
+    <!-- <img src="../../../assets/images/char_slots.png" /> -->
   </div>
-  <div>
+  <div  class="">
+    <div class="flex-container">
+      <label>Food:</label>
+      <input readonly [value]="sd?.City.food | number:'1.0-0'" />
+    </div>
+    <div class="flex-container">
       <label>Wood:</label>
       <input readonly [value]="sd?.City.wood | number:'1.0-0'" />
     </div>
-    <div>
-        <label>Stone:</label>
-        <input readonly [value]="sd?.City.stone | number:'1.0-0'" />
-      </div>
+    <div class="flex-container">
+      <label>Stone:</label>
+      <input readonly [value]="sd?.City.stone | number:'1.0-0'" />
+    </div>
+  </div>
 </div>
