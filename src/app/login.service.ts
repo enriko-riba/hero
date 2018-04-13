@@ -1,6 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { CanActivate, CanLoad, Router } from '@angular/router';
 
 declare var gapi: any;
 
@@ -85,18 +86,29 @@ export class LoginService {
    */
   public signInGoogle(): Promise<gapi.auth2.GoogleUser> {
     let p = this.googleLoadedPromise.then(() => {
-      let googleAuth = gapi.auth2.getAuthInstance();
+      let googleAuth : gapi.auth2.GoogleAuth = gapi.auth2.getAuthInstance();
       if (googleAuth.isSignedIn.get()) {
-        this.authProviderStatus.next(AuthProvider.Google);
-        this.googleProviderStatus.next(ProviderStatus.SignedIn);
-        return googleAuth.currentUser.get();
-      }
-      else {
-        this.googleProviderStatus.next(ProviderStatus.SignedOut);
-        return googleAuth.signIn();
-      }
+        let user = googleAuth.currentUser.get();
+        this.handleGoogleLoginState(user);
+        return user;
+      }else {
+        return googleAuth.signIn({prompt: 'select_account'})
+        .then( user => { 
+          this.handleGoogleLoginState(user);
+          return user;
+        });
+      }      
     });
     return p;
+  }
+
+  private handleGoogleLoginState(user: gapi.auth2.GoogleUser){
+    if(user){
+      this.authProviderStatus.next(AuthProvider.Google);
+      this.googleProviderStatus.next(ProviderStatus.SignedIn);
+    }else{
+      this.googleProviderStatus.next(ProviderStatus.SignedOut);
+    }
   }
   //----------------------------------------------//
   //-------------- eof google related ------------//
@@ -153,4 +165,30 @@ export class LoginService {
     }
     this.authProviderStatus.next(AuthProvider.None);
   }
+}
+
+export class AuthGuard implements CanActivate /*, CanLoad */ {
+  constructor(
+    private loginSvc: LoginService,
+    private router: Router){
+    this.loginSvc.authStatus.subscribe(ap => this.isSignedIn = ap != AuthProvider.None);
+  }
+
+  private isSignedIn : boolean;
+
+  public canActivate(){
+    if(!this.isSignedIn){
+      console.log('CanActivate guard prevented navigation!');
+      this.router.navigate(['redirectToRoot']);
+    }
+    return this.isSignedIn;
+  }
+
+  // public canLoad(){
+  //   console.log('CanLoad guard: ', this.isSignedIn);
+  //   if(!this.isSignedIn){
+  //     this.router.navigate(['redirectToRoot']);
+  //   }
+  //   return Promise.resolve(this.isSignedIn);
+  // }
 }

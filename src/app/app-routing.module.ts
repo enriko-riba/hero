@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './login.service';
 
 const routes: Routes = [
   {
@@ -7,7 +8,12 @@ const routes: Routes = [
     loadChildren: 'app/dash/dash.module#DashModule'
   },
   {
+    path: 'redirectToRoot',
+    redirectTo: '/'
+  },
+  {
     path: 'character',
+    canActivate: [AuthGuard],
     loadChildren: 'app/character/character.module#CharacterModule'
   },
 ];

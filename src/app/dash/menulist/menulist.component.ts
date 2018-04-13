@@ -19,7 +19,7 @@ export class MenulistComponent implements OnInit {
   }
 
   startClick() {
-    console.log('start...');
+    console.log('start..., token is:', this.loginSvc.token);
     this.client.initSocket();
     this.router.navigate(['character/stats']);
   }
