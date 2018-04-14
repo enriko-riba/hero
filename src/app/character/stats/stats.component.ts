@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { GameClientService} from '../../game-client.service';
 import { SyncData } from '../../Messages/Server2Client/SyncData';
-import { ServerMessage } from '../../Messages/Server2Client/ServerMessage';
+import { ServerMessage, MessageType } from '../../Messages/Server2Client/ServerMessage';
 import { CharData, EquipmentSlot } from '../../Messages/Server2Client/CharData';
-import { items, Item } from '../../Items/items';
+import { Item } from '../../Messages/Server2Client/Item';
 
 @Component({
   selector: 'app-stats',
@@ -19,12 +19,14 @@ export class StatsComponent implements OnInit {
   constructor(private gcs: GameClientService) { }
 
   ngOnInit() {
-    this.gcs.onMessage().subscribe(msg=> this.parseSync(msg));
+    this.gcs.onMessage().subscribe(msg => this.parseSync(msg));
   }
 
   parseSync(msg: ServerMessage) {
+    if(msg.Type === MessageType.Sync){
     this.sd = msg.Payload as SyncData;
-    this.ch = this.sd.Character || {slots: [], equipped: []};    
+    this.ch = this.sd.Character || {slots: [], equipped: []};
+    }   
   }
 
   private damageDesc(item: Item){
@@ -37,9 +39,9 @@ export class StatsComponent implements OnInit {
 
   public eqInfo(slotId: EquipmentSlot){
     if(!this.ch) return "";
-    let idx = this.ch.equipped[slotId] || 0;
-    if(idx > 0){
-      let item : Item = items[idx];
+    let id = this.ch.equipped[slotId] || 0;
+    if(id > 0){
+      let item : Item = this.gcs.items.find((i) => i.id ===id );
       return `${item.desc} ${this.damageDesc(item)} ${this.armorDesc(item)}`;
     }
     else{

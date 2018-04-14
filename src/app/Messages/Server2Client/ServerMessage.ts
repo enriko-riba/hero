@@ -1,8 +1,10 @@
 import { SyncData } from "./SyncData";
 import { ChatData } from "./ChatData";
+import { WorldInitData } from "./WorldInitData";
 
 export enum MessageType{
     Sync,
+    WorldInit,
     Chat
   }
   
@@ -12,5 +14,5 @@ export enum MessageType{
     Data: string;
   
     Type: MessageType;
-    Payload: SyncData | ChatData;
+    Payload:  WorldInitData | SyncData | ChatData;
   }

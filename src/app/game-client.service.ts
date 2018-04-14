@@ -4,14 +4,22 @@ import { Observable } from 'rxjs/Observable';
 import { LoginService } from './login.service';
 import { Subscriber } from 'rxjs/Subscriber';
 import { ServerMessage, MessageType } from './Messages/Server2Client/ServerMessage';
+import { WorldInitData } from './Messages/Server2Client/WorldInitData';
+import { SyncData } from './Messages/Server2Client/SyncData';
+import { Building } from './Messages/Server2Client/Building';
+import { Item } from './Messages/Server2Client/Item';
 
 //const SERVER_URL = 'wss://hero-srv.azurewebsites.net/srv';
 
 @Injectable()
 export class GameClientService {
 
+
   private socket: WebSocket;
   constructor(private loginSvc: LoginService) {}
+
+  public buildings: Array<Building>;
+  public items: Array<Item>;
 
   public initSocket(): void {
     if(this.socket){
@@ -36,14 +44,21 @@ export class GameClientService {
   }
 
   private parseMesage(data: string, observer : Subscriber<ServerMessage>){
-      const msg = JSON.parse(data);
+      const msg : ServerMessage = JSON.parse(data);
       const type = msg.Data.substring(0, 4); 
       const payload = msg.Data.substring(5); 
       switch(type)
       {
+        case "WINI":
+          msg.Type = MessageType.WorldInit;
+          msg.Payload = JSON.parse(payload) as WorldInitData;
+          this.buildings = msg.Payload.BuildingData;
+          this.items = msg.Payload.ItemData;
+          break;
+
         case "SYNC":
           msg.Type = MessageType.Sync;
-          msg.Payload = JSON.parse(payload);
+          msg.Payload = JSON.parse(payload) as SyncData;
           break;
       }
       observer.next(msg);
