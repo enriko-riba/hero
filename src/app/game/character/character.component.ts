@@ -7,11 +7,11 @@ import { CharData, EquipmentSlot } from '../../Messages/Server2Client/CharData';
 import { Item } from '../../Messages/Server2Client/Item';
 
 @Component({
-  selector: 'app-stats',
-  templateUrl: './stats.component.html',
-  styleUrls: ['./stats.component.scss']
+  selector: 'game-character',
+  templateUrl: './character.component.html',
+  styleUrls: ['./character.component.scss']
 })
-export class StatsComponent implements OnInit {
+export class CharacterComponent implements OnInit {
 
   public sd : SyncData;
   private ch: CharData;

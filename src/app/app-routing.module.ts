@@ -12,9 +12,9 @@ const routes: Routes = [
     redirectTo: '/'
   },
   {
-    path: 'character',
+    path: 'game',
     canActivate: [AuthGuard],
-    loadChildren: 'app/character/character.module#CharacterModule'
+    loadChildren: 'app/game/game.module#GameModule'
   },
 ];
 

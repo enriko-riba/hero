@@ -36,15 +36,15 @@
   <div class="">
     <div class="flex-container">
       <label>Food:</label>
-      <input readonly [value]="sd?.City.food | number:'1.0-0'" />
+      <input readonly [value]="sd?.City.resources.food | number:'1.0-0'" />
     </div>
     <div class="flex-container">
       <label>Wood:</label>
-      <input readonly [value]="sd?.City.wood | number:'1.0-0'" />
+      <input readonly [value]="sd?.City.resources.wood | number:'1.0-0'" />
     </div>
     <div class="flex-container">
       <label>Stone:</label>
-      <input readonly [value]="sd?.City.stone | number:'1.0-0'" />
+      <input readonly [value]="sd?.City.resources.stone | number:'1.0-0'" />
     </div>
   </div>
 </div>

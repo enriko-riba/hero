@@ -1,8 +1,6 @@
-import { Production } from "./Production";
+import { Resources } from "./Resources";
 
-export interface CityData {
-    food: number;
-    wood: number;
-    stone: number;
-    production: Production;
+export interface CityData {   
+    resources : Resources
+    production: Resources;
   }

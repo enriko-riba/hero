@@ -9,8 +9,6 @@ import { SyncData } from './Messages/Server2Client/SyncData';
 import { Building } from './Messages/Server2Client/Building';
 import { Item } from './Messages/Server2Client/Item';
 
-//const SERVER_URL = 'wss://hero-srv.azurewebsites.net/srv';
-
 @Injectable()
 export class GameClientService {
 
@@ -20,6 +18,7 @@ export class GameClientService {
 
   public buildings: Array<Building>;
   public items: Array<Item>;
+  public isConnected = false;
 
   public initSocket(): void {
     if(this.socket){
@@ -28,7 +27,11 @@ export class GameClientService {
 
     const url =  `${environment.serverUrl}?idToken=${this.loginSvc.token}`;
     console.log(url);
-    this.socket = new WebSocket(url);    
+    this.socket = new WebSocket(url);  
+    this.socket.onopen = (event) => {
+      console.log('connected!')
+      this.isConnected = true;
+    };
   }
 
   public send(message: ServerMessage): void {
@@ -39,7 +42,11 @@ export class GameClientService {
     return new Observable<ServerMessage>(observer => {
       this.socket.onmessage = (event) => this.parseMesage(event.data, observer);
       this.socket.onerror = (event) => observer.error(event);
-      this.socket.onclose = (event) => observer.complete();
+      this.socket.onclose = (event) => {
+        console.log('disconnected!')
+        this.isConnected = false;
+        observer.complete();
+      }
     });
   }
 
