@@ -1,0 +1,26 @@
+.connection-status {
+    display: inline-block;
+    position: absolute;
+    bottom: 0; left: 0;
+    background-color: red;
+    width: 24px;
+    height: 24px;
+    border-radius: 16px;
+    &.connected {
+        background-color: green;
+    }
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 2px;
+    background-color: rgba(200,200,200, 0.9);
+    display: none;
+    min-width: 100px;
+    font-size: 14px;
+    padding: 4px 2px;       
+}
+
+.connection-status:hover .tooltip, .connection-status:focus .tooltip{
+    display: block;
+}  

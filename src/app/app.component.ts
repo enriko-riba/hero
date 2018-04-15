@@ -1,3 +1,4 @@
+import { GameClientService } from './game-client.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  constructor(private client : GameClientService){}
+
+  title = 'My Hero';
 }

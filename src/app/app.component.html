@@ -1,1 +1,4 @@
+<button class="connection-status" [ngClass]="{connected: client.isConnected}">
+    <div class="tooltip">{{client.isConnected ? 'connected': 'disconnected'}}</div>
+</button>
 <router-outlet></router-outlet>

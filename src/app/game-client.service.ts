@@ -11,9 +11,8 @@ import { Item } from './Messages/Server2Client/Item';
 
 @Injectable()
 export class GameClientService {
-
-
   private socket: WebSocket;
+  
   constructor(private loginSvc: LoginService) {}
 
   public buildings: Array<Building>;
@@ -32,6 +31,12 @@ export class GameClientService {
       console.log('connected!')
       this.isConnected = true;
     };
+  }
+
+  public disconnect(){
+    if(this.socket){
+      this.socket.close(1000, "bye");
+    }
   }
 
   public send(message: ServerMessage): void {

@@ -2,7 +2,7 @@
 
   <menulist [canClick]="isMenuVisible"></menulist>
 
-  <div class="flex-container row">
+  <div class="flex-container">
     <div class="status">{{statusText}}</div>
     <div class="sign-in" *ngIf="!isMenuVisible" >
       <button class="loginBtn loginBtn--google" [disabled]="!isGoogleButtonEnabled" (click)="signInGoogle()">{{googleText}}</button>

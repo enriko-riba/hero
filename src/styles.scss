@@ -17,14 +17,16 @@ button, label, p {
     div {
         flex:  1 1 auto;
     }
+}
 
-    .center {
-        flex: 0 1 100vw;
-    }
-    .row {
-        flex-flow:  row;
-    }
-    .column {
-        flex-flow: column;
-    }
+.center {
+    flex: 0 1 100vw;
+}
+
+.row {
+    flex-flow: row;
+}
+
+.column, .col {
+    flex-flow: column;
 }

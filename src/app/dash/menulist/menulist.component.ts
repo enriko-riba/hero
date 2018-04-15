@@ -21,10 +21,11 @@ export class MenulistComponent implements OnInit {
   startClick() {
     console.log('start..., token is:', this.loginSvc.token);
     this.client.initSocket();
-    this.router.navigate(['game/character']);
+    this.router.navigate(['game']);
   }
 
   signoutClick (){
+    this.client.disconnect();
     this.loginSvc.signOut();
   }
 }
