@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private client : GameClientService){}
+  constructor(public client : GameClientService){}
 
   title = 'My Hero';
 }
