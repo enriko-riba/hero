@@ -1,16 +1,22 @@
 @import '~_variables.scss';
 
 .content {
-    background-image: url('assets/images/city_back.png');
+    position: fixed;
     height: 100vh;
+    width: 100vw;
+    background-image: url('assets/images/city_back.png');
     align-content: flex-start;    
     color: $text-color;
     & div{
         justify-content: flex-start;
     }
 }
+.res-list{
+    margin: 4px 35px 4px 4px;
+}
 .resource{
     background-color: $skin-color;
+    border: solid 1px $text-color;
     flex: 0 1 25%;
     margin-left: 2px;
     text-align: left;
@@ -22,3 +28,23 @@
         color: #defdfa;
     }
 }
+
+
+.city-slots {
+    padding: 30px 5px 0;
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+}
+// .slot{
+//     height: 64px;
+//     width: 64px;
+//     background-image: url('../../../assets/images/slot.png');
+//     background-repeat: no-repeat;
+//     margin: 5px;
+//     outline: none;
+//     border: none;
+//     background-color: $slot-back-color;
+//     overflow: hidden;
+//     border-radius: 6px;
+// }

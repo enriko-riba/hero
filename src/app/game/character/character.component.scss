@@ -1,3 +1,5 @@
+@import '~_variables.scss';
+
 .content{
     color: #f3f2a8;
     background: url('../../../assets/images/char_back.png');
@@ -41,7 +43,7 @@
     margin: 5px;
     outline: none;
     border: none;
-    background-color: #a3a3a3e6;
+    background-color: $slot-back-color;
     overflow: hidden;
     border-radius: 6px;
     &:focus {

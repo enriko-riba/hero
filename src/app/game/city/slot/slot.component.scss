@@ -1,0 +1,14 @@
+@import '~_variables.scss';
+
+button{ 
+    height: 64px;
+    width: 64px;
+    background-image: url('../../../../assets/images/slot.png');
+    background-repeat: no-repeat;
+    margin: 5px;
+    outline: none;
+    border: none;
+    background-color: $slot-back-color;
+    overflow: hidden;
+    border-radius: 6px;
+}
