@@ -1,5 +1,14 @@
+@import '~_variables.scss';
+
+.content {
+    background-color: $skin-color;
+    height: 100vh;
+    align-content: center;
+}
 a {
     text-decoration: none;
     display: flex;
     flex: 1;
+    padding: 10px;
+    border: dotted 1px #ff6622;
 }

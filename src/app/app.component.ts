@@ -1,5 +1,7 @@
 import { GameClientService } from './game-client.service';
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public client : GameClientService){}
+  constructor(
+    public client : GameClientService,
+    private router: Router,
+    private location: Location){
+      console.log("url: '"+this.router.url+"'");
+    }
 
-  title = 'My Hero';
+    isBackButtonVisible(){
+      return this.router.url != "/";
+    }
+    navigateBack(){
+      this.location.back();
+    }
 }
