@@ -12,22 +12,12 @@ import { Item } from '../../Messages/Server2Client/Item';
   styleUrls: ['./character.component.scss']
 })
 export class CharacterComponent implements OnInit {
-
-  public sd : SyncData;
-  private ch: CharData;
-
+  
   constructor(private gcs: GameClientService) { }
 
   ngOnInit() {
-    this.gcs.onMessage().subscribe(msg => this.parseSync(msg));
   }
 
-  parseSync(msg: ServerMessage) {
-    if(msg.Type === MessageType.Sync){
-    this.sd = msg.Payload as SyncData;
-    this.ch = this.sd.Character || {slots: [], equipped: []};
-    }   
-  }
 
   private damageDesc(item: Item){
       return item.dmg ? "+" + item.dmg.toString() + " attack" : "";
@@ -38,8 +28,8 @@ export class CharacterComponent implements OnInit {
   }
 
   public eqInfo(slotId: EquipmentSlot){
-    if(!this.ch) return "";
-    let id = this.ch.equipped[slotId] || 0;
+    if(!this.gcs.currentGameData) return "";
+    let id = this.gcs.currentGameData.CharData.equipped[slotId] || 0;
     if(id > 0){
       let item : Item = this.gcs.items.find((i) => i.id ===id );
       return `${item.desc} ${this.damageDesc(item)} ${this.armorDesc(item)}`;

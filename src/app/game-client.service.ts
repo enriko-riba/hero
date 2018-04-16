@@ -12,29 +12,35 @@ import { Item } from './Messages/Server2Client/Item';
 @Injectable()
 export class GameClientService {
   private socket: WebSocket;
-  
-  constructor(private loginSvc: LoginService) {}
+private 
+  constructor(private loginSvc: LoginService) { }
 
   public buildings: Array<Building>;
   public items: Array<Item>;
   public isConnected = false;
+  public currentGameData: SyncData;
 
   public initSocket(): void {
-    if(this.socket){
+    if (this.socket) {
       this.socket.close();
     }
 
-    const url =  `${environment.serverUrl}?idToken=${this.loginSvc.token}`;
+    const url = `${environment.serverUrl}?idToken=${this.loginSvc.token}`;
     console.log(url);
-    this.socket = new WebSocket(url);  
+    this.socket = new WebSocket(url);
     this.socket.onopen = (event) => {
       console.log('connected!')
       this.isConnected = true;
     };
+    this.socket.onclose = (event) => {
+      console.log('disconnected!')
+      this.isConnected = false;
+    };
+    this.socket.onmessage = (event) => this.parseMesage(event.data);
   }
 
-  public disconnect(){
-    if(this.socket){
+  public disconnect() {
+    if (this.socket) {
       this.socket.close(1000, "bye");
     }
   }
@@ -45,34 +51,43 @@ export class GameClientService {
 
   public onMessage(): Observable<ServerMessage> {
     return new Observable<ServerMessage>(observer => {
-      this.socket.onmessage = (event) => this.parseMesage(event.data, observer);
+      this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
       this.socket.onerror = (event) => observer.error(event);
-      this.socket.onclose = (event) => {
-        console.log('disconnected!')
-        this.isConnected = false;
-        observer.complete();
-      }
+      this.socket.onclose = (event) => observer.complete();
     });
   }
 
-  private parseMesage(data: string, observer : Subscriber<ServerMessage>){
-      const msg : ServerMessage = JSON.parse(data);
-      const type = msg.Data.substring(0, 4); 
-      const payload = msg.Data.substring(5); 
-      switch(type)
-      {
-        case "WINI":
-          msg.Type = MessageType.WorldInit;
-          msg.Payload = JSON.parse(payload) as WorldInitData;
-          this.buildings = msg.Payload.BuildingData;
-          this.items = msg.Payload.ItemData;
-          break;
+  private convertToMessage(data: string) {
+    const msg: ServerMessage = JSON.parse(data);
+    const type = msg.Data.substring(0, 4);
+    const payload = msg.Data.substring(5);
+    switch (type) {
+      case "WINI":
+        msg.Type = MessageType.WorldInit;
+        msg.Payload = JSON.parse(payload) as WorldInitData;
+        break;
 
-        case "SYNC":
-          msg.Type = MessageType.Sync;
-          msg.Payload = JSON.parse(payload) as SyncData;
-          break;
-      }
-      observer.next(msg);
+      case "SYNC":
+        msg.Type = MessageType.Sync;
+        msg.Payload = JSON.parse(payload) as SyncData;
+        break;
+    }
+    return msg;
+  }
+
+  private parseMesage(data: string) {
+    const msg: ServerMessage = this.convertToMessage(data);
+    
+    switch (msg.Type) {
+      case MessageType.WorldInit:
+        this.buildings = (msg.Payload as WorldInitData).BuildingData as Building[];
+        this.items = (msg.Payload as WorldInitData).ItemData as Item[];
+        break;
+
+      case MessageType.Sync:
+        this.currentGameData = msg.Payload as SyncData;
+        break;
+    }
+    return msg;
   }
 }

@@ -5,6 +5,5 @@ export interface SyncData {
     exp: number;
     gold: number;
     City: CityData;
-    Character: CharData
-
+    CharData: CharData
   }

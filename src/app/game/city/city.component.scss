@@ -1,6 +1,24 @@
 @import '~_variables.scss';
+
 .content {
-    background-color: $skin-color;
+    background-image: url('assets/images/city_back.png');
     height: 100vh;
-    align-content: center;
+    align-content: flex-start;    
+    color: $text-color;
+    & div{
+        justify-content: flex-start;
+    }
+}
+.resource{
+    background-color: $skin-color;
+    flex: 0 1 25%;
+    margin-left: 2px;
+    text-align: left;
+    padding: 3px 2px 3px 5px;
+    font-size: 22px;
+    .value {
+        font-family: 'Yatra One',Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        color: #defdfa;
+    }
 }

@@ -1,5 +1,16 @@
 <div class="content">
-    <div class="flex-container row">
-     
+  <div class="flex-container row">
+    <div class="resource">
+      <span>Food:</span>
+      <span class="value">{{sd?.City.resources.food | number:'1.0-0'}}</span>
+    </div>
+    <div class="resource">
+      <span>Wood:</span>
+      <span class="value">{{sd?.City.resources.wood | number:'1.0-0'}}</span>  
+    </div>
+    <div class="resource">
+      <span>Stone:</span>
+      <span class="value">{{sd?.City.resources.stone | number:'1.0-0'}}</span>
     </div>
   </div>
+</div>

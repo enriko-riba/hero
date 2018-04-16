@@ -1,11 +1,12 @@
 .connection-status {
-    display: inline-block;
+    z-index: 1000;
     position: absolute;
     bottom: 0; left: 0;
     background-color: red;
     width: 24px;
     height: 24px;
     border-radius: 16px;
+    cursor: pointer;
     &.connected {
         background-color: green;
     }
@@ -26,6 +27,7 @@
 }
 
 .btn-back{
+    z-index: 1000;
     position: absolute;
     top: 3px; right: 3px; 
     background-color: #0000;
@@ -36,6 +38,7 @@
     outline: none;
     border: 2px solid rgb(149, 149, 149);
     box-sizing: content-box;
+    cursor: pointer;
     &:focus{
         outline: none;
     }  
