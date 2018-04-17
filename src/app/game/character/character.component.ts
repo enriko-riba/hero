@@ -29,9 +29,9 @@ export class CharacterComponent implements OnInit {
 
   public eqInfo(slotId: EquipmentSlot){
     if(!this.gcs.currentGameData) return "";
-    let id = this.gcs.currentGameData.CharData.equipped[slotId] || 0;
+    let id = this.gcs.currentGameData.charData.equipped[slotId] || 0;
     if(id > 0){
-      let item : Item = this.gcs.items.find((i) => i.id ===id );
+      let item : Item = this.gcs.itemTemplates.find((i) => i.id ===id );
       return `${item.desc} ${this.damageDesc(item)} ${this.armorDesc(item)}`;
     }
     else{

@@ -8,6 +8,7 @@ import { WorldInitData } from './Messages/Server2Client/WorldInitData';
 import { SyncData } from './Messages/Server2Client/SyncData';
 import { Building } from './Messages/Server2Client/Building';
 import { Item } from './Messages/Server2Client/Item';
+import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class GameClientService {
@@ -15,19 +16,30 @@ export class GameClientService {
 private 
   constructor(private loginSvc: LoginService) { }
 
-  public buildings: Array<Building>;
-  public items: Array<Item>;
+  public buildingTemplates: Array<Building>;
+  public itemTemplates: Array<Item>;
   public isConnected = false;
   public currentGameData: SyncData;
+  private subscription : Subscription;
+  public serverMessages : Observable<ServerMessage>;
 
   public initSocket(): void {
     if (this.socket) {
+      this.subscription.unsubscribe();
       this.socket.close();
     }
 
     const url = `${environment.serverUrl}?idToken=${this.loginSvc.token}`;
     console.log(url);
     this.socket = new WebSocket(url);
+    
+    this.serverMessages =  new Observable<ServerMessage>(observer => {
+      this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
+      this.socket.onerror = (event) => observer.error(event);
+      this.socket.onclose = (event) => observer.complete();
+    });
+    this.subscription = this.serverMessages.subscribe();
+
     this.socket.onopen = (event) => {
       console.log('connected!')
       this.isConnected = true;
@@ -36,7 +48,7 @@ private
       console.log('disconnected!')
       this.isConnected = false;
     };
-    this.socket.onmessage = (event) => this.parseMesage(event.data);
+    //this.socket.onmessage = (event) => this.parseMesage(event.data);
   }
 
   public disconnect() {
@@ -49,13 +61,13 @@ private
     this.socket.send(JSON.stringify(message));
   }
 
-  public onMessage(): Observable<ServerMessage> {
-    return new Observable<ServerMessage>(observer => {
-      this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
-      this.socket.onerror = (event) => observer.error(event);
-      this.socket.onclose = (event) => observer.complete();
-    });
-  }
+  // public onMessage(): Observable<ServerMessage> {
+  //   return new Observable<ServerMessage>(observer => {
+  //     this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
+  //     this.socket.onerror = (event) => observer.error(event);
+  //     this.socket.onclose = (event) => observer.complete();
+  //   });
+  // }
 
   private convertToMessage(data: string) {
     const msg: ServerMessage = JSON.parse(data);
@@ -80,8 +92,8 @@ private
     
     switch (msg.Type) {
       case MessageType.WorldInit:
-        this.buildings = (msg.Payload as WorldInitData).BuildingData as Building[];
-        this.items = (msg.Payload as WorldInitData).ItemData as Item[];
+        this.buildingTemplates = (msg.Payload as WorldInitData).BuildingData as Building[];
+        this.itemTemplates = (msg.Payload as WorldInitData).ItemData as Item[];
         break;
 
       case MessageType.Sync:

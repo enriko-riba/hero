@@ -4,6 +4,6 @@ import { CharData } from "./CharData";
 export interface SyncData {
     exp: number;
     gold: number;
-    City: CityData;
-    CharData: CharData
+    city: CityData;
+    charData: CharData
   }

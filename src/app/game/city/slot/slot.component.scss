@@ -1,14 +1,27 @@
 @import '~_variables.scss';
 
-button{ 
+.btn{ 
+    outline: none;
+    border: none;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.btn-slot{
+    margin: 5px;
     height: 64px;
     width: 64px;
     background-image: url('../../../../assets/images/slot.png');
     background-repeat: no-repeat;
-    margin: 5px;
-    outline: none;
-    border: none;
     background-color: $slot-back-color;
-    overflow: hidden;
     border-radius: 6px;
+}
+
+.btn-build{
+    height: 32px;
+    width: 32px;
+    margin: 16px 0 0 16px; //  center in parent div
+    background-image: url('../../../../assets/buttons/build.png');
+    background-size: 32px 32px;
+    background-color: #0000;
 }

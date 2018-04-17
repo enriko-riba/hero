@@ -1,1 +1,4 @@
-<button [attr.id]="'tile' + id.toString()"></button>
+<div class="btn btn-slot" [attr.id]="'tile' + id.toString()">
+    <button *ngIf="isEmpty" class="btn btn-build" (click)="onBuildClick()"></button>
+    <button *ngIf="!isEmpty" class="btn btn-build" (click)="onBuildClick()"></button>
+</div>

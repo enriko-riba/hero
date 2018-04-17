@@ -11,27 +11,9 @@ import { CityData } from '../../Messages/Server2Client/CityData';
   styleUrls: ['./city.component.scss']
 })
 export class CityComponent implements OnInit {
-  public cityData: CityData;
 
-  constructor(private gcs: GameClientService) { }
+  constructor(public gcs: GameClientService) { }
 
-  ngOnInit() {
-    this.gcs.onMessage().subscribe(msg => this.parseSync(msg));
-    if (this.gcs.currentGameData) {
-      const msg: ServerMessage = {
-            Cid: 0,
-            Tick: 0,
-            Data: '',
-            Type: MessageType.Sync,
-            Payload: this.gcs.currentGameData,
-      };
-      this.parseSync(msg);
-    }
-  }
-
-  parseSync(msg: ServerMessage) {
-    if (msg.Type === MessageType.Sync) {
-      this.cityData = (msg.Payload as SyncData).City;
-    }
+  ngOnInit() {   
   }
 }
