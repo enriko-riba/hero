@@ -8,7 +8,8 @@
     width: 100vw;
     height: 100vh;
     background-color: #584e4e;
-    opacity: 0.9;
+    opacity: 0.85;
+    font-family: 'Yatra One';
 }
 
 .dialog {  
@@ -22,18 +23,22 @@
     background-color: $skin-color;
     border: solid 1px $text-color;
 }
+.title {
+    font-size: 24px;
+    color: #fff;
+}
 .build {
-    margin-top: 20px;
     display: flex;
     flex-flow: column;
     & div {
         height: 64px;
         display: flex;
         align-items: center;
-        background-image: url('../../../../assets/images/slot.png');
-        background-repeat: no-repeat;
+        border: solid 1px;
+        margin-top: 10px;
+        // background-image: url('../../../../assets/images/slot.png');
+        // background-repeat: no-repeat;
         & img { 
-            width: 48px;
             padding-left: 8px; 
         }
         & span {      
