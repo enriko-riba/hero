@@ -1,7 +1,7 @@
 @import '~_variables.scss';
 
 .content {
-    position: fixed;
+    position: absolute;
     height: 100vh;
     width: 100vw;
     background-image: url('assets/images/city_back.png');
@@ -29,22 +29,9 @@
     }
 }
 
-
 .city-slots {
     padding: 30px 5px 0;
     display: flex;
     flex-flow: column;
     flex-wrap: wrap;
 }
-// .slot{
-//     height: 64px;
-//     width: 64px;
-//     background-image: url('../../../assets/images/slot.png');
-//     background-repeat: no-repeat;
-//     margin: 5px;
-//     outline: none;
-//     border: none;
-//     background-color: $slot-back-color;
-//     overflow: hidden;
-//     border-radius: 6px;
-// }
