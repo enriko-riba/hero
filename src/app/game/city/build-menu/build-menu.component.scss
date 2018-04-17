@@ -1,0 +1,13 @@
+@import '~_variables.scss';
+
+#cbm{
+    position: absolute;
+    padding: 5px;
+    display: flex;
+    justify-content: flex-start;
+    background-color: $skin-color;
+
+    & div {
+        flex: 0 1 30%;
+    }
+}

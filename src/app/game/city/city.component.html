@@ -16,7 +16,10 @@
 
   <div class="city-slots">
     <div class="row">
-      <city-slot *ngFor="let b of gcs.currentGameData?.city.buildings; let i = index" [id]="i"></city-slot>
+      <city-slot *ngFor="let b of gcs.currentGameData?.city.buildings; let i = index" [id]="i" (click)="onSlotClick(i, $event)"></city-slot>
     </div>
   </div>
+
+  <city-build-menu #bm></city-build-menu>
+  <city-options-menu #om></city-options-menu>
 </div>

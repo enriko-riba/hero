@@ -25,3 +25,15 @@
     background-size: 32px 32px;
     background-color: #0000;
 }
+
+.menu-build {    
+    position: absolute;
+    width: 128px;
+    height: 64px;
+    background-color: $back-color;
+}
+
+.menu-options {   
+    position: absolute; 
+    background-color: $back-color;
+}

@@ -6,6 +6,7 @@ export interface Building {
         name: string;
         type: number;
         buildTime: number;
+        buildTimeLeft: number;
         production: Resources;
         cost: Resources;
 }

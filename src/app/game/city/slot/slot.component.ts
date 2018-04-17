@@ -13,12 +13,12 @@ export class SlotComponent implements OnInit {
   @Input() id: number;
 
   private building: Building;
-  public isEmpty = true;
-
+  public SlotState = SlotState;
+  public state : SlotState = SlotState.Empty;
+  
   constructor(private gcs: GameClientService) { }
 
   ngOnInit() {
-    console.log('id: ' +  this.id + ', building: ' + (this.building ? this.building.name : ''));
     this.gcs.serverMessages.subscribe(this.parseServerMessage);
   }
 
@@ -27,15 +27,17 @@ export class SlotComponent implements OnInit {
       let data = msg.Payload as SyncData;
       let slotBuilding = data.city.buildings[this.id];
       if(slotBuilding){
-        this.isEmpty = false;
-        //  TODO: update slot building
+        this.state = slotBuilding.buildTimeLeft <= 0 ? SlotState.Finished : SlotState.InProgress;
+        //  TODO: update slot building image, progress bar
       }else {
-        this.isEmpty = true;
+        this.state = SlotState.Empty;
       }
     }
   }
+}
 
-  public onBuildClick(){
-
-  }
+export enum SlotState{
+  Empty,
+  InProgress,
+  Finished
 }
