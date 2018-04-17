@@ -1,11 +1,28 @@
 @import '~_variables.scss';
 
-#cbm{
+.container{
+    z-index: 20000;
     position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #584e4e;
+    opacity: 0.8;
+}
+
+.dialog{  
+    position: absolute;  
+    top: 20vh;
+    left: 10px;
+    width: calc(100vw - 20px);
+    height: calc(60vh - 20px);
+    opacity: 1;
     padding: 5px;
     display: flex;
     justify-content: flex-start;
     background-color: $skin-color;
+    border: solid 1px $text-color;
 
     & div {
         flex: 0 1 30%;

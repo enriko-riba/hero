@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Building } from '../../../Messages/Server2Client/Building';
+import { GameClientService } from '../../../game-client.service';
 
 @Component({
   selector: 'city-build-menu',
@@ -7,17 +8,14 @@ import { Building } from '../../../Messages/Server2Client/Building';
   styleUrls: ['./build-menu.component.scss']
 })
 export class BuildMenuComponent implements OnInit {
-  public test: string = "te";
-  private top: number;
-  private left: number;
-
-  constructor() { }
+  public visible = false;
+  constructor(private gcs: GameClientService) { }
 
   ngOnInit() {
   }
 
-  initMenu(building : Building, x: number, y: number){
-    this.top = y;
-    this.left = x;
+  showMenu(building : Building){
+    //  TODO: setup available building
+    this.visible = true;
   }
 }

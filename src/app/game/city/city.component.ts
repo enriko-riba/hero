@@ -27,6 +27,6 @@ export class CityComponent implements AfterViewInit {
     console.log('click on:' + index);
     const slotElement : HTMLElement = (event.target || event.currentTarget) as HTMLElement;
     let building = this.gcs.currentGameData.city.buildings[index];
-    this.bm.initMenu(building, slotElement.offsetLeft, slotElement.offsetTop );
+    this.bm.showMenu(building);
   }
 }
