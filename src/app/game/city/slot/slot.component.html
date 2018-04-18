@@ -1,3 +1,3 @@
 <div class="btn btn-slot" [attr.id]="'tile' + id.toString()">
-    <button *ngIf="state == SlotState.Empty" class="btn btn-build"></button>
+    <button class="btn btn-icon" [ngStyle]="{'background-image':'url(' + getImageUrl() + ')'}"></button>
 </div>

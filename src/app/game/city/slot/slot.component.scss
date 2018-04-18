@@ -1,6 +1,6 @@
 @import '~_variables.scss';
 
-.btn{ 
+.btn { 
     outline: none;
     border: none;
     overflow: hidden;
@@ -17,13 +17,21 @@
     border-radius: 6px;
 }
 
-.btn-build{
+.btn-icon {
     height: 32px;
     width: 32px;
     margin: 16px 0 0 16px; //  center in parent div
-    background-image: url('../../../../assets/buttons/build.png');
-    background-size: 32px 32px;
     background-color: #0000;
+    background-size: 32px 32px;
+}
+.btn-build {   
+    background-image: url('../../../../assets/buttons/build.png');
+}
+.btn-progress{
+    background-image: url('../../../../assets/buttons/hammer.png');
+}
+.btn-done{
+    background-image: url('../../../../assets/buttons/back.png');
 }
 
 .menu-build {    
