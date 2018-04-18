@@ -9,19 +9,21 @@ import { SyncData } from './Messages/Server2Client/SyncData';
 import { Building } from './Messages/Server2Client/Building';
 import { Item } from './Messages/Server2Client/Item';
 import { Subscription } from 'rxjs/Subscription';
+import { ClientMessage, MessageKind, CommandKind } from './messages/client2server/ClientMessage';
 
 @Injectable()
 export class GameClientService {
   private socket: WebSocket;
-private 
+  private cid = 1;
+
   constructor(private loginSvc: LoginService) { }
 
   public buildingTemplates: Array<Building>;
   public itemTemplates: Array<Item>;
   public isConnected = false;
   public currentGameData: SyncData;
-  private subscription : Subscription;
-  public serverMessages : Observable<ServerMessage>;
+  private subscription: Subscription;
+  public serverMessages: Observable<ServerMessage>;
 
   public initSocket(): void {
     if (this.socket) {
@@ -32,8 +34,8 @@ private
     const url = `${environment.serverUrl}?idToken=${this.loginSvc.token}`;
     console.log(url);
     this.socket = new WebSocket(url);
-    
-    this.serverMessages =  new Observable<ServerMessage>(observer => {
+
+    this.serverMessages = new Observable<ServerMessage>(observer => {
       this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
       this.socket.onerror = (event) => observer.error(event);
       this.socket.onclose = (event) => observer.complete();
@@ -57,7 +59,7 @@ private
     }
   }
 
-  public send(message: ServerMessage): void {
+  public send(message: ClientMessage): void {
     this.socket.send(JSON.stringify(message));
   }
 
@@ -68,6 +70,28 @@ private
   //     this.socket.onclose = (event) => observer.complete();
   //   });
   // }
+
+  /*--------------------------------------
+  //  Commands & related
+  --------------------------------------*/
+  public canBuild(b: Building) {
+    let res = this.currentGameData.city.resources;
+    return (b.cost.food <= res.food && b.cost.wood <= res.wood && b.cost.stone <= res.stone);
+  }
+
+  public startBuilding(slot: number, buildingId: number) {
+    let building: Building = this.buildingTemplates.find((b) => b.id === buildingId);
+    if (this.canBuild(building)) {
+      var cm = new ClientMessage(Date.now(), this.cid++, MessageKind.Command);
+      cm.Data = `${CommandKind.BuildStart}${slot}|${buildingId}`;
+      this.send(cm);
+    }
+  }
+
+  /*--------------------------------------
+   //  EOF commands
+   --------------------------------------*/
+
 
   private convertToMessage(data: string) {
     const msg: ServerMessage = JSON.parse(data);
@@ -83,13 +107,21 @@ private
         msg.Type = MessageType.Sync;
         msg.Payload = JSON.parse(payload) as SyncData;
         break;
+
+      case "CMDR":
+        let kind = payload.substr(0, 2);
+        let load = payload.substring(2);
+        msg.Type = MessageType.CommandResponse;
+        msg.CommandKind == CommandKind[kind];
+        msg.Payload = JSON.parse(load);
+        break;
     }
     return msg;
   }
 
   private parseMesage(data: string) {
     const msg: ServerMessage = this.convertToMessage(data);
-    
+
     switch (msg.Type) {
       case MessageType.WorldInit:
         this.buildingTemplates = (msg.Payload as WorldInitData).BuildingData as Building[];
@@ -99,7 +131,24 @@ private
       case MessageType.Sync:
         this.currentGameData = msg.Payload as SyncData;
         break;
+
+      case MessageType.CommandResponse:
+        this.HandleCommandResponse(msg);
+        break;
     }
     return msg;
+  }
+
+  private HandleCommandResponse(msg: ServerMessage) {
+    switch (msg.CommandKind) {
+      case CommandKind.BuildStart:       
+        let slot = (msg.Payload as any).slot;
+        let building = (msg.Payload as any).bulding;
+        this.currentGameData.city.buildings[slot] = building;
+        break;
+        
+      default:
+        break;
+    }
   }
 }

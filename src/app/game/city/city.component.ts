@@ -29,7 +29,7 @@ export class CityComponent implements AfterViewInit {
     if(building){
       this.om.showMenu(building);
     }else {
-      this.bm.showMenu();
+      this.bm.showMenu(index);
     }
   }
 }
