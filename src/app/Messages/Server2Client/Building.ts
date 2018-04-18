@@ -4,9 +4,15 @@ export interface Building {
         id: number;
         level: number;
         name: string;
-        type: number;
+        type: BuildingType;
         buildTime: number;
         buildTimeLeft: number;
         production: Resources;
         cost: Resources;
+}
+
+export enum BuildingType {
+        Farm,
+        WoodCutter,
+        Quarry,
 }

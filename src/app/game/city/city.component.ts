@@ -24,9 +24,12 @@ export class CityComponent implements AfterViewInit {
   }
 
   onSlotClick(index : number, event : MouseEvent){
-    console.log('click on:' + index);
-    const slotElement : HTMLElement = (event.target || event.currentTarget) as HTMLElement;
+    //  if empty slot display build menu else options menu
     let building = this.gcs.currentGameData.city.buildings[index];
-    this.bm.showMenu(building);
+    if(building){
+      this.om.showMenu(building);
+    }else {
+      this.bm.showMenu();
+    }
   }
 }

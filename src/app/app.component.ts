@@ -16,9 +16,6 @@ export class AppComponent {
       console.log("url: '"+this.router.url+"'");
     }
 
-    isBackButtonVisible(){
-      return this.router.url != "/";
-    }
     navigateBack(){
       this.location.back();
     }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Building } from '../../../Messages/Server2Client/Building';
 
 @Component({
   selector: 'city-options-menu',
@@ -6,11 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./options-menu.component.scss']
 })
 export class OptionsMenuComponent implements OnInit {
-
-  public test: string = "te";
+  public building : Building;
+  public visible = false;
   constructor() { }
 
   ngOnInit() {
   }
 
+  showMenu(building : Building){
+    this.building = building;
+    this.visible = true;
+  }
+
+  close(){
+    this.visible = false;
+  }
 }

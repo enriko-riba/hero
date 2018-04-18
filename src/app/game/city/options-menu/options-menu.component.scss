@@ -1,0 +1,51 @@
+@import '~_variables.scss';
+
+.container{
+    
+    font-family: 'Yatra One';
+}
+
+.overlay {
+    z-index: 2000;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: #584e4e;
+    opacity: 0.85;
+}
+
+.dialog {  
+    position: absolute;
+    top: 20vh;
+    left: 10px;
+    z-index: 2001;
+    flex-direction: column;
+    width: calc(100vw - 30px); //   (10px border + 5px padding) * 2
+    padding: 5px;
+    display: flex;
+    background-color: $skin-color;
+    border: solid 1px $text-color;
+}
+.title {
+    font-size: 24px;
+    color: #fff;
+}
+.build {
+    display: flex;
+    flex-flow: column;
+    & div {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        border: solid 1px;
+        margin-top: 10px;
+        & img { 
+            padding-left: 8px; 
+        }
+        & span {      
+             margin-left: 20px;
+            }
+    }
+}

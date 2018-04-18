@@ -1,10 +1,20 @@
-<div id="cbm" class="container" *ngIf="visible">
+<div class="container" *ngIf="visible">
+  <div class="overlay"></div>
   <div class="dialog">
+    <back-button (onClick)="close()"></back-button>
     <div class="title">Select building</div>
     <div class="build">
-      <div><img src="../../../../assets/images/b_food_01.png"/><span>Farm</span></div>
-      <div><img src="../../../../assets/images/b_wood_01.png"/><span>Woodcutters hut</span></div>
-      <div><img src="../../../../assets/images/b_stone_01.png"/><span>Small Quary</span></div>
-    </div>
+      <div class="item" *ngFor="let item of items">
+        <img [attr.src]="getImage(item)" />
+        <div class="desc">
+          <span>{{item.name}}</span>
+          <span>{{buildTime(item)}}</span>
+        </div>
+        <div class="res-req" [class.red]="!canBuild(item)">
+          <span>{{item.cost.food | number:'1.0-0'}} food</span>
+          <span>{{item.cost.wood | number:'1.0-0'}} wood</span>
+          <span>{{item.cost.stone | number:'1.0-0'}} stone</span>
+        </div>
+      </div>      
   </div>
 </div>

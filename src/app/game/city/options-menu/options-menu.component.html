@@ -1,3 +1,24 @@
-<p>
-  options-menu works!
-</p>
+<div class="container" *ngIf="visible">
+    <div class="overlay"></div>
+    <div class="dialog">
+      <back-button (onClick)="close()"></back-button>
+      <div class="title">Select building</div>
+      <div class="build">
+        <div>
+          <img src="../../../../assets/images/b_food_01.png" />
+          <span>Farm</span>
+          <div class="res-req"></div>
+        </div>
+        <div>
+          <img src="../../../../assets/images/b_wood_01.png" />
+          <span>Woodcutters hut</span>
+          <div class="res-req"></div>
+        </div>
+        <div>
+          <img src="../../../../assets/images/b_stone_01.png" />
+          <span>Small Quary</span>
+          <div class="res-req"></div>
+        </div>
+      </div>
+    </div>
+  </div>

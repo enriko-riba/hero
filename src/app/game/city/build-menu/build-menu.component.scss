@@ -1,6 +1,11 @@
 @import '~_variables.scss';
 
 .container{
+    
+    font-family: 'Yatra One';
+}
+
+.overlay {
     z-index: 2000;
     position: absolute;
     top: 0px;
@@ -9,14 +14,14 @@
     height: 100vh;
     background-color: #584e4e;
     opacity: 0.85;
-    font-family: 'Yatra One';
 }
 
 .dialog {  
-    flex-direction: column;
     position: absolute;
     top: 20vh;
     left: 10px;
+    z-index: 2001;
+    flex-direction: column;
     width: calc(100vw - 30px); //   (10px border + 5px padding) * 2
     padding: 5px;
     display: flex;
@@ -29,20 +34,39 @@
 }
 .build {
     display: flex;
-    flex-flow: column;
-    & div {
-        height: 64px;
-        display: flex;
-        align-items: center;
-        border: solid 1px;
-        margin-top: 10px;
-        // background-image: url('../../../../assets/images/slot.png');
-        // background-repeat: no-repeat;
-        & img { 
-            padding-left: 8px; 
-        }
-        & span {      
-             margin-left: 20px;
-            }
+    flex-flow: column;   
+}
+.item {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    border: solid 1px;
+    margin-top: 10px;
+    font-size: 14px;
+    &:hover {
+        background-color: lighten($skin-color, 20%);
+    }
+
+    & img { 
+        padding-left: 4px; 
     }
 }
+.desc {
+    & span {      
+            margin-left: 10px;
+    }
+    display: flex;
+    flex-flow: column;
+    & span:nth-child(2){
+        color: white;
+    }
+}
+.res-req {
+    color: white;
+    font-size: 12px;
+    display: flex;
+    flex-flow: column;
+    margin-left: auto;  //    for right alignment
+    margin-right: 10px;
+}
+.red { color: red }

@@ -1,7 +1,4 @@
-<button class="btn-back" *ngIf="isBackButtonVisible()" (click)="navigateBack()">
-    <img src="../assets/buttons/close.png" width="24"/>
-</button>
-
+<back-button (onClick)="navigateBack()"></back-button>
 <button class="connection-status" [ngClass]="{connected: client.isConnected}">
     <div class="tooltip">{{client.isConnected ? 'connected': 'disconnected'}}</div>
 </button>

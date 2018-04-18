@@ -8,11 +8,13 @@ import { OverviewComponent } from './overview/overview.component';
 import { SlotComponent } from './city/slot/slot.component';
 import { BuildMenuComponent } from './city/build-menu/build-menu.component';
 import { OptionsMenuComponent } from './city/options-menu/options-menu.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    GameRoutingModule
+    GameRoutingModule,
+    SharedModule
   ],
   declarations: [CharacterComponent, CityComponent, OverviewComponent, SlotComponent, BuildMenuComponent, OptionsMenuComponent]
 })

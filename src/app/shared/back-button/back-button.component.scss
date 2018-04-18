@@ -1,0 +1,17 @@
+.btn-back{
+    z-index: 1000;
+    position: absolute;
+    top: 5px; right: 5px; 
+    background-color: #0000;
+    width: 24px;
+    height: 24px;
+    border-radius: 16px;
+    padding: 0;
+    outline: none;
+    border: 2px solid rgb(149, 149, 149);
+    box-sizing: content-box;
+    cursor: pointer;
+    &:focus{
+        outline: none;
+    }  
+}

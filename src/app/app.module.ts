@@ -8,6 +8,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppComponent } from './app.component';
 import { LoginService, AuthGuard } from './login.service';
 import { GameClientService } from './game-client.service';
+import { BackButtonComponent } from './shared/back-button/back-button.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { GameClientService } from './game-client.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule,
     ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [LoginService, GameClientService, AuthGuard],
