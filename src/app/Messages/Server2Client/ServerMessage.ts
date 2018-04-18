@@ -1,7 +1,7 @@
 import { SyncData } from "./SyncData";
 import { ChatData } from "./ChatData";
 import { WorldInitData } from "./WorldInitData";
-import { CommandKind } from "../../game-client.service";
+import { MessageKind } from "../../game-client.service";
 
 export enum MessageType{
     Sync,
@@ -22,5 +22,5 @@ export enum MessageType{
      * Used only for command responses.
      * This member is not sent from server, instead it is set by GameClientService
      */
-    CommandKind: CommandKind;
+    CommandKind: MessageKind;
   }

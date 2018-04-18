@@ -82,8 +82,8 @@ export class GameClientService {
   public startBuilding(slot: number, buildingId: number) {
     let building: Building = this.buildingTemplates.find((b) => b.id === buildingId);
     if (this.canBuild(building)) {
-      var cm = new Request(Date.now(), this.cid++, MessageKind.Command);
-      cm.Data = `${CommandKind.BuildStart}${slot}|${buildingId}`;
+      var cm = new Request(Date.now(), this.cid++, MessageKind.StartBuilding);
+      cm.Data = `${slot}|${buildingId}`;
       this.send(cm);
     }
   }
@@ -109,10 +109,10 @@ export class GameClientService {
         break;
 
       case "CMDR":
-        let kind = payload.substr(0, 2);
-        let load = payload.substring(2);
+        let data = payload.split('|');
+        let load = data[1];
         msg.Type = MessageType.CommandResponse;
-        msg.CommandKind == CommandKind[kind];
+        msg.CommandKind == MessageKind[data[0]];
         msg.Payload = JSON.parse(load);
         break;
     }
@@ -141,9 +141,9 @@ export class GameClientService {
 
   private HandleCommandResponse(msg: ServerMessage) {
     switch (msg.CommandKind) {
-      case CommandKind.BuildStart:       
+      case MessageKind.StartBuilding:       
         let slot = (msg.Payload as any).slot;
-        let building = (msg.Payload as any).bulding;
+        let building = (msg.Payload as any).building;
         this.currentGameData.city.buildings[slot] = building;
         break;
         
@@ -167,11 +167,6 @@ export class Request{
 
 export enum MessageKind{
   Command  = 2,
-  Chat = 3
-}
-
-export enum CommandKind{
-  Null = "00",
-  Login = "01",
-  BuildStart = "10",
+  StartBuilding = 10,
+  Chat = 1024
 }
