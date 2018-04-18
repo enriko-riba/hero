@@ -9,7 +9,7 @@ import { SyncData } from './Messages/Server2Client/SyncData';
 import { Building } from './Messages/Server2Client/Building';
 import { Item } from './Messages/Server2Client/Item';
 import { Subscription } from 'rxjs/Subscription';
-import { Request, MessageKind, CommandKind } from './messages/client2server/Request';
+
 
 @Injectable()
 export class GameClientService {
@@ -151,4 +151,27 @@ export class GameClientService {
         break;
     }
   }
+}
+
+export class Request{
+  constructor(
+      public Created : number,
+      public Cid : number,
+      public Kind: MessageKind
+  ){}
+  /**
+   *  Format: 2 char opcode, n char payload
+   */
+  public Data: string;
+}
+
+export enum MessageKind{
+  Command  = 2,
+  Chat = 3
+}
+
+export enum CommandKind{
+  Null = "00",
+  Login = "01",
+  BuildStart = "10",
 }
