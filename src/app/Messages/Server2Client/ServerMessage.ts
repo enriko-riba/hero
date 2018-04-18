@@ -1,7 +1,7 @@
 import { SyncData } from "./SyncData";
 import { ChatData } from "./ChatData";
 import { WorldInitData } from "./WorldInitData";
-import { CommandKind } from "../client2server/ClientMessage";
+import { CommandKind } from "../client2server/Request";
 
 export enum MessageType{
     Sync,

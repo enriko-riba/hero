@@ -1,4 +1,4 @@
-export class ClientMessage{
+export class Request{
     constructor(
         public Created : number,
         public Cid : number,

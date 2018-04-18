@@ -9,7 +9,7 @@ import { SyncData } from './Messages/Server2Client/SyncData';
 import { Building } from './Messages/Server2Client/Building';
 import { Item } from './Messages/Server2Client/Item';
 import { Subscription } from 'rxjs/Subscription';
-import { ClientMessage, MessageKind, CommandKind } from './messages/client2server/ClientMessage';
+import { Request, MessageKind, CommandKind } from './messages/client2server/Request';
 
 @Injectable()
 export class GameClientService {
@@ -59,7 +59,7 @@ export class GameClientService {
     }
   }
 
-  public send(message: ClientMessage): void {
+  public send(message: Request): void {
     this.socket.send(JSON.stringify(message));
   }
 
@@ -82,7 +82,7 @@ export class GameClientService {
   public startBuilding(slot: number, buildingId: number) {
     let building: Building = this.buildingTemplates.find((b) => b.id === buildingId);
     if (this.canBuild(building)) {
-      var cm = new ClientMessage(Date.now(), this.cid++, MessageKind.Command);
+      var cm = new Request(Date.now(), this.cid++, MessageKind.Command);
       cm.Data = `${CommandKind.BuildStart}${slot}|${buildingId}`;
       this.send(cm);
     }
