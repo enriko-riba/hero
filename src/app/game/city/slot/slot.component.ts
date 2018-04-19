@@ -15,8 +15,6 @@ export class SlotComponent implements AfterViewInit {
   private lastState : SyncData;
   private building: Building;
 
-  //public SlotState = SlotState;
-
   public timeLeft : string;
   public statusClass: string;
   public imageUrl: string;
@@ -35,14 +33,7 @@ export class SlotComponent implements AfterViewInit {
     this.statusClass = this.getStatusClass(b);
     this.imageUrl = this.getImageUrl(b);
   }
-  // private async updateState(s: SyncData){
-  //   this.lastState = await s;
-  //   const b = s.city.buildings[this.id];
-  //   this.timeLeft = this.calcTimeLeft(b);
-  //   this.statusClass = this.getStatusClass(b);
-  //   this.imageUrl = this.getImageUrl(b);
-  // }
-
+  
   private calcTimeLeft(b: Building): string{
     return (b && b.buildTimeLeft > 0) ? timeString(b.buildTimeLeft) : "";
   }
