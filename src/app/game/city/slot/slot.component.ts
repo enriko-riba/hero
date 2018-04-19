@@ -19,7 +19,8 @@ export class SlotComponent implements AfterViewInit {
   public statusClass: string;
   public imageUrl: string;
 
-  constructor(private gcs: GameClientService) { }
+  constructor(private gcs: GameClientService) { 
+  }
 
   private subscription;
 
@@ -29,8 +30,8 @@ export class SlotComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.subscription = this.gcs.gameState
-                              .map(s => s.city.buildings[this.id])
-                              .subscribe(this.updateState.bind(this));
+    .map(s => s.city.buildings[this.id])
+    .subscribe(this.updateState.bind(this));
   }
 
   private async updateState(building: Building) {
@@ -40,7 +41,7 @@ export class SlotComponent implements AfterViewInit {
     this.imageUrl = this.getImageUrl(b);
 
     if (b && b.buildTimeLeft > 0) {
-      console.log('Slot id: ' + this.id + ', ' + b.name + ', state: ' + this.statusClass + ' : ' + b.buildTimeLeft);
+      console.log('Slot id: ' + this.id + ', ' + b.name + ', state: ' + this.statusClass + ' : ' + b.buildTimeLeft + ', mid: ' + this.gcs.currentGameData.mid);
     }
   }
 

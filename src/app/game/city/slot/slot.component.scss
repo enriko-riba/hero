@@ -47,13 +47,11 @@
 }
 
 .time {
-    display: none;
-    color: $text-color;
-    background-color: #222222a0;
-    padding: 1px;
-    font-size: 16px;
+    //display: none;
     position: relative;
+    background-color: #385858aa;
     top: -24px;
     left: 2px;
-    width: 60px;
+    min-width: 32px;
+    text-align: center;
 }

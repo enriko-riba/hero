@@ -21,20 +21,20 @@ export class GameClientService {
 
   
   //  for game state change notifications
-  private currentGameData: SyncData;
+  public currentGameData: SyncData;
   private currentState : BehaviorSubject<SyncData> = new BehaviorSubject<SyncData>(null);
   public get gameState() : Observable<SyncData>{
     return this.currentState.asObservable();
   }
 
   //  server message pump
-  private subscription: Subscription;
-  public serverMessages: Observable<ServerMessage>;
+  //private subscription: Subscription;
+  //public serverMessages: Observable<ServerMessage>;
 
 
   public initSocket(): void {
     if (this.socket) {
-      this.subscription.unsubscribe();
+      //this.subscription.unsubscribe();
       this.socket.close();
     }
 
@@ -42,12 +42,12 @@ export class GameClientService {
     console.log(url);
     this.socket = new WebSocket(url);
 
-    this.serverMessages = new Observable<ServerMessage>(observer => {
-      this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
-      this.socket.onerror = (event) => observer.error(event);
-      this.socket.onclose = (event) => observer.complete();
-    });
-    this.subscription = this.serverMessages.subscribe();
+    // this.serverMessages = new Observable<ServerMessage>(observer => {
+    //   this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
+    //   this.socket.onerror = (event) => observer.error(event);
+    //   this.socket.onclose = (event) => observer.complete();
+    // });
+    // this.subscription = this.serverMessages.subscribe();
 
     this.socket.onopen = (event) => {
       console.log('connected!')
@@ -57,7 +57,7 @@ export class GameClientService {
       console.log('disconnected!')
       this.isConnected = false;
     };
-    //this.socket.onmessage = (event) => this.parseMesage(event.data);
+    this.socket.onmessage = (event) => this.parseMesage(event.data);
   }
 
   public disconnect() {
@@ -91,6 +91,7 @@ export class GameClientService {
    //  EOF commands
    --------------------------------------*/
 
+  private mid = 0;
 
   private convertToMessage(data: string) {
     const msg: ServerMessage = JSON.parse(data);
@@ -130,6 +131,7 @@ export class GameClientService {
 
       case MessageType.Sync:
         this.currentGameData = msg.Payload as SyncData;
+        this.currentGameData.mid = ++this.mid;
         this.currentState.next(this.currentGameData);
         break;
 
@@ -146,6 +148,7 @@ export class GameClientService {
         let slot = (msg.Payload as any).slot;
         let building = (msg.Payload as any).building;
         this.currentGameData.city.buildings[slot] = building;
+        this.currentGameData.mid = ++this.mid;        
         this.currentState.next(this.currentGameData);
         break;
         
