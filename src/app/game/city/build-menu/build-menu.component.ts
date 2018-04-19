@@ -11,6 +11,7 @@ export class BuildMenuComponent implements OnInit {
   public visible = false;
   public items: Building[];
   public buildTime = (b: Building) => timeString(b.buildTime,'s');
+
   private slotIndex: number;
   constructor(private gcs: GameClientService) { }
 
@@ -41,7 +42,6 @@ export class BuildMenuComponent implements OnInit {
   }
 
   onClick(building: Building){
-    console.log('Item clicked: ', building,  event);
     if(this.canBuild(building)){
       this.gcs.startBuilding(this.slotIndex, building.id);
       this.close();

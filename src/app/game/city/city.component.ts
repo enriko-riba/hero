@@ -14,13 +14,16 @@ export class CityComponent implements AfterViewInit {
   @ViewChild("om") om: OptionsMenuComponent;
 
   public lastState : SyncData;
-  constructor(public gcs: GameClientService) {
-    this.gcs.gameState.subscribe( s => this.lastState = s );
+  constructor(public gcs: GameClientService) {    
+  }
+
+  private subscription;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   ngAfterViewInit() {
-    console.log(this.bm);
-    console.log(this.om);
+    this.subscription = this.gcs.gameState.subscribe( async s => this.lastState = await s );
   }
 
   onSlotClick(index: number) {

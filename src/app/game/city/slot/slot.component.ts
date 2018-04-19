@@ -12,33 +12,43 @@ import "rxjs/add/operator/map";
 export class SlotComponent implements AfterViewInit {
   @Input() id: number;
 
-  private lastState : SyncData;
+  private lastState: SyncData;
   private building: Building;
 
-  public timeLeft : string;
+  public timeLeft: string;
   public statusClass: string;
   public imageUrl: string;
 
   constructor(private gcs: GameClientService) { }
 
-  ngAfterViewInit() {
-    this.gcs.gameState
-        .map(s=> s.city.buildings[this.id])
-        .subscribe(this.updateState.bind(this));
+  private subscription;
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
-  private async updateState(building: Building){
+  ngAfterViewInit() {
+    this.subscription = this.gcs.gameState
+                              .map(s => s.city.buildings[this.id])
+                              .subscribe(this.updateState.bind(this));
+  }
+
+  private async updateState(building: Building) {
     let b = await building;
     this.timeLeft = this.calcTimeLeft(b);
     this.statusClass = this.getStatusClass(b);
     this.imageUrl = this.getImageUrl(b);
+
+    if (b && b.buildTimeLeft > 0) {
+      console.log('Slot id: ' + this.id + ', ' + b.name + ', state: ' + this.statusClass + ' : ' + b.buildTimeLeft);
+    }
   }
-  
-  private calcTimeLeft(b: Building): string{
+
+  private calcTimeLeft(b: Building): string {
     return (b && b.buildTimeLeft > 0) ? timeString(b.buildTimeLeft) : "";
   }
 
-  private getStatusClass(b: Building){
+  private getStatusClass(b: Building) {
     if (!b)
       return "empty";
     else if (b.buildTimeLeft > 0)
