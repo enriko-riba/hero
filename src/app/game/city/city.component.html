@@ -2,21 +2,21 @@
   <div class="flex-container row res-list">
     <div class="resource">
       <span>Food:</span>
-      <span class="value">{{gcs.currentGameData?.city.resources.food | number:'1.0-0'}}</span>
+      <span class="value">{{lastState?.city.resources.food | number:'1.0-0'}}</span>
     </div>
     <div class="resource">
       <span>Wood:</span>
-      <span class="value">{{gcs.currentGameData?.city.resources.wood | number:'1.0-0'}}</span>
+      <span class="value">{{lastState?.city.resources.wood | number:'1.0-0'}}</span>
     </div>
     <div class="resource">
       <span>Stone:</span>
-      <span class="value">{{gcs.currentGameData?.city.resources.stone | number:'1.0-0'}}</span>
+      <span class="value">{{lastState?.city.resources.stone | number:'1.0-0'}}</span>
     </div>
   </div>
 
   <div class="city-slots">
     <div class="row">
-      <city-slot *ngFor="let b of gcs.currentGameData?.city.buildings; let i = index" [id]="i" (click)="onSlotClick(i, $event)"></city-slot>
+      <city-slot *ngFor="let b of lastState?.city.buildings; let i = index" [id]="i" (click)="onSlotClick(i)"></city-slot>
     </div>
   </div>
   <city-build-menu #bm></city-build-menu>

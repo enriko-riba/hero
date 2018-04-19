@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameClientService } from '../../../game-client.service';
-import { buildTime } from '../../../shared/utility';
-import { Building, BuildingType } from '../../../shared/messages/server2client/Building';
+import { Building, BuildingType, timeString } from '../../../shared/index';
 
 @Component({
   selector: 'city-build-menu',
@@ -11,7 +10,7 @@ import { Building, BuildingType } from '../../../shared/messages/server2client/B
 export class BuildMenuComponent implements OnInit {
   public visible = false;
   public items: Building[];
-  public buildTime = buildTime;
+  public buildTime = (b: Building) => timeString(b.buildTime,'s');
   private slotIndex: number;
   constructor(private gcs: GameClientService) { }
 

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { GameClientService} from '../../game-client.service';
-import { Item } from '../../shared/messages/server2client/Item';
-import { EquipmentSlot } from '../../shared/messages/server2client/CharData';
+import { EquipmentSlot, Item, SyncData } from '../../shared';
 
 @Component({
   selector: 'game-character',
@@ -11,9 +10,11 @@ import { EquipmentSlot } from '../../shared/messages/server2client/CharData';
 })
 export class CharacterComponent implements OnInit {
   
+  private lastState: SyncData;
   constructor(private gcs: GameClientService) { }
 
   ngOnInit() {
+    this.gcs.gameState.subscribe(s => this.lastState = s);
   }
 
 
@@ -26,8 +27,8 @@ export class CharacterComponent implements OnInit {
   }
 
   public eqInfo(slotId: EquipmentSlot){
-    if(!this.gcs.currentGameData) return "";
-    let id = this.gcs.currentGameData.charData.equipped[slotId] || 0;
+    if(!this.lastState) return "";
+    let id = this.lastState.charData.equipped[slotId] || 0;
     if(id > 0){
       let item : Item = this.gcs.itemTemplates.find((i) => i.id ===id );
       return `${item.desc} ${this.damageDesc(item)} ${this.armorDesc(item)}`;

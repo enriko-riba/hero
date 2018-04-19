@@ -1,42 +1,53 @@
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { GameClientService } from './../../../game-client.service';
-import { Component, OnInit, Input } from '@angular/core';
-import { buildTime } from '../../../shared/utility';
-import { Building, BuildingType } from '../../../shared/messages/server2client/Building';
+import { Building, BuildingType, timeString, SyncData } from '../../../shared';
+import { Observable } from 'rxjs/Observable';
+import "rxjs/add/operator/map";
 
 @Component({
   selector: 'city-slot',
   templateUrl: './slot.component.html',
   styleUrls: ['./slot.component.scss']
 })
-export class SlotComponent implements OnInit {
+export class SlotComponent implements AfterViewInit {
   @Input() id: number;
 
+  private lastState : SyncData;
   private building: Building;
-  public SlotState = SlotState;
+
+  //public SlotState = SlotState;
+
+  public timeLeft : string;
+  public statusClass: string;
+  public imageUrl: string;
 
   constructor(private gcs: GameClientService) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    this.gcs.gameState
+        .map(s=> s.city.buildings[this.id])
+        .subscribe(this.updateState.bind(this));
   }
 
-  // public get state() {
-  //   const b = this.gcs.currentGameData.city.buildings[this.id];
-  //   if (!b)
-  //     return SlotState.Empty;
-  //   else if (b.buildTimeLeft > 0)
-  //     return SlotState.InProgress;
-  //   else
-  //     return SlotState.Finished;
+  private async updateState(building: Building){
+    let b = await building;
+    this.timeLeft = this.calcTimeLeft(b);
+    this.statusClass = this.getStatusClass(b);
+    this.imageUrl = this.getImageUrl(b);
+  }
+  // private async updateState(s: SyncData){
+  //   this.lastState = await s;
+  //   const b = s.city.buildings[this.id];
+  //   this.timeLeft = this.calcTimeLeft(b);
+  //   this.statusClass = this.getStatusClass(b);
+  //   this.imageUrl = this.getImageUrl(b);
   // }
 
-
-  public get timeLeft(){
-    const b = this.gcs.currentGameData.city.buildings[this.id];
-    return (b && b.buildTimeLeft > 0) ? buildTime(b) : "";
+  private calcTimeLeft(b: Building): string{
+    return (b && b.buildTimeLeft > 0) ? timeString(b.buildTimeLeft) : "";
   }
 
-  public statusClass(){
-    const b = this.gcs.currentGameData.city.buildings[this.id];
+  private getStatusClass(b: Building){
     if (!b)
       return "empty";
     else if (b.buildTimeLeft > 0)
@@ -45,10 +56,7 @@ export class SlotComponent implements OnInit {
       return "finished";
   }
 
-  public getImageUrl() {
-    const b = this.gcs.currentGameData.city.buildings[this.id];
-
-    //  empty slot
+  public getImageUrl(b: Building) {
     if (!b)
       return "assets/buttons/empty_slot.png";
 
@@ -62,7 +70,6 @@ export class SlotComponent implements OnInit {
         return isProgress ? "assets/buttons/hammer.png" : "assets/images/b_stone_01.png";
     }
   }
-
 }
 
 export enum SlotState {

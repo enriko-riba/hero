@@ -1,15 +1,11 @@
 import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { LoginService } from './login.service';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Subscription } from 'rxjs/Subscription';
-import { Building } from './shared/messages/server2client/Building';
-import { Item } from './shared/messages/server2client/Item';
-import { SyncData } from './shared/messages/server2client/SyncData';
-import { ServerMessage, MessageType } from './shared/messages/server2client/ServerMessage';
-import { WorldInitData } from './shared/messages/server2client/WorldInitData';
-import { MessageKind, Request } from './shared/messages/client2server/Request';
+import { LoginService } from './login.service';
+import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData } from './shared/index';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
@@ -22,9 +18,19 @@ export class GameClientService {
   public buildingTemplates: Array<Building>;
   public itemTemplates: Array<Item>;
   public isConnected = false;
-  public currentGameData: SyncData;
+
+  
+  //  for game state change notifications
+  private currentGameData: SyncData;
+  private currentState : BehaviorSubject<SyncData> = new BehaviorSubject<SyncData>(null);
+  public get gameState() : Observable<SyncData>{
+    return this.currentState.asObservable();
+  }
+
+  //  server message pump
   private subscription: Subscription;
   public serverMessages: Observable<ServerMessage>;
+
 
   public initSocket(): void {
     if (this.socket) {
@@ -64,14 +70,6 @@ export class GameClientService {
     this.socket.send(JSON.stringify(message));
   }
 
-  // public onMessage(): Observable<ServerMessage> {
-  //   return new Observable<ServerMessage>(observer => {
-  //     this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
-  //     this.socket.onerror = (event) => observer.error(event);
-  //     this.socket.onclose = (event) => observer.complete();
-  //   });
-  // }
-
   /*--------------------------------------
   //  Commands & related
   --------------------------------------*/
@@ -110,10 +108,11 @@ export class GameClientService {
         break;
 
       case "CMDR":
-        let data = payload.split('|');
-        let load = data[1];
+        let parts = payload.split('|');
+        let load = parts[1];
+        let kindValue = parseInt(parts[0], 10);
         msg.Type = MessageType.CommandResponse;
-        msg.CommandKind == MessageKind[data[0]];
+        msg.CommandKind = kindValue;
         msg.Payload = JSON.parse(load);
         break;
     }
@@ -131,6 +130,7 @@ export class GameClientService {
 
       case MessageType.Sync:
         this.currentGameData = msg.Payload as SyncData;
+        this.currentState.next(this.currentGameData);
         break;
 
       case MessageType.CommandResponse:
@@ -146,6 +146,7 @@ export class GameClientService {
         let slot = (msg.Payload as any).slot;
         let building = (msg.Payload as any).building;
         this.currentGameData.city.buildings[slot] = building;
+        this.currentState.next(this.currentGameData);
         break;
         
       default:
