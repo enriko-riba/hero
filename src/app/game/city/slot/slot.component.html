@@ -1,3 +1,4 @@
-<div class="btn btn-slot" [attr.id]="'tile' + id.toString()">
+<div class="btn btn-slot" [ngClass]="statusClass()">
     <button class="btn btn-icon" [ngStyle]="{'background-image':'url(' + getImageUrl() + ')'}"></button>
+    <div class="time">{{timeLeft}}</div>
 </div>

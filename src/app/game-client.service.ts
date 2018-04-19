@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { LoginService } from './login.service';
 import { Subscriber } from 'rxjs/Subscriber';
-import { ServerMessage, MessageType } from './Messages/Server2Client/ServerMessage';
-import { WorldInitData } from './Messages/Server2Client/WorldInitData';
-import { SyncData } from './Messages/Server2Client/SyncData';
-import { Building } from './Messages/Server2Client/Building';
-import { Item } from './Messages/Server2Client/Item';
 import { Subscription } from 'rxjs/Subscription';
+import { Building } from './shared/messages/server2client/Building';
+import { Item } from './shared/messages/server2client/Item';
+import { SyncData } from './shared/messages/server2client/SyncData';
+import { ServerMessage, MessageType } from './shared/messages/server2client/ServerMessage';
+import { WorldInitData } from './shared/messages/server2client/WorldInitData';
+import { MessageKind, Request } from './shared/messages/client2server/Request';
 
 
 @Injectable()
@@ -151,22 +152,4 @@ export class GameClientService {
         break;
     }
   }
-}
-
-export class Request{
-  constructor(
-      public Created : number,
-      public Cid : number,
-      public Kind: MessageKind
-  ){}
-  /**
-   *  Format: 2 char opcode, n char payload
-   */
-  public Data: string;
-}
-
-export enum MessageKind{
-  Command  = 2,
-  StartBuilding = 10,
-  Chat = 1024
 }

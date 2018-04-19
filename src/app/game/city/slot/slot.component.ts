@@ -1,9 +1,7 @@
-import { CityData } from './../../../Messages/Server2Client/CityData';
 import { GameClientService } from './../../../game-client.service';
-import { Building, BuildingType } from './../../../Messages/Server2Client/Building';
 import { Component, OnInit, Input } from '@angular/core';
-import { ServerMessage, MessageType } from '../../../Messages/Server2Client/ServerMessage';
-import { SyncData } from '../../../Messages/Server2Client/SyncData';
+import { buildTime } from '../../../shared/utility';
+import { Building, BuildingType } from '../../../shared/messages/server2client/Building';
 
 @Component({
   selector: 'city-slot',
@@ -21,14 +19,30 @@ export class SlotComponent implements OnInit {
   ngOnInit() {
   }
 
-  public get state() {
+  // public get state() {
+  //   const b = this.gcs.currentGameData.city.buildings[this.id];
+  //   if (!b)
+  //     return SlotState.Empty;
+  //   else if (b.buildTimeLeft > 0)
+  //     return SlotState.InProgress;
+  //   else
+  //     return SlotState.Finished;
+  // }
+
+
+  public get timeLeft(){
+    const b = this.gcs.currentGameData.city.buildings[this.id];
+    return (b && b.buildTimeLeft > 0) ? buildTime(b) : "";
+  }
+
+  public statusClass(){
     const b = this.gcs.currentGameData.city.buildings[this.id];
     if (!b)
-      return SlotState.Empty;
+      return "empty";
     else if (b.buildTimeLeft > 0)
-      return SlotState.InProgress;
+      return "progress";
     else
-      return SlotState.Finished;
+      return "finished";
   }
 
   public getImageUrl() {
@@ -36,7 +50,7 @@ export class SlotComponent implements OnInit {
 
     //  empty slot
     if (!b)
-      return "assets/buttons/build.png";
+      return "assets/buttons/empty_slot.png";
 
     let isProgress = b.buildTimeLeft > 0;
     switch (b.type) {

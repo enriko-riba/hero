@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { GameClientService} from '../../game-client.service';
-import { SyncData } from '../../Messages/Server2Client/SyncData';
-import { ServerMessage, MessageType } from '../../Messages/Server2Client/ServerMessage';
-import { CharData, EquipmentSlot } from '../../Messages/Server2Client/CharData';
-import { Item } from '../../Messages/Server2Client/Item';
+import { Item } from '../../shared/messages/server2client/Item';
+import { EquipmentSlot } from '../../shared/messages/server2client/CharData';
 
 @Component({
   selector: 'game-character',

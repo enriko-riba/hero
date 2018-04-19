@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Building } from '../../../Messages/Server2Client/Building';
+import { Building } from '../../../shared/messages/server2client/Building';
 
 @Component({
   selector: 'city-options-menu',

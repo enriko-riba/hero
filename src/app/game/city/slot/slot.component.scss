@@ -5,33 +5,33 @@
     border: none;
     overflow: hidden;
     display: inline-block;
+    height: 64px;
+    width: 64px;
 }
 
 .btn-slot{
     margin: 5px;
-    height: 64px;
-    width: 64px;
-    background-image: url('../../../../assets/images/slot.png');
+    background-image: url('assets/images/slot.png');
     background-repeat: no-repeat;
     background-color: $slot-back-color;
     border-radius: 6px;
+    &.finished {
+        background-color: #daf7e5;
+    }
+    &.progress {
+        background-color: #e0c02e;
+
+        & > div.time {  //  show time
+            display: inline-block;
+        }
+    }
+    &.empty {
+        opacity: 0.6;
+    }
 }
 
 .btn-icon {
-    height: 32px;
-    width: 32px;
-    margin: 16px 0 0 16px; //  center in parent div
-    background-color: #0000;
-    background-size: 32px 32px;
-}
-.btn-build {   
-    background-image: url('../../../../assets/buttons/build.png');
-}
-.btn-progress{
-    background-image: url('../../../../assets/buttons/hammer.png');
-}
-.btn-done{
-    background-image: url('../../../../assets/buttons/back.png');
+    background: 9px 9px/46px 46px no-repeat #0000;
 }
 
 .menu-build {    
@@ -44,4 +44,16 @@
 .menu-options {   
     position: absolute; 
     background-color: $back-color;
+}
+
+.time {
+    display: none;
+    color: $text-color;
+    background-color: #222222a0;
+    padding: 1px;
+    font-size: 16px;
+    position: relative;
+    top: -24px;
+    left: 2px;
+    width: 60px;
 }

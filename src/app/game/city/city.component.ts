@@ -1,9 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { GameClientService } from '../../game-client.service';
-import { ServerMessage, MessageType } from '../../Messages/Server2Client/ServerMessage';
-import { SyncData } from '../../Messages/Server2Client/SyncData';
-import { CharData } from '../../Messages/Server2Client/CharData';
-import { CityData } from '../../Messages/Server2Client/CityData';
 import {BuildMenuComponent} from "./build-menu/build-menu.component";
 import {OptionsMenuComponent} from "./options-menu/options-menu.component";
 

@@ -1,7 +1,7 @@
 import { SyncData } from "./SyncData";
 import { ChatData } from "./ChatData";
 import { WorldInitData } from "./WorldInitData";
-import { MessageKind } from "../../game-client.service";
+import { MessageKind } from "../client2server/Request";
 
 export enum MessageType{
     Sync,

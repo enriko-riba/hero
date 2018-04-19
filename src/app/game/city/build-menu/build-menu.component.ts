@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Building, BuildingType } from '../../../Messages/Server2Client/Building';
 import { GameClientService } from '../../../game-client.service';
+import { buildTime } from '../../../shared/utility';
+import { Building, BuildingType } from '../../../shared/messages/server2client/Building';
 
 @Component({
   selector: 'city-build-menu',
@@ -10,7 +11,7 @@ import { GameClientService } from '../../../game-client.service';
 export class BuildMenuComponent implements OnInit {
   public visible = false;
   public items: Building[];
-
+  public buildTime = buildTime;
   private slotIndex: number;
   constructor(private gcs: GameClientService) { }
 
@@ -40,26 +41,11 @@ export class BuildMenuComponent implements OnInit {
     return this.gcs.canBuild(b);
   }
 
-  buildTime(b: Building) {
-    let sec = b.buildTime;
-    let h = Math.floor(sec / 3600);
-    sec -= h * 3600;
-    let min = Math.floor(sec / 60);
-    sec -= min * 60;
-    var result = "";
-    if (h)
-      result += `${h}h : `;
-    if (min)
-      result += `${min}m : `;
-
-    result += `${sec}s`;
-    return result;
-  }
-
   onClick(building: Building){
     console.log('Item clicked: ', building,  event);
     if(this.canBuild(building)){
       this.gcs.startBuilding(this.slotIndex, building.id);
+      this.close();
     }
   }
 }

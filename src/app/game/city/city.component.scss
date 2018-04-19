@@ -15,16 +15,17 @@
     margin: 4px 35px 4px 4px;
 }
 .resource{
+    min-height: 64px;
     background-color: $skin-color;
     border: solid 1px $text-color;
-    flex: 0 1 25%;
+    flex: 1 1 25%;
     margin-left: 2px;
     text-align: left;
     padding: 3px 2px 3px 5px;
-    font-size: 22px;
+    font-size: 18px;
     .value {
         font-family: 'Yatra One',Arial, Helvetica, sans-serif;
-        font-size: 18px;
+        font-size: 16px;
         color: #defdfa;
     }
 }
