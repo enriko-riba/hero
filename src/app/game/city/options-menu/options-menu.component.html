@@ -4,22 +4,22 @@
     <back-button (onClick)="close()"></back-button>
     <div class="title">{{building.name}} level {{building.level}}</div>
     <div class="buttons">
-      <div class="btn">
+      <div class="btn" (click)="onUpgradeClick()">
         <img src="assets/buttons/upgrade.png" />
         <span>Upgrade to level {{building.level + 1}}</span>
-        <div class="sub">
-          <span>food: {{building.cost.food * (building.level + 1)}}</span>
-          <span>wood: {{building.cost.wood * (building.level + 1)}}</span>
-          <span>stone: {{building.cost.stone * (building.level + 1)}}</span>
+        <div class="sub" [class.red]="!canUpgrade()">
+          <span>{{upgradeCost.food}} food</span>
+          <span>{{upgradeCost.wood}} wood</span>
+          <span>{{upgradeCost.stone}} stone</span>
         </div>
       </div>
-      <div class="btn">
+      <div class="btn" (click)="onDestroyClick()">
         <img src="assets/buttons/destroy.png" />
         <span class="red">Destroy building</span>
         <div class="sub">
-            <span>food: {{ 0.25 * building.cost.food * building.level}}</span>
-            <span>wood: {{0.25 * building.cost.wood * building.level}}</span>
-            <span>stone: {{0.25 * building.cost.stone * building.level}}</span>
+            <span>{{destroyRefund.food }} food</span>
+            <span>{{destroyRefund.wood }} wood</span>
+            <span>{{destroyRefund.stone}} stone</span>
         </div>
       </div>
     </div>

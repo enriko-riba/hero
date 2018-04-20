@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Subscription } from 'rxjs/Subscription';
 import { LoginService } from './login.service';
-import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData } from './shared';
+import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData, Resources } from './shared';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
@@ -19,35 +19,22 @@ export class GameClientService {
   public itemTemplates: Array<Item>;
   public isConnected = false;
 
-  
+
   //  for game state change notifications
   public currentGameData: SyncData;
-  private currentState : BehaviorSubject<SyncData> = new BehaviorSubject<SyncData>(null);
-  public get gameState() : Observable<SyncData>{
+  private currentState: BehaviorSubject<SyncData> = new BehaviorSubject<SyncData>(null);
+  public get gameState(): Observable<SyncData> {
     return this.currentState.asObservable();
   }
 
-  //  server message pump
-  //private subscription: Subscription;
-  //public serverMessages: Observable<ServerMessage>;
-
-
   public initSocket(): void {
     if (this.socket) {
-      //this.subscription.unsubscribe();
       this.socket.close();
     }
 
     const url = `${environment.serverUrl}?idToken=${this.loginSvc.token}`;
     console.log(url);
     this.socket = new WebSocket(url);
-
-    // this.serverMessages = new Observable<ServerMessage>(observer => {
-    //   this.socket.onmessage = (event) => observer.next(this.parseMesage(event.data));
-    //   this.socket.onerror = (event) => observer.error(event);
-    //   this.socket.onclose = (event) => observer.complete();
-    // });
-    // this.subscription = this.serverMessages.subscribe();
 
     this.socket.onopen = (event) => {
       console.log('connected!')
@@ -73,6 +60,28 @@ export class GameClientService {
   /*--------------------------------------
   //  Commands & related
   --------------------------------------*/
+  public getBuildingUpgradeCost(b: Building): Resources {
+    return {
+      food: b.cost.food * (b.level + 1),
+      wood: b.cost.wood * (b.level + 1),
+      stone: b.cost.stone * (b.level + 1)
+    }
+  }
+
+  public getBuildingdestroyRefund(b: Building): Resources {
+    return {
+      food: (b.cost.food * b.level) / 4,
+      wood: (b.cost.wood * b.level) / 4,
+      stone: (b.cost.stone * b.level) / 4
+    }
+  }
+
+  public canUpgrade(b: Building) {
+    let cost = this.getBuildingUpgradeCost(b);
+    let res = this.currentGameData.city.resources;
+    return (cost.food <= res.food && cost.wood <= res.wood && cost.stone <= res.stone);
+  }
+
   public canBuild(b: Building) {
     let res = this.currentGameData.city.resources;
     return (b.cost.food <= res.food && b.cost.wood <= res.wood && b.cost.stone <= res.stone);
@@ -83,6 +92,15 @@ export class GameClientService {
     if (this.canBuild(building)) {
       var cm = new Request(Date.now(), this.cid++, MessageKind.StartBuilding);
       cm.Data = `${slot}|${buildingId}`;
+      this.send(cm);
+    }
+  }
+
+  public startBuildingUpgrade(slot: number) {
+    let building = this.currentGameData.city.buildings[slot];
+    if (this.canUpgrade(building)) {
+      var cm = new Request(Date.now(), this.cid++, MessageKind.StartBuildingUpgrade);
+      cm.Data = `${slot}|${building.id}`;
       this.send(cm);
     }
   }
@@ -144,14 +162,14 @@ export class GameClientService {
 
   private HandleCommandResponse(msg: ServerMessage) {
     switch (msg.CommandKind) {
-      case MessageKind.StartBuilding:       
+      case MessageKind.StartBuilding:
         let slot = (msg.Payload as any).slot;
         let building = (msg.Payload as any).building;
         this.currentGameData.city.buildings[slot] = building;
-        this.currentGameData.mid = ++this.mid;        
+        this.currentGameData.mid = ++this.mid;
         this.currentState.next(this.currentGameData);
         break;
-        
+
       default:
         break;
     }

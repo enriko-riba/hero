@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Building } from '../../../shared';
+import { GameClientService } from '../../../game-client.service';
 
 @Component({
   selector: 'city-options-menu',
@@ -9,17 +10,43 @@ import { Building } from '../../../shared';
 export class OptionsMenuComponent implements OnInit {
   public building : Building;
   public visible = false;
-  constructor() { }
+  private index:number;
 
+  constructor(private gcs: GameClientService) { }
+  
   ngOnInit() {
   }
 
-  showMenu(building : Building){
-    this.building = building;
+  public onUpgradeClick(){
+    if(this.canUpgrade()){
+      this.gcs.startBuildingUpgrade(this.index);
+    }
+  }
+
+  public onDestroyClick(){
+    //  TODO: implement
+  }
+
+  public canUpgrade(){
+    return this.gcs.canUpgrade(this.building);
+  }
+
+  public get upgradeCost(){
+    return this.gcs.getBuildingUpgradeCost(this.building);
+  }
+
+  public get destroyRefund(){
+    return this.gcs.getBuildingdestroyRefund(this.building);
+  }
+
+  public showMenu(index : number){
+    this.index = index;
+    this.building = this.gcs.currentGameData.city.buildings[index];
     this.visible = true;
   }
 
-  close(){
+  public close(){
     this.visible = false;
   }
+
 }

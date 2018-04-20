@@ -39,7 +39,7 @@ export class CityComponent implements AfterViewInit {
     //  if empty slot display build menu else options menu
     let building = this.gcs.currentGameData.city.buildings[index];
     if (building) {
-      this.om.showMenu(building);
+      this.om.showMenu(index);
     } else {
       this.bm.showMenu(index);
     }
