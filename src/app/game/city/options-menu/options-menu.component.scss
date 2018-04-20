@@ -44,7 +44,11 @@
         display: flex;
         align-items: center;
         border: solid 1px;
-        margin-top: 10px;        
+        margin-top: 10px;   
+        
+        &:hover {
+            background-color: lighten($skin-color, 20%);
+        }
     }
 }
 
