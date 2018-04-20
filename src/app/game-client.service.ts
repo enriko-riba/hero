@@ -60,15 +60,7 @@ export class GameClientService {
   /*--------------------------------------
   //  Commands & related
   --------------------------------------*/
-  public getBuildingUpgradeCost(b: Building): Resources {
-    return {
-      food: b.cost.food * (b.level + 1),
-      wood: b.cost.wood * (b.level + 1),
-      stone: b.cost.stone * (b.level + 1)
-    }
-  }
-
-  public getBuildingdestroyRefund(b: Building): Resources {
+    public getBuildingdestroyRefund(b: Building): Resources {
     return {
       food: (b.cost.food * b.level) / 4,
       wood: (b.cost.wood * b.level) / 4,
@@ -77,7 +69,7 @@ export class GameClientService {
   }
 
   public canUpgrade(b: Building) {
-    let cost = this.getBuildingUpgradeCost(b);
+    let cost = b.upgradeCost;
     let res = this.currentGameData.city.resources;
     return (cost.food <= res.food && cost.wood <= res.wood && cost.stone <= res.stone);
   }
@@ -161,15 +153,26 @@ export class GameClientService {
   }
 
   private HandleCommandResponse(msg: ServerMessage) {
+    var slot:number;
+    var building: Building;
+
     switch (msg.CommandKind) {
       case MessageKind.StartBuilding:
-        let slot = (msg.Payload as any).slot;
-        let building = (msg.Payload as any).building;
+        slot = (msg.Payload as any).slot;
+        building = (msg.Payload as any).building;
         this.currentGameData.city.buildings[slot] = building;
         this.currentGameData.mid = ++this.mid;
         this.currentState.next(this.currentGameData);
         break;
 
+      case MessageKind.StartBuildingUpgrade:
+        slot = (msg.Payload as any).slot;
+        building = (msg.Payload as any).building;
+        this.currentGameData.city.buildings[slot] = building;
+        this.currentGameData.mid = ++this.mid;
+        this.currentState.next(this.currentGameData);
+        break;
+        
       default:
         break;
     }

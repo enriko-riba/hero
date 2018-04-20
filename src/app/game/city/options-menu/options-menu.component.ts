@@ -20,19 +20,17 @@ export class OptionsMenuComponent implements OnInit {
   public onUpgradeClick(){
     if(this.canUpgrade()){
       this.gcs.startBuildingUpgrade(this.index);
+      this.close();
     }
   }
 
   public onDestroyClick(){
     //  TODO: implement
+    this.close();
   }
 
   public canUpgrade(){
     return this.gcs.canUpgrade(this.building);
-  }
-
-  public get upgradeCost(){
-    return this.gcs.getBuildingUpgradeCost(this.building);
   }
 
   public get destroyRefund(){

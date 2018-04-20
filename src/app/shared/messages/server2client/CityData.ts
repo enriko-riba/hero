@@ -5,4 +5,5 @@ export interface CityData {
     resources : Resources
     production: Resources;
     buildings: Building[];
+    storageCap: number;
   }

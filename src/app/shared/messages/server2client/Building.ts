@@ -9,6 +9,7 @@ export interface Building {
         buildTimeLeft: number;
         production: Resources;
         cost: Resources;
+        upgradeCost: Resources;
 }
 
 export enum BuildingType {

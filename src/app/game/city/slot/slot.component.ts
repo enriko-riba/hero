@@ -25,7 +25,7 @@ export class SlotComponent implements AfterViewInit {
   private subscription;
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if(this.subscription)this.subscription.unsubscribe();
   }
 
   ngAfterViewInit() {
@@ -39,7 +39,7 @@ export class SlotComponent implements AfterViewInit {
     this.timeLeft = this.calcTimeLeft(b);
     this.statusClass = this.getStatusClass(b);
     this.imageUrl = this.getImageUrl(b);
-
+    this.building = b;
     if (b && b.buildTimeLeft > 0) {
       console.log('Slot id: ' + this.id + ', ' + b.name + ', state: ' + this.statusClass + ' : ' + b.buildTimeLeft + ', mid: ' + this.gcs.currentGameData.mid);
     }
@@ -71,6 +71,10 @@ export class SlotComponent implements AfterViewInit {
       case BuildingType.Quarry:
         return isProgress ? "assets/buttons/hammer.png" : "assets/images/b_stone_01.png";
     }
+  }
+
+  public get level(){
+    return this.building ? this.building.level : "";
   }
 }
 

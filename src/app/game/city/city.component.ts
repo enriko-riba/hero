@@ -20,7 +20,7 @@ export class CityComponent implements AfterViewInit {
 
   private subscription;
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if(this.subscription)this.subscription.unsubscribe();
   }
 
   ngAfterViewInit() {

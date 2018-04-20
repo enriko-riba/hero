@@ -8,9 +8,9 @@
         <img src="assets/buttons/upgrade.png" />
         <span>Upgrade to level {{building.level + 1}}</span>
         <div class="sub" [class.red]="!canUpgrade()">
-          <span>{{upgradeCost.food}} food</span>
-          <span>{{upgradeCost.wood}} wood</span>
-          <span>{{upgradeCost.stone}} stone</span>
+          <span>{{building.upgradeCost.food}} food</span>
+          <span>{{building.upgradeCost.wood}} wood</span>
+          <span>{{building.upgradeCost.stone}} stone</span>
         </div>
       </div>
       <div class="btn" (click)="onDestroyClick()">
