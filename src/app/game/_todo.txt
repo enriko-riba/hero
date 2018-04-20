@@ -16,6 +16,7 @@ City
 * build menu
 - add 'available in...' display for buildings that lack resources
 - add list scrolling for many building types
+- animate hammer and background during build progress
 
 * options menu
 - add destroy
@@ -25,6 +26,7 @@ City
 ==========================
 Overview
 ==========================
+- block on overview untill connected
 - add last N events
 - login rewards
 

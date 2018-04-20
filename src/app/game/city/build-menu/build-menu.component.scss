@@ -1,7 +1,6 @@
 @import '~_variables.scss';
 
-.container{
-    
+.container{    
     font-family: 'Yatra One';
 }
 
@@ -63,10 +62,9 @@
 }
 .res-req {
     color: white;
-    font-size: 12px;
+    font-size: 13px;
     display: flex;
     flex-flow: column;
     margin-left: auto;  //    for right alignment
     margin-right: 10px;
 }
-.red { color: red }

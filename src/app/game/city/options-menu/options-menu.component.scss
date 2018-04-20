@@ -1,7 +1,6 @@
 @import '~_variables.scss';
 
-.container{
-    
+.container{    
     font-family: 'Yatra One';
 }
 
@@ -32,20 +31,28 @@
     font-size: 24px;
     color: #fff;
 }
-.build {
+.buttons {
     display: flex;
     flex-flow: column;
-    & div {
+    & img { 
+        width: 46px;
+        padding: 0 8px 0 8px;
+    }
+
+    & .btn {
         height: 64px;
         display: flex;
         align-items: center;
         border: solid 1px;
-        margin-top: 10px;
-        & img { 
-            padding-left: 8px; 
-        }
-        & span {      
-             margin-left: 20px;
-            }
+        margin-top: 10px;        
     }
+}
+
+div.sub {
+    display: flex;
+    flex-flow: column;
+    color: #fff;//#a9ee7a;
+    font-size: 13px;
+    margin-left: auto;
+    margin-right: 10px;
 }
