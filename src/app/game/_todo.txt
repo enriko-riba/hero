@@ -1,0 +1,49 @@
+==========================
+Character
+==========================
+- equipment slot equip
+- add inventory GUI
+
+
+==========================
+City
+==========================
+* res list:
+- add production / sec or hour
+- add res icons instead text
+- display total capacity
+
+* build menu
+- add 'available in...' display for buildings that lack resources
+- add list scrolling for many building types
+
+* options menu
+- add destroy
+- add upgrade
+
+
+==========================
+Overview
+==========================
+- add last N events
+- login rewards
+
+
+==========================
+Map
+==========================
+- implement
+
+
+==========================
+Overal
+==========================
+- smithing / equipment upgrading
+- dungeons/mobs with item drops
+- hero exp/skills
+- equipment stats
+- atk/dmg/def/lvl formulas
+
+* ideas
+- research tree?
+- pets?

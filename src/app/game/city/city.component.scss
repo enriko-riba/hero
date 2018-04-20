@@ -4,7 +4,7 @@
     position: absolute;
     height: 100vh;
     width: 100vw;
-    background-image: url('../../../assets/images/city_back.png');
+    background-image: url('assets/images/city_back.png');
     align-content: flex-start;    
     color: $text-color;
     & div{
@@ -15,7 +15,6 @@
     margin: 4px 35px 4px 4px;
 }
 .resource{
-    min-height: 64px;
     background-color: $skin-color;
     border: solid 1px $text-color;
     flex: 1 1 25%;
@@ -23,10 +22,33 @@
     text-align: left;
     padding: 3px 2px 3px 5px;
     font-size: 18px;
+
     .value {
         font-family: 'Yatra One',Arial, Helvetica, sans-serif;
         font-size: 16px;
         color: #defdfa;
+    }
+    
+    & img{
+        width: 32px;
+        padding-right: 2px;
+    }
+
+    & div {
+    display: flex;
+    align-items: flex-start;
+    }
+}
+
+.production
+{
+    font-family: 'Open Sans';
+    padding-top: 5px;
+    color: #a9ee7a;
+    font-size: 12px;
+    
+    & span:nth-child(2){
+        color: rgb(187, 141, 224);
     }
 }
 

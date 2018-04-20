@@ -1,16 +1,34 @@
 <div class="content">
   <div class="flex-container row res-list">
     <div class="resource">
-      <span>Food:</span>
-      <span class="value">{{state?.city.resources.food | number:'1.0-0'}}</span>
+      <div>
+        <img src="assets/images/res-food.png">
+        <span class="value">{{state?.city.resources.food | number:'1.0-0'}}</span>
+      </div>
+      <div class="production">
+        <span>{{3600 * state?.city.production.food | number:'1.0-0'}}/h</span>
+        <span>&nbsp;({{state?.city.storageCap}})</span>
+      </div>
     </div>
     <div class="resource">
-      <span>Wood:</span>
-      <span class="value">{{state?.city.resources.wood | number:'1.0-0'}}</span>
+      <div>
+        <img src="assets/images/res-wood.png">
+        <span class="value">{{state?.city.resources.wood | number:'1.0-0'}}</span>
+      </div>
+      <div class="production">
+        <span>{{3600 * state?.city.production.wood | number:'1.0-0'}}/h</span>
+        <span>&nbsp;({{state?.city.storageCap}})</span>
+      </div>
     </div>
     <div class="resource">
-      <span>Stone:</span>
-      <span class="value">{{state?.city.resources.stone | number:'1.0-0'}}</span>
+      <div>
+        <img src="assets/images/res-stone.png">
+        <span class="value">{{state?.city.resources.stone | number:'1.0-0'}}</span>
+      </div>
+      <div class="production">
+        <span>{{3600 * state?.city.production.stone | number:'1.0-0'}}/h</span>
+        <span>&nbsp;({{state?.city.storageCap}})</span>
+      </div>
     </div>
   </div>
 
