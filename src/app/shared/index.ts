@@ -1,3 +1,4 @@
+export * from "./shared.module";
 export * from "./utility";
 export * from "./back-button/back-button.component";
 export * from "./messages/server2client/Building";

@@ -52,9 +52,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-
   signInGoogle() {
-    console.log('Google sign in...');
     this.isMenuVisible = false;
     this.loginSvc.signInGoogle().then((user) => {
       this.statusText = "Hi " + user.getBasicProfile().getName();

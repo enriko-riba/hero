@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CharacterComponent } from './character/character.component';
 import { CityComponent } from './city/city.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:'city',
     component: CityComponent
+  },
+  {
+    path:'map',
+    component: MapComponent
   },
 ];
 

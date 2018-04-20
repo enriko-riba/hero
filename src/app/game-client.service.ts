@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Subscription } from 'rxjs/Subscription';
 import { LoginService } from './login.service';
-import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData } from './shared/index';
+import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData } from './shared';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 

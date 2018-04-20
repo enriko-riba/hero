@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameClientService } from '../../../game-client.service';
-import { Building, BuildingType, timeString } from '../../../shared/index';
+import { Building, BuildingType, timeString } from '../../../shared';
 
 @Component({
   selector: 'city-build-menu',

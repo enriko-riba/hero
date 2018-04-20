@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Building } from '../../../shared/index';
+import { Building } from '../../../shared';
 
 @Component({
   selector: 'city-options-menu',
