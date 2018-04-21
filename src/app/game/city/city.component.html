@@ -7,7 +7,7 @@
       </div>
       <div class="production">
         <span>{{3600 * state?.city.production.food | number:'1.0-0'}}/h</span>
-        <span>&nbsp;({{state?.city.storageCap}})</span>
+        <span [class.red]="state?.city.resources.food >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
       </div>
     </div>
     <div class="resource">
@@ -17,7 +17,7 @@
       </div>
       <div class="production">
         <span>{{3600 * state?.city.production.wood | number:'1.0-0'}}/h</span>
-        <span>&nbsp;({{state?.city.storageCap}})</span>
+        <span [class.red]="state?.city.resources.wood >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
       </div>
     </div>
     <div class="resource">
@@ -27,7 +27,7 @@
       </div>
       <div class="production">
         <span>{{3600 * state?.city.production.stone | number:'1.0-0'}}/h</span>
-        <span>&nbsp;({{state?.city.storageCap}})</span>
+        <span [class.red]="state?.city.resources.stone >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
       </div>
     </div>
   </div>

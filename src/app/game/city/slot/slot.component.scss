@@ -19,10 +19,13 @@
         background-color: #daf7e5;
     }
     &.progress {
-        background-color: #e0c02e;
-
+        animation:  pulse 4s infinite; //   back color animation       
+        
         & > div.time {  //  show time
             display: inline-block;
+        }
+        & > div img {
+            animation:spin 2s linear infinite;  //  hammer animation         
         }
     }
     &.empty {
@@ -32,8 +35,8 @@
     div.lvl {
         display: inline-block;
         position: relative;
-        top: -58px;
-        left: 8px;
+        top: -59px;
+        left: 10px;
         padding: 0 2px 0 2px;
         text-align: center;
         font-size: 22px;
@@ -44,8 +47,13 @@
     }
 }
 
-.btn-icon {
-    background: 9px 9px/46px 46px no-repeat #0000;
+.btn-icon img{
+    background-color: #0000;
+    position: relative;
+    top: 9px;
+    left: 9px;
+    width: 46px;
+    height: 46px;   
 }
 
 .menu-build {    
@@ -64,8 +72,19 @@
     //display: none;
     position: relative;
     background-color: #385858aa;
-    top: -24px;
-    left: 2px;
+    top: -22px;
+    left: -8px;
     min-width: 32px;
-    text-align: center;
+    //text-align: center;
+}
+
+@keyframes pulse {
+    0% {background-color: #ffe778;}
+    50% {background-color: #3F51B5;}
+    100% {background-color: #ffe778;}
+}
+@keyframes spin { 
+    0%  {transform:rotate(-20deg);}
+    50% {transform:rotate(20deg);}
+    100% {transform:rotate(-20deg);} 
 }

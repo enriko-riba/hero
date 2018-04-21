@@ -15,9 +15,9 @@ export function timeString(t: number, unit?: TimeStringUnit) {
     sec -= min * 60;
     var result = "";
     if (h)
-      result += `${h}h : `;
+      result += `${h}h:`;
     if (min)
-      result += `${min}m : `;
+      result += `${min}m:`;
 
     result += `${Math.floor(sec)}s`;
     return result;

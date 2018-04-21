@@ -1,5 +1,7 @@
 <div class="btn btn-slot" [ngClass]="statusClass">
-    <button class="btn btn-icon" [ngStyle]="{'background-image':'url(' + imageUrl + ')'}"></button>
+    <div class="btn btn-icon">
+        <img [src]="imageUrl" />
+    </div>
+    <div *ngIf="level > 0" class="lvl">{{level}}</div>
     <div class="time">{{timeLeft}}</div>
-    <div class="lvl">{{level}}</div>
 </div>
