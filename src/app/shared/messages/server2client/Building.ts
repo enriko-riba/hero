@@ -8,13 +8,26 @@ export interface Building {
         buildTime: number;
         buildTimeLeft: number;
         production: Resources;
-        cost: Resources;
         upgradeCost: Resources;
-        upgradeTime:number;
+        upgradeTime: number;
+        destroyRefund: Resources;
 }
 
 export enum BuildingType {
         Farm,
         WoodCutter,
         Quarry,
+}
+
+export type ProductionType = 'f' | 'w' | 's';
+
+export function getBuildingProductionType(b: Building): ProductionType {
+        switch (b.type) {
+                case BuildingType.Farm:
+                        return 'f';
+                case BuildingType.WoodCutter:
+                        return 'w';
+                case BuildingType.Quarry:
+                        return 's';
+        }
 }

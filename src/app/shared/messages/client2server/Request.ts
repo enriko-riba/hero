@@ -14,5 +14,6 @@ export class Request{
     Command  = 2,
     StartBuilding = 10,
     StartBuildingUpgrade = 11,
+    StartBuildingDestroy = 12,
     Chat = 1024
   }

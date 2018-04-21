@@ -9,9 +9,9 @@ Character
 City
 ==========================
 * res list:
-- add production / sec or hour
-- add res icons instead text
-- display total capacity
+- add production / sec or hour  - DONE
+- add res icons instead text    - DONE
+- display total capacity        - DONE
 
 * build menu
 - add 'available in...' display for buildings that lack resources
@@ -20,7 +20,7 @@ City
 
 * options menu
 - add destroy
-- add upgrade
+- add upgrade       - DONE
 
 
 ==========================

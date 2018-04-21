@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Building, timeString } from '../../../shared';
+import { Building, timeString, ProductionType } from '../../../shared';
 import { GameClientService } from '../../../game-client.service';
 
 @Component({
@@ -26,16 +26,16 @@ export class OptionsMenuComponent implements OnInit {
   }
 
   public onDestroyClick(){
-    //  TODO: implement
+    this.gcs.startBuildingDestroy(this.index);
     this.close();
   }
 
-  public canUpgrade(){
-    return this.gcs.canUpgrade(this.building);
+  public canUpgrade(resId?: ProductionType){
+    return this.gcs.canUpgrade(this.building, resId);
   }
 
   public get destroyRefund(){
-    return this.gcs.getBuildingdestroyRefund(this.building);
+    return this.building.destroyRefund;
   }
 
   public showMenu(index : number){

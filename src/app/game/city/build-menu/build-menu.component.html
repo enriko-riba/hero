@@ -12,9 +12,9 @@
             <span>{{buildTime(item)}}</span>
           </div>
           <div class="res-req" [class.red]="!canBuild(item)">
-            <span>{{item.cost.food | number:'1.0-0'}} food</span>
-            <span>{{item.cost.wood | number:'1.0-0'}} wood</span>
-            <span>{{item.cost.stone | number:'1.0-0'}} stone</span>
+            <span>{{item.upgradeCost.food | number:'1.0-0'}} food</span>
+            <span>{{item.upgradeCost.wood | number:'1.0-0'}} wood</span>
+            <span>{{item.upgradeCost.stone | number:'1.0-0'}} stone</span>
           </div>
         </div>
       </div>

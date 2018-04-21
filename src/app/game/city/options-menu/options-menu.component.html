@@ -6,14 +6,14 @@
     <div class="buttons">
       <div class="btn" (click)="onUpgradeClick()">
         <img src="assets/buttons/upgrade.png" />
-        <div class="desc">
+        <div class="desc" [class.red]="!canUpgrade()">
           <span>Upgrade to level {{building.level + 1}}</span>
           <span>{{upgradeTime()}}</span>
         </div>
-        <div class="sub" [class.red]="!canUpgrade()">
-          <span>{{building.upgradeCost.food}} food</span>
-          <span>{{building.upgradeCost.wood}} wood</span>
-          <span>{{building.upgradeCost.stone}} stone</span>
+        <div class="sub">
+          <span [class.red]="!canUpgrade('f')">{{building.upgradeCost.food}} food</span>
+          <span [class.red]="!canUpgrade('w')">{{building.upgradeCost.wood}} wood</span>
+          <span [class.red]="!canUpgrade('s')">{{building.upgradeCost.stone}} stone</span>
         </div>
       </div>
       <div class="btn" (click)="onDestroyClick()">

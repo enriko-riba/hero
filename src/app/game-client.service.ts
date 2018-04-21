@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Subscription } from 'rxjs/Subscription';
 import { LoginService } from './login.service';
-import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData, Resources } from './shared';
+import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData, Resources, ProductionType } from './shared';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
@@ -36,6 +36,9 @@ export class GameClientService {
     console.log(url);
     this.socket = new WebSocket(url);
 
+    this.socket.onerror = (event) => {
+      console.log('error', event);
+    };
     this.socket.onopen = (event) => {
       console.log('connected!')
       this.isConnected = true;
@@ -60,23 +63,24 @@ export class GameClientService {
   /*--------------------------------------
   //  Commands & related
   --------------------------------------*/
-    public getBuildingdestroyRefund(b: Building): Resources {
-    return {
-      food: (b.cost.food * b.level) / 4,
-      wood: (b.cost.wood * b.level) / 4,
-      stone: (b.cost.stone * b.level) / 4
-    }
-  }
-
-  public canUpgrade(b: Building) {
+  public canUpgrade(b: Building, resId?: ProductionType) {
     let cost = b.upgradeCost;
     let res = this.currentGameData.city.resources;
-    return (cost.food <= res.food && cost.wood <= res.wood && cost.stone <= res.stone);
+    switch (resId) {
+      case 'f':
+        return cost.food <= res.food;
+      case 'w':
+        return cost.wood <= res.wood;
+      case 's':
+        return cost.stone <= res.stone;
+      default:
+        return (cost.food <= res.food && cost.wood <= res.wood && cost.stone <= res.stone);
+    }
   }
 
   public canBuild(b: Building) {
     let res = this.currentGameData.city.resources;
-    return (b.cost.food <= res.food && b.cost.wood <= res.wood && b.cost.stone <= res.stone);
+    return (b.upgradeCost.food <= res.food && b.upgradeCost.wood <= res.wood && b.upgradeCost.stone <= res.stone);
   }
 
   public startBuilding(slot: number, buildingId: number) {
@@ -97,6 +101,14 @@ export class GameClientService {
     }
   }
 
+  public startBuildingDestroy(slot: number) {
+    let building = this.currentGameData.city.buildings[slot];
+    if (building) {
+      var cm = new Request(Date.now(), this.cid++, MessageKind.StartBuildingDestroy);
+      cm.Data = `${slot}|${building.id}`;
+      this.send(cm);
+    }
+  }
   /*--------------------------------------
    //  EOF commands
    --------------------------------------*/
@@ -153,7 +165,7 @@ export class GameClientService {
   }
 
   private HandleCommandResponse(msg: ServerMessage) {
-    var slot:number;
+    var slot: number;
     var building: Building;
 
     switch (msg.CommandKind) {
@@ -172,7 +184,14 @@ export class GameClientService {
         this.currentGameData.mid = ++this.mid;
         this.currentState.next(this.currentGameData);
         break;
-        
+
+      case MessageKind.StartBuildingDestroy:
+        slot = (msg.Payload as any).slot;
+        this.currentGameData.city.buildings[slot] = null;
+        this.currentGameData.city.resources = (msg.Payload as any).resources;
+        this.currentGameData.mid = ++this.mid;
+        this.currentState.next(this.currentGameData);
+        break;
       default:
         break;
     }
