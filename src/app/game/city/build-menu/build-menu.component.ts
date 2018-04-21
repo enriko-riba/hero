@@ -10,7 +10,7 @@ import { Building, BuildingType, timeString } from '../../../shared';
 export class BuildMenuComponent implements OnInit {
   public visible = false;
   public items: Building[];
-  public buildTime = (b: Building) => timeString(b.buildTime,'s');
+  public buildTime = (b: Building) => timeString(b.upgradeTime,'ms');
 
   private slotIndex: number;
   constructor(private gcs: GameClientService) { }

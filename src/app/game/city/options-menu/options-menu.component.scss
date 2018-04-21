@@ -52,6 +52,17 @@
     }
 }
 
+.desc {
+    & span {      
+            margin-left: 10px;
+    }
+    display: flex;
+    flex-flow: column;
+    & span:nth-child(2){
+        color: white;
+    }
+}
+
 div.sub {
     display: flex;
     flex-flow: column;

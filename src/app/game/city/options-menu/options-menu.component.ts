@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Building } from '../../../shared';
+import { Building, timeString } from '../../../shared';
 import { GameClientService } from '../../../game-client.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { GameClientService } from '../../../game-client.service';
 export class OptionsMenuComponent implements OnInit {
   public building : Building;
   public visible = false;
+  public upgradeTime = (b: Building) => timeString(this.building.upgradeTime,'ms');
   private index:number;
 
   constructor(private gcs: GameClientService) { }
@@ -40,7 +41,10 @@ export class OptionsMenuComponent implements OnInit {
   public showMenu(index : number){
     this.index = index;
     this.building = this.gcs.currentGameData.city.buildings[index];
-    this.visible = true;
+    if(this.building.buildTimeLeft <= 0)
+      this.visible = true;
+    else
+      console.warn('can not comply - upgrade in progress!');
   }
 
   public close(){

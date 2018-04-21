@@ -6,7 +6,10 @@
     <div class="buttons">
       <div class="btn" (click)="onUpgradeClick()">
         <img src="assets/buttons/upgrade.png" />
-        <span>Upgrade to level {{building.level + 1}}</span>
+        <div class="desc">
+          <span>Upgrade to level {{building.level + 1}}</span>
+          <span>{{upgradeTime()}}</span>
+        </div>
         <div class="sub" [class.red]="!canUpgrade()">
           <span>{{building.upgradeCost.food}} food</span>
           <span>{{building.upgradeCost.wood}} wood</span>
