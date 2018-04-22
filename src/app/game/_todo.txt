@@ -19,14 +19,14 @@ City
 - animate hammer and background during build progress
 
 * options menu
-- add destroy
+- add destroy       - DONE
 - add upgrade       - DONE
 
 
 ==========================
 Overview
 ==========================
-- block on overview untill connected
+- block overview untill connected
 - add last N events
 - login rewards
 
@@ -45,6 +45,8 @@ Overal
 - hero exp/skills
 - equipment stats
 - atk/dmg/def/lvl formulas
+- FB login
+- allow ws connection without token and send token as a new ClientMessage (MessageKind.Login)
 
 * ideas
 - research tree?

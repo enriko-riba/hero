@@ -21,11 +21,11 @@
     &.progress {
         animation:  pulse 4s infinite; //   back color animation       
         
-        & > div.time {  //  show time
-            display: inline-block;
+        & > div.time {  
+            display: inline-block; //  show time if progress
         }
         & > div img {
-            animation:spin 2s linear infinite;  //  hammer animation         
+            animation:spin 1.75s ease-in infinite;  //  hammer animation         
         }
     }
     &.empty {
