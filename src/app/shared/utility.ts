@@ -3,7 +3,7 @@ import { Building } from "./messages/server2client/Building";
 export type TimeStringUnit = 'ms' | 's';
 
 /**
- * Converts the given seconds/milliseconds to string
+ * Converts the given seconds/milliseconds to string.
  * @param t 
  * @param unit unit of t: 'ms' for milliseconds, 's' for seconds
  */
@@ -31,4 +31,12 @@ export function timeString(t: number, unit?: TimeStringUnit) {
 	}
 
 	return result;
+}
+
+/**
+ * Returns a timestring for buildings remaining build time.
+ * @param b 
+ */
+export function calcTimeLeft(b: Building): string {
+	return (b && b.buildTimeLeft > 0) ? timeString(b.buildTimeLeft) : "";
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { GameClientService } from './../../../game-client.service';
-import { Building, BuildingType, timeString, SyncData } from '../../../shared';
+import { Building, BuildingType, timeString, SyncData, calcTimeLeft } from '../../../shared';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/operator/map";
 
@@ -36,7 +36,7 @@ export class SlotComponent implements AfterViewInit {
 
 	private async updateState(building: Building) {
 		let b = await building;
-		this.timeLeft = this.calcTimeLeft(b);
+		this.timeLeft = calcTimeLeft(b);
 		this.statusClass = this.getStatusClass(b);
 		this.imageUrl = this.getImageUrl(b);
 		this.building = b;
@@ -45,9 +45,7 @@ export class SlotComponent implements AfterViewInit {
 		}
 	}
 
-	private calcTimeLeft(b: Building): string {
-		return (b && b.buildTimeLeft > 0) ? timeString(b.buildTimeLeft) : "";
-	}
+	
 
 	private getStatusClass(b: Building) {
 		if (!b)

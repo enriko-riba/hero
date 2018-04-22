@@ -18,7 +18,9 @@ export class CityComponent implements AfterViewInit {
 	constructor(public gcs: GameClientService) {
 	}
 
+	private _state;
 	private subscription;
+	
 	ngOnDestroy() {
 		if (this.subscription) this.subscription.unsubscribe();
 	}
@@ -27,7 +29,6 @@ export class CityComponent implements AfterViewInit {
 		this.subscription = this.gcs.gameState.subscribe(async s => this._state = await s);
 	}
 
-	private _state;
 	public get state(): SyncData {
 		return this._state;
 	}

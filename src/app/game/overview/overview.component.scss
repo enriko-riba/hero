@@ -5,10 +5,11 @@
     height: 100vh;
     width: 100vw;
     align-content: center;
+    color: $text-color;
 }
 
 .menu {
-    margin: 4px 35px 4px 4px;
+    margin: 4px 4px 20px 4px;
     justify-content: flex-start;
 }
 
@@ -21,4 +22,99 @@ a {
     border: solid 1px $text-color;
     background-color: $skin-color;
     color: $text-color;
+}
+
+.builder {
+    margin-top: 10px;
+    font-size: 14px;
+    display: flex;
+
+    .builder-icon {
+        margin: 5px;
+        background-image: url('assets/images/slot.png');
+        background-repeat: no-repeat;
+        background-color: $slot-back-color;
+        border-radius: 6px;
+        width: 64px;
+        height: 64px;
+        
+        img.zzz {
+            position: relative;
+            top: -37px;
+            left: 9px;
+            opacity: 1;
+            animation: builder-idle 2.0s ease-in infinite;
+        }
+
+        &.progress {
+            background-color: $text-color;
+            animation: builder-pulse 2.0s ease-in infinite;
+        }
+        &.progress img {
+            animation: builder-working 2.0s ease-in infinite; //   back color animation     
+            &.zzz {
+                display: none;  //  hide sleeping
+            }  
+        }
+    }
+
+    img {
+        display: block; //  show both images
+        opacity: 0.6;
+        position: relative;
+        top: 9px;
+        left: 9px;
+        background-color: #0000;
+        width: 46px;
+        height: 46px;
+        flex: 0 1;        
+    }
+}
+
+.builder-details {
+    margin: 5px;
+    padding: 5px;
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    & div {
+        padding: 2px;
+        flex: 1;
+    }
+}
+
+@keyframes builder-working {
+    0% {
+        transform: scale(1.0) rotate(-5deg);
+    }
+    50% {
+        transform: scale(0.5) rotate(20deg);
+    }
+    100% {
+        transform: scale(1.0) rotate(-5deg);
+    }
+}
+
+@keyframes builder-pulse {
+    0% {
+        background-color: #ffac4d;
+    }
+    50% {
+        background-color: #ffff00;
+    }
+    100% {
+        background-color: #ffac4d;
+    }
+}
+
+@keyframes builder-idle {
+    0% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1.0);
+    }
 }
