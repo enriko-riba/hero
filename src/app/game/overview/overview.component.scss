@@ -1,5 +1,4 @@
 @import '~_variables.scss';
-
 .content {
     position: fixed;
     background-color: $back-color;
@@ -7,10 +6,12 @@
     width: 100vw;
     align-content: center;
 }
+
 .menu {
     margin: 4px 35px 4px 4px;
     justify-content: flex-start;
 }
+
 a {
     text-decoration: none;
     display: flex;

@@ -6,31 +6,31 @@ import { CityComponent } from './city/city.component';
 import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
-  {
-    path:'',
-    redirectTo: 'overview', 
-    pathMatch: 'full'
-  },
-  {
-    path:'overview',
-    component: OverviewComponent
-  },
-  {
-    path:'character',
-    component: CharacterComponent   
-  },
-  {
-    path:'city',
-    component: CityComponent
-  },
-  {
-    path:'map',
-    component: MapComponent
-  },
+	{
+		path: '',
+		redirectTo: 'overview',
+		pathMatch: 'full'
+	},
+	{
+		path: 'overview',
+		component: OverviewComponent
+	},
+	{
+		path: 'character',
+		component: CharacterComponent
+	},
+	{
+		path: 'city',
+		component: CityComponent
+	},
+	{
+		path: 'map',
+		component: MapComponent
+	},
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class GameRoutingModule { }

@@ -1,7 +1,8 @@
 .connection-status {
     z-index: 1000;
     position: absolute;
-    bottom: 0; left: 0;
+    bottom: 0;
+    left: 0;
     background-color: red;
     width: 24px;
     height: 24px;
@@ -15,13 +16,14 @@
 .tooltip {
     position: absolute;
     bottom: 2px;
-    background-color: rgba(200,200,200, 0.9);
+    background-color: rgba(200, 200, 200, 0.9);
     display: none;
     min-width: 100px;
     font-size: 14px;
-    padding: 4px 2px;       
+    padding: 4px 2px;
 }
 
-.connection-status:hover .tooltip, .connection-status:focus .tooltip{
+.connection-status:hover .tooltip,
+.connection-status:focus .tooltip {
     display: block;
 }

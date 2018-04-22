@@ -1,30 +1,30 @@
 <div class="container" *ngIf="visible">
-  <div class="overlay"></div>
-  <div class="dialog">
-    <back-button (onClick)="close()"></back-button>
-    <div class="title">{{building.name}} level {{building.level}}</div>
-    <div class="buttons">
-      <div class="btn" (click)="onUpgradeClick()">
-        <img src="assets/buttons/upgrade.png" />
-        <div class="desc" [class.red]="!canUpgrade()">
-          <span>Upgrade to level {{building.level + 1}}</span>
-          <span>{{upgradeTime()}}</span>
-        </div>
-        <div class="sub">
-          <span [class.red]="!canUpgrade('f')">{{building.upgradeCost.food}} food</span>
-          <span [class.red]="!canUpgrade('w')">{{building.upgradeCost.wood}} wood</span>
-          <span [class.red]="!canUpgrade('s')">{{building.upgradeCost.stone}} stone</span>
-        </div>
-      </div>
-      <div class="btn" (click)="onDestroyClick()">
-        <img src="assets/buttons/destroy.png" />
-        <span class="danger">Destroy building</span>
-        <div class="sub">
-            <span>{{destroyRefund.food }} food</span>
-            <span>{{destroyRefund.wood }} wood</span>
-            <span>{{destroyRefund.stone}} stone</span>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="overlay"></div>
+	<div class="dialog">
+		<back-button (onClick)="close()"></back-button>
+		<div class="title">{{building.name}} level {{building.level}}</div>
+		<div class="buttons">
+			<div class="btn" (click)="onUpgradeClick()">
+				<img src="assets/buttons/upgrade.png" />
+				<div class="desc" [class.red]="!canUpgrade()">
+					<span>Upgrade to level {{building.level + 1}}</span>
+					<span>{{upgradeTime()}}</span>
+				</div>
+				<div class="sub">
+					<span [class.red]="!canUpgrade('f')">{{building.upgradeCost.food}} food</span>
+					<span [class.red]="!canUpgrade('w')">{{building.upgradeCost.wood}} wood</span>
+					<span [class.red]="!canUpgrade('s')">{{building.upgradeCost.stone}} stone</span>
+				</div>
+			</div>
+			<div class="btn" (click)="onDestroyClick()">
+				<img src="assets/buttons/destroy.png" />
+				<span class="danger">Destroy building</span>
+				<div class="sub">
+					<span>{{destroyRefund.food }} food</span>
+					<span>{{destroyRefund.wood }} wood</span>
+					<span>{{destroyRefund.stone}} stone</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

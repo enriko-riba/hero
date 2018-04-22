@@ -3,52 +3,52 @@ import { Building, timeString, ProductionType } from '../../../shared';
 import { GameClientService } from '../../../game-client.service';
 
 @Component({
-  selector: 'city-options-menu',
-  templateUrl: './options-menu.component.html',
-  styleUrls: ['./options-menu.component.scss']
+	selector: 'city-options-menu',
+	templateUrl: './options-menu.component.html',
+	styleUrls: ['./options-menu.component.scss']
 })
 export class OptionsMenuComponent implements OnInit {
-  public building : Building;
-  public visible = false;
-  public upgradeTime = (b: Building) => timeString(this.building.upgradeTime,'ms');
-  private index:number;
+	public building: Building;
+	public visible = false;
+	public upgradeTime = (b: Building) => timeString(this.building.upgradeTime, 'ms');
+	private index: number;
 
-  constructor(private gcs: GameClientService) { }
-  
-  ngOnInit() {
-  }
+	constructor(private gcs: GameClientService) { }
 
-  public onUpgradeClick(){
-    if(this.canUpgrade()){
-      this.gcs.startBuildingUpgrade(this.index);
-      this.close();
-    }
-  }
+	ngOnInit() {
+	}
 
-  public onDestroyClick(){
-    this.gcs.startBuildingDestroy(this.index);
-    this.close();
-  }
+	public onUpgradeClick() {
+		if (this.canUpgrade()) {
+			this.gcs.startBuildingUpgrade(this.index);
+			this.close();
+		}
+	}
 
-  public canUpgrade(resId?: ProductionType){
-    return this.gcs.canUpgrade(this.building, resId);
-  }
+	public onDestroyClick() {
+		this.gcs.startBuildingDestroy(this.index);
+		this.close();
+	}
 
-  public get destroyRefund(){
-    return this.building.destroyRefund;
-  }
+	public canUpgrade(resId?: ProductionType) {
+		return this.gcs.canUpgrade(this.building, resId);
+	}
 
-  public showMenu(index : number){
-    this.index = index;
-    this.building = this.gcs.currentGameData.city.buildings[index];
-    if(this.building.buildTimeLeft <= 0)
-      this.visible = true;
-    else
-      console.warn('can not comply - upgrade in progress!');
-  }
+	public get destroyRefund() {
+		return this.building.destroyRefund;
+	}
 
-  public close(){
-    this.visible = false;
-  }
+	public showMenu(index: number) {
+		this.index = index;
+		this.building = this.gcs.currentGameData.city.buildings[index];
+		if (this.building.buildTimeLeft <= 0)
+			this.visible = true;
+		else
+			console.warn('can not comply - upgrade in progress!');
+	}
+
+	public close() {
+		this.visible = false;
+	}
 
 }

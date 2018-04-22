@@ -1,20 +1,21 @@
 @import '~_variables.scss';
-
 .content {
     position: absolute;
     height: 100vh;
     width: 100vw;
     background-image: url('assets/images/city_back.png');
-    align-content: flex-start;    
+    align-content: flex-start;
     color: $text-color;
-    & div{
+    & div {
         justify-content: flex-start;
     }
 }
-.res-list{
+
+.res-list {
     margin: 4px 35px 4px 4px;
 }
-.resource{
+
+.resource {
     background-color: $skin-color;
     border: solid 1px $text-color;
     flex: 1 1 25%;
@@ -22,32 +23,27 @@
     text-align: left;
     padding: 3px 2px 3px 5px;
     font-size: 18px;
-
     .value {
-        font-family: 'Yatra One',Arial, Helvetica, sans-serif;
+        font-family: 'Yatra One', Arial, Helvetica, sans-serif;
         font-size: 16px;
         color: #defdfa;
     }
-    
-    & img{
+    & img {
         width: 32px;
         padding-right: 2px;
     }
-
     & div {
-    display: flex;
-    align-items: flex-start;
+        display: flex;
+        align-items: flex-start;
     }
 }
 
-.production
-{
+.production {
     font-family: 'Open Sans';
     padding-top: 5px;
     color: #a9ee7a;
     font-size: 12px;
-    
-    & span:nth-child(2){
+    & span:nth-child(2) {
         color: rgb(187, 141, 224);
     }
 }

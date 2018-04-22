@@ -1,5 +1,5 @@
 <back-button (onClick)="navigateBack()"></back-button>
 <button class="connection-status" [ngClass]="{connected: client.isConnected}">
-    <div class="tooltip">{{client.isConnected ? 'connected': 'disconnected'}}</div>
+	<div class="tooltip">{{client.isConnected ? 'connected': 'disconnected'}}</div>
 </button>
 <router-outlet></router-outlet>

@@ -1,6 +1,5 @@
 @import '~_variables.scss';
-
-.container{    
+.container {
     font-family: 'Yatra One';
 }
 
@@ -15,7 +14,7 @@
     opacity: 0.85;
 }
 
-.dialog {  
+.dialog {
     position: absolute;
     top: 20vh;
     left: 10px;
@@ -27,24 +26,25 @@
     background-color: $skin-color;
     border: solid 1px $text-color;
 }
+
 .title {
     font-size: 24px;
     color: #fff;
 }
+
 .buttons {
     display: flex;
     flex-flow: column;
-    & img { 
+    & img {
         width: 46px;
         padding: 0 8px 0 8px;
     }
-
     & .btn {
         height: 64px;
         display: flex;
         align-items: center;
         border: solid 1px;
-        margin-top: 10px;   
+        margin-top: 10px;
         cursor: pointer;
         &:hover {
             background-color: lighten($skin-color, 20%);
@@ -53,12 +53,12 @@
 }
 
 .desc {
-    & span {      
-            margin-left: 10px;
+    & span {
+        margin-left: 10px;
     }
     display: flex;
     flex-flow: column;
-    & span:nth-child(2){
+    & span:nth-child(2) {
         color: white;
     }
 }
@@ -66,7 +66,7 @@
 div.sub {
     display: flex;
     flex-flow: column;
-    color: #fff;//#a9ee7a;
+    color: #fff; //#a9ee7a;
     font-size: 13px;
     margin-left: auto;
     margin-right: 10px;

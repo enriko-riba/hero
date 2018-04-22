@@ -1,19 +1,18 @@
 @import '~_variables.scss';
-
-.content{
+.content {
     color: #f3f2a8;
     background: url('../../../assets/images/char_back.png');
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
     img {
         width: 100%;
         max-width: 512px;
     }
-    label{
+    label {
         text-align: left;
         padding: 2px;
-        margin-left:10px;
+        margin-left: 10px;
         flex: 1;
     }
     input {
@@ -35,11 +34,12 @@
     flex: 1 1 100%;
     flex-flow: row nowrap;
 }
+
 .slot {
     height: 64px;
     width: 64px;
     background-image: url('assets/images/slot.png');
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     margin: 5px;
     outline: none;
     border: none;
@@ -49,7 +49,6 @@
     &:focus {
         outline: none;
         border: none;
-
     }
 }
 
@@ -57,12 +56,12 @@
     display: flex;
     flex-flow: wrap;
     label {
-        flex: 1 1 30%;        
+        flex: 1 1 30%;
         border: solid 1px silver;
         padding: 2px 5px 1px 20px;
     }
     span {
-        flex: 1 1 50%;    
+        flex: 1 1 50%;
         margin: 0 10px 0 0;
         padding: 0 0 0 10px;
         border: solid 1px silver;

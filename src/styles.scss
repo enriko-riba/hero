@@ -1,21 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Chicle|Yatra+One|Open+Sans');
-
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     font-family: 'Chicle', cursive;
 }
-button, label, p {
+
+button,
+label,
+p {
     font-family: 'Chicle', cursive;
 }
-.flex-container{
+
+.flex-container {
     display: flex;
     text-align: center;
-    align-items:center;
+    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     div {
-        flex:  1 1 auto;
+        flex: 1 1 auto;
     }
 }
 
@@ -27,9 +31,15 @@ button, label, p {
     flex-flow: row;
 }
 
-.column, .col {
+.column,
+.col {
     flex-flow: column;
 }
 
-.red { color: red !important}
-.danger { color: #fa6502;}
+.red {
+    color: red !important
+}
+
+.danger {
+    color: #fa6502;
+}

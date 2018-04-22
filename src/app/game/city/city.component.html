@@ -1,42 +1,42 @@
 <div class="content">
-  <div class="flex-container row res-list">
-    <div class="resource">
-      <div>
-        <img src="assets/images/res-food.png">
-        <span class="value">{{state?.city.resources.food | number:'1.0-0'}}</span>
-      </div>
-      <div class="production">
-        <span>{{3600 * state?.city.production.food | number:'1.0-0'}}/h</span>
-        <span [class.red]="state?.city.resources.food >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
-      </div>
-    </div>
-    <div class="resource">
-      <div>
-        <img src="assets/images/res-wood.png">
-        <span class="value">{{state?.city.resources.wood | number:'1.0-0'}}</span>
-      </div>
-      <div class="production">
-        <span>{{3600 * state?.city.production.wood | number:'1.0-0'}}/h</span>
-        <span [class.red]="state?.city.resources.wood >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
-      </div>
-    </div>
-    <div class="resource">
-      <div>
-        <img src="assets/images/res-stone.png">
-        <span class="value">{{state?.city.resources.stone | number:'1.0-0'}}</span>
-      </div>
-      <div class="production">
-        <span>{{3600 * state?.city.production.stone | number:'1.0-0'}}/h</span>
-        <span [class.red]="state?.city.resources.stone >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
-      </div>
-    </div>
-  </div>
+	<div class="flex-container row res-list">
+		<div class="resource">
+			<div>
+				<img src="assets/images/res-food.png">
+				<span class="value">{{state?.city.resources.food | number:'1.0-0'}}</span>
+			</div>
+			<div class="production">
+				<span>{{3600 * state?.city.production.food | number:'1.0-0'}}/h</span>
+				<span [class.red]="state?.city.resources.food >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
+			</div>
+		</div>
+		<div class="resource">
+			<div>
+				<img src="assets/images/res-wood.png">
+				<span class="value">{{state?.city.resources.wood | number:'1.0-0'}}</span>
+			</div>
+			<div class="production">
+				<span>{{3600 * state?.city.production.wood | number:'1.0-0'}}/h</span>
+				<span [class.red]="state?.city.resources.wood >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
+			</div>
+		</div>
+		<div class="resource">
+			<div>
+				<img src="assets/images/res-stone.png">
+				<span class="value">{{state?.city.resources.stone | number:'1.0-0'}}</span>
+			</div>
+			<div class="production">
+				<span>{{3600 * state?.city.production.stone | number:'1.0-0'}}/h</span>
+				<span [class.red]="state?.city.resources.stone >= state?.city.storageCap">&nbsp;({{state?.city.storageCap}})</span>
+			</div>
+		</div>
+	</div>
 
-  <div class="city-slots">
-    <div class="row">
-      <city-slot *ngFor="let b of buildingSlots; let i = index" [id]="i" (click)="onSlotClick(i)"></city-slot>
-    </div>
-  </div>
-  <city-build-menu #bm></city-build-menu>
-  <city-options-menu #om></city-options-menu>
+	<div class="city-slots">
+		<div class="row">
+			<city-slot *ngFor="let b of buildingSlots; let i = index" [id]="i" (click)="onSlotClick(i)"></city-slot>
+		</div>
+	</div>
+	<city-build-menu #bm></city-build-menu>
+	<city-options-menu #om></city-options-menu>
 </div>
