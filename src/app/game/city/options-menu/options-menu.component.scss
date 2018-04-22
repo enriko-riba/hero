@@ -45,7 +45,7 @@
         align-items: center;
         border: solid 1px;
         margin-top: 10px;   
-        
+        cursor: pointer;
         &:hover {
             background-color: lighten($skin-color, 20%);
         }

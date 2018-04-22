@@ -19,7 +19,7 @@
         background-color: #daf7e5;
     }
     &.progress {
-        animation:  pulse 4s infinite; //   back color animation       
+        animation:  pulse 1.75s infinite; //   back color animation       
         
         & > div.time {  
             display: inline-block; //  show time if progress
@@ -33,7 +33,8 @@
     }
 
     div.lvl {
-        display: inline-block;
+        //display: inline-block;
+        float: left;
         position: relative;
         top: -59px;
         left: 10px;
@@ -69,13 +70,11 @@
 }
 
 .time {
-    //display: none;
-    position: relative;
     background-color: #385858aa;
+    position: relative;
     top: -22px;
-    left: -8px;
-    min-width: 32px;
-    //text-align: center;
+    float: left;
+    margin-left: 9px;
 }
 
 @keyframes pulse {
