@@ -63,6 +63,12 @@ export class GameClientService {
 	/*--------------------------------------
 	//  Commands & related
 	--------------------------------------*/
+
+	/**
+	 * Checks if the city has enough resources to upgrade the given building.
+	 * @param b the building to be upgraded
+	 * @param resId if used only the given resource is checked 
+	 */
 	public canUpgrade(b: Building, resId?: ProductionType) {
 		let cost = b.upgradeCost;
 		let res = this.currentGameData.city.resources;
@@ -78,6 +84,10 @@ export class GameClientService {
 		}
 	}
 
+	/**
+	 * Checks if the city has enough resources to build the given building.
+	 * @param b 
+	 */
 	public canBuild(b: Building) {
 		let res = this.currentGameData.city.resources;
 		return (b.upgradeCost.food <= res.food && b.upgradeCost.wood <= res.wood && b.upgradeCost.stone <= res.stone);

@@ -16,7 +16,7 @@ City
 * build menu
 - add 'available in...' display for buildings that lack resources
 - add list scrolling for many building types
-- animate hammer and background during build progress
+- animate hammer and background during build progress - DONE
 
 * options menu
 - add destroy       - DONE
