@@ -1,4 +1,4 @@
-import { Building } from "./messages/server2client/Building";
+import { Building, BuildingType } from "./messages/server2client/Building";
 
 export type TimeStringUnit = 'ms' | 's';
 
@@ -40,3 +40,12 @@ export function timeString(t: number, unit?: TimeStringUnit) {
 export function calcTimeLeft(b: Building): string {
 	return (b && b.buildTimeLeft > 0) ? timeString(b.buildTimeLeft) : "";
 }
+
+export function getImage(b: Building) {
+    switch (b.type) {
+      case BuildingType.Farm: return "assets/images/b_food_01.png";
+      case BuildingType.WoodCutter: return "assets/images/b_wood_01.png";
+      case BuildingType.Quarry: return "assets/images/b_stone_01.png";
+      case BuildingType.Storage: return "assets/images/b_storage_01.png";
+    }
+  }

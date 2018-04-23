@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { GameClientService } from './../../../game-client.service';
-import { Building, BuildingType, timeString, SyncData, calcTimeLeft } from '../../../shared';
+import { Building, BuildingType, timeString, SyncData, calcTimeLeft, getImage } from '../../../shared';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/operator/map";
 
@@ -61,14 +61,7 @@ export class SlotComponent implements AfterViewInit {
 			return "assets/buttons/empty_slot.png";
 
 		let isProgress = b.buildTimeLeft > 0;
-		switch (b.type) {
-			case BuildingType.Farm:
-				return isProgress ? "assets/buttons/hammer.png" : "assets/images/b_food_01.png";
-			case BuildingType.WoodCutter:
-				return isProgress ? "assets/buttons/hammer.png" : "assets/images/b_wood_01.png";
-			case BuildingType.Quarry:
-				return isProgress ? "assets/buttons/hammer.png" : "assets/images/b_stone_01.png";
-		}
+		return isProgress ? "assets/buttons/hammer.png" : getImage(b);
 	}
 
 	public get level(): number {

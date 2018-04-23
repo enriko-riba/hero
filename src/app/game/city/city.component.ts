@@ -1,3 +1,4 @@
+import { CityData } from './../../shared/messages/server2client/CityData';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { GameClientService } from '../../game-client.service';
 import { BuildMenuComponent } from './build-menu/build-menu.component';
@@ -13,7 +14,7 @@ export class CityComponent implements AfterViewInit {
 	@ViewChild("bm") bm: BuildMenuComponent;
 	@ViewChild("om") om: OptionsMenuComponent;
 
-	public buildingSlots = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+	public buildingSlots=[];
 
 	constructor(public gcs: GameClientService) {
 	}
@@ -26,14 +27,17 @@ export class CityComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit() {
-		this.subscription = this.gcs.gameState.subscribe(async s => this._state = await s);
+		this.subscription = this.gcs.gameState.subscribe(async s => this.state = await s);
 	}
-
+	
 	public get state(): SyncData {
 		return this._state;
 	}
 	public set state(v) {
 		this._state = v;
+		if(v){
+			this.buildingSlots = this.gcs.currentGameData.city.buildings.map((v,i) => i);
+		}
 	}
 
 	onSlotClick(index: number) {

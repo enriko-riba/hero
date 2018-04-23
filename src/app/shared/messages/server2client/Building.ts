@@ -11,12 +11,14 @@ export interface Building {
         upgradeCost: Resources;
         upgradeTime: number;
         destroyRefund: Resources;
+        storage: number;
 }
 
 export enum BuildingType {
         Farm,
         WoodCutter,
         Quarry,
+        Storage
 }
 
 export type ProductionType = 'f' | 'w' | 's';
