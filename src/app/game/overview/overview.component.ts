@@ -31,6 +31,7 @@ export class OverviewComponent implements AfterViewInit {
 	public set state(value) {
 		this._state = value;
 		if (this._state) {
+			//this.builders = this._state.city.builders;
 			if (!this.builders) {
 				this.builders = this._state.city.builders;
 			}

@@ -6,6 +6,9 @@
     width: 100vw;
     align-content: center;
     color: $text-color;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('assets/images/overview_back.png');
 }
 
 .menu {
@@ -97,13 +100,13 @@ a {
 
 @keyframes builder-pulse {
     0% {
-        background-color: #ffac4d;
+        background-color: #794580;
     }
     50% {
-        background-color: #ffff00;
+        background-color: #68c400;
     }
     100% {
-        background-color: #ffac4d;
+        background-color: #794580;
     }
 }
 
