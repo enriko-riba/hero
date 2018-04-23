@@ -37,10 +37,14 @@ export function timeString(t: number, unit?: TimeStringUnit) {
  * Returns a timestring for buildings remaining build time.
  * @param b 
  */
-export function calcTimeLeft(b: Building): string {
-	return (b && b.buildTimeLeft > 0) ? timeString(b.buildTimeLeft) : "";
+export function calcTimeLeft(b: Building, noTimeLeft?: string): string {
+	return (b && b.buildTimeLeft > 0) ? timeString(b.buildTimeLeft) : noTimeLeft || "";
 }
 
+/**
+ * Returns the building image.
+ * @param b 
+ */
 export function getImage(b: Building) {
     switch (b.type) {
       case BuildingType.Farm: return "assets/images/b_food_01.png";

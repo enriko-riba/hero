@@ -12,8 +12,9 @@ export class OverviewComponent implements AfterViewInit {
 	constructor(private gcs: GameClientService) {
 	}
 
-
+	public calcTimeLeft = calcTimeLeft;
 	public builders: Array<Builder>;
+	
 	private _state: SyncData;
 	private subscription;
 
@@ -28,6 +29,7 @@ export class OverviewComponent implements AfterViewInit {
 	public get state(): SyncData {
 		return this._state;
 	}
+
 	public set state(value) {
 		this._state = value;
 		if (this._state) {
@@ -42,6 +44,7 @@ export class OverviewComponent implements AfterViewInit {
 			}
 		}
 	}
+
 	public getAvailability(b: Builder) {
 		let date = new Date(b.expires);
 		if (date.getFullYear() > 9000) {
@@ -49,11 +52,6 @@ export class OverviewComponent implements AfterViewInit {
 		} else {
 			return "works untill " + date.toDateString();
 		}
-
-	}
-
-	public calcTimeLeft(b: Building) {
-		return b.buildTimeLeft > 0 ? calcTimeLeft(b) : "idle"
 	}
 
 	public isBuilding(b: Builder) {
