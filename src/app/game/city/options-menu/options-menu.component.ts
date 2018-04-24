@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Building, timeString, ProductionType } from '../../../shared';
+import { Building, timeString, ProductionType, getBuildingProductionString } from '../../../shared';
 import { GameClientService } from '../../../game-client.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class OptionsMenuComponent implements OnInit {
 	public building: Building;
 	public visible = false;
 	public upgradeTime = (b: Building) => timeString(this.building.upgradeTime, 'ms');
+	public getBuildingProductionString = getBuildingProductionString;
 	private index: number;
 
 	constructor(private gcs: GameClientService) { }

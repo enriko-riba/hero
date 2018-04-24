@@ -48,9 +48,9 @@ export class OverviewComponent implements AfterViewInit {
 	public getAvailability(b: Builder) {
 		let date = new Date(b.expires);
 		if (date.getFullYear() > 9000) {
-			return "lifetime contract";
+			return "available: permanent";
 		} else {
-			return "works untill " + date.toDateString();
+			return "available: " + date.toDateString();
 		}
 	}
 
