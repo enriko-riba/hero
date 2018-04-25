@@ -5,7 +5,7 @@ export * from "./messages/server2client/Builder";
 export * from "./messages/server2client/Building";
 export * from "./messages/server2client/CharData";
 export * from "./messages/server2client/ChatData";
-export * from "./messages/server2client/CityData";
+export * from "./messages/server2client/City";
 export * from "./messages/server2client/Item";
 export * from "./messages/server2client/Resources";
 export * from "./messages/server2client/ServerMessage";

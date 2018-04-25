@@ -35,23 +35,34 @@ export function getBuildingProductionType(b: Building): ProductionType {
         }
 }
 
-export function getBuildingProductionString(b: Building, level?:number): string {
-        //      TODO: keep in sync with server side logic
-        const baseFood = 0.5;
-        const baseWood = 0.5;
-        const baseStone = 0.2;
-
+export function getBuildingProduction(b: Building, level?:number): number {
         level = level || b.level;
-
         switch (b.type) {
                 case BuildingType.Farm:
-                        return `+${b.production.food *level * 3600} food/h`;
+                        return b.production.food * level;
                 case BuildingType.WoodCutter:
-                        return `+${b.production.wood *level * 3600} wood/h`;
+                        return b.production.wood * level;
                 case BuildingType.Quarry:
-                        return `+${b.production.stone * level * 3600} stone/h`;
+                        return b.production.stone * level;
                 case BuildingType.Storage:
-                        return `+${b.storage * level} storage`;
+                        return b.storage * level;
+                default:
+                        return 0;
+        }
+}
+
+export function getBuildingProductionString(b: Building, level?:number): string {
+        level = level || b.level;
+        var prod = getBuildingProduction(b, level);
+        switch (b.type) {
+                case BuildingType.Farm:
+                        return `+${prod * 3600} food/h`;
+                case BuildingType.WoodCutter:
+                        return `+${prod * 3600} wood/h`;
+                case BuildingType.Quarry:
+                        return `+${prod * 3600} stone/h`;
+                case BuildingType.Storage:
+                        return `+${prod} storage`;
         }
         return "";
 }

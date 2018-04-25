@@ -5,12 +5,14 @@
 			<a class="" routerLink="/game/city" routerLinkActive="active">City</a>
 			<a class="" routerLink="/game/map" routerLinkActive="active">Map</a>
 		</div>
-		<div>
+		<!-- <div>
 			<img src="assets/images/castle.png" width="128" />
 		</div>
 		<div>
 			<img src="assets/images/city.png" width="128" />
-		</div>
+		</div> -->
+		<div class="stat"><span>gold:</span><span>{{state?.gold}}</span></div>
+		<div class="stat"><span>experience:</span><span>{{state?.exp}}</span></div>
 	</div>
 
 	<div *ngFor="let b of builders" class="builder">

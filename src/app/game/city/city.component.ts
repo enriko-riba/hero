@@ -1,9 +1,8 @@
-import { CityData } from './../../shared/messages/server2client/CityData';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { GameClientService } from '../../game-client.service';
 import { BuildMenuComponent } from './build-menu/build-menu.component';
 import { OptionsMenuComponent } from "./options-menu/options-menu.component";
-import { SyncData } from '../../shared';
+import { SyncData, City } from '../../shared';
 
 @Component({
 	selector: 'app-city',

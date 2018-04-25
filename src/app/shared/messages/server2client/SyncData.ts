@@ -1,10 +1,10 @@
-import { CityData } from "./CityData";
+import { City } from "./City";
 import { CharData } from "./CharData";
 
 export interface SyncData {
     exp: number;
     gold: number;
-    city: CityData;
+    city: City;
     charData: CharData;
 
     //  for debuging

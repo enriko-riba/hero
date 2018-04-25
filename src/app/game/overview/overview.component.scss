@@ -4,15 +4,18 @@
     background-color: $back-color;
     height: 100vh;
     width: 100vw;
-    align-content: center;
     color: $text-color;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url('assets/images/overview_back.png');
+
+    .flex-container.column {
+        align-items: left;
+    }
 }
 
 .menu {
-    margin: 4px 4px 20px 4px;
+    margin: 5px;
     justify-content: flex-start;
 }
 
@@ -25,6 +28,19 @@ a {
     border: solid 1px $text-color;
     background-color: $skin-color;
     color: $text-color;
+}
+
+.stat {
+    margin: 5px;
+    span {
+        display: inline-block;
+        text-align: right;        
+    }
+    span:first-child {
+        color: #f3ffc5;
+        width: 55px;
+        margin-right: 24px;
+    }
 }
 
 .builder {

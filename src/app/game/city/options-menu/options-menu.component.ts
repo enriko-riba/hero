@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Building, timeString, ProductionType, getBuildingProductionString } from '../../../shared';
+import { Building, timeString, ProductionType, getBuildingProductionString, getBuildingProduction } from '../../../shared';
 import { GameClientService } from '../../../game-client.service';
 
 @Component({
@@ -37,6 +37,12 @@ export class OptionsMenuComponent implements OnInit {
 
 	public get destroyRefund() {
 		return this.building.destroyRefund;
+	}
+
+	public getUpgradeProductionIncrease(){
+		var prod = getBuildingProduction(this.building);
+		var next = getBuildingProduction(this.building, this.building.level + 1 );
+		return next - prod;
 	}
 
 	public showMenu(index: number) {

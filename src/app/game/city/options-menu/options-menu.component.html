@@ -10,6 +10,7 @@
 				<div class="desc" [class.red]="!canUpgrade()">
 					<span>Upgrade to level {{building.level + 1}}</span>
 					<span>{{upgradeTime()}}</span>
+					<span>{{upgradeTime()}}</span>
 				</div>
 				<div class="sub">
 					<span [class.red]="!canUpgrade('f')">{{building.upgradeCost.food}} food</span>

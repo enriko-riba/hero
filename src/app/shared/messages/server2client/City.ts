@@ -2,7 +2,7 @@ import { Building } from './Building';
 import { Resources } from "./Resources";
 import { Builder } from './Builder';
 
-export interface CityData {   
+export interface City {   
     resources : Resources
     production: Resources;
     buildings: Building[];
