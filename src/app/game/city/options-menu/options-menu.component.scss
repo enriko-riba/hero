@@ -1,6 +1,6 @@
 @import '~_variables.scss';
 .container {
-    font-family: 'Yatra One';
+    font-family: 'Open Sans';
 }
 
 .overlay {
@@ -28,7 +28,11 @@
 }
 
 .title {
-    font-size: 20px;
+    font-size: 19px;
+}
+
+.sub-title {
+    font-size: 15px;
     color: #fff;
 }
 
@@ -46,6 +50,7 @@
         border: solid 1px;
         margin-top: 10px;
         cursor: pointer;
+        font-size: 13px;
         &:hover {
             background-color: lighten($skin-color, 20%);
         }
@@ -53,21 +58,29 @@
 }
 
 .desc {
+    color: #fff;
     & span {
         margin-left: 10px;
     }
     display: flex;
     flex-flow: column;
-    & span:nth-child(2) {
-        color: white;
-    }
+    flex: 5;
+    & span:first-child {}
 }
 
-div.sub {
+div.cost {
     display: flex;
     flex-flow: column;
+    flex: 1;
     color: #fff; //#a9ee7a;
-    font-size: 13px;
-    margin-left: auto;
+    align-items: flex-end;
+    padding-right: 5px;
+}
+
+.right {
+    display: flex;
+    flex-flow: column;
+    flex: 1;
+    align-items: flex-start;
     margin-right: 10px;
 }

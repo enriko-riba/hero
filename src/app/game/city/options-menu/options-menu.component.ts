@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Building, timeString, ProductionType, getBuildingProductionString, getBuildingProduction } from '../../../shared';
+import { Building, timeString, 
+		ProductionType, 
+		getBuildingProductionString, 
+		getBuildingProduction,
+		getBuildingProductionTypeString, 
+		BuildingType} from '../../../shared';
 import { GameClientService } from '../../../game-client.service';
 
 @Component({
@@ -42,7 +47,12 @@ export class OptionsMenuComponent implements OnInit {
 	public getUpgradeProductionIncrease(){
 		var prod = getBuildingProduction(this.building);
 		var next = getBuildingProduction(this.building, this.building.level + 1 );
-		return next - prod;
+		var bpts = getBuildingProductionTypeString(this.building);
+		if(this.building.type != BuildingType.Storage){
+			return `+${(next - prod)*3600} ${bpts}/h`;
+		}else{
+			return `+${(next - prod)} ${bpts}`;
+		}
 	}
 
 	public showMenu(index: number) {

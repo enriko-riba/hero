@@ -24,18 +24,20 @@ export enum BuildingType {
 
 export type ProductionType = 'f' | 'w' | 's';
 
-export function getBuildingProductionType(b: Building): ProductionType {
+export function getBuildingProductionTypeString(b: Building): string {
         switch (b.type) {
                 case BuildingType.Farm:
-                        return 'f';
+                        return 'food';
                 case BuildingType.WoodCutter:
-                        return 'w';
+                        return 'wood';
                 case BuildingType.Quarry:
-                        return 's';
+                        return 'stone';
+                case BuildingType.Storage:
+                        return 'storage';
         }
 }
 
-export function getBuildingProduction(b: Building, level?:number): number {
+export function getBuildingProduction(b: Building, level?: number): number {
         level = level || b.level;
         switch (b.type) {
                 case BuildingType.Farm:
@@ -51,18 +53,18 @@ export function getBuildingProduction(b: Building, level?:number): number {
         }
 }
 
-export function getBuildingProductionString(b: Building, level?:number): string {
+export function getBuildingProductionString(b: Building, level?: number): string {
         level = level || b.level;
         var prod = getBuildingProduction(b, level);
         switch (b.type) {
                 case BuildingType.Farm:
-                        return `+${prod * 3600} food/h`;
+                        return `${prod * 3600} food/h`;
                 case BuildingType.WoodCutter:
-                        return `+${prod * 3600} wood/h`;
+                        return `${prod * 3600} wood/h`;
                 case BuildingType.Quarry:
-                        return `+${prod * 3600} stone/h`;
+                        return `${prod * 3600} stone/h`;
                 case BuildingType.Storage:
-                        return `+${prod} storage`;
+                        return `${prod} storage`;
         }
         return "";
 }
