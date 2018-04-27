@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -13,7 +14,7 @@ export class GameClientService {
 	private socket: WebSocket;
 	private cid = 1;
 
-	constructor(private loginSvc: LoginService) { }
+	constructor(private loginSvc: LoginService, private toastr: ToastrService) { }
 
 	public buildingTemplates: Array<Building>;
 	public itemTemplates: Array<Item>;
@@ -141,6 +142,7 @@ export class GameClientService {
 				break;
 
 			case "CMDR":
+			case "ERR ":
 				let parts = payload.split('|');
 				let load = parts[1];
 				let kindValue = parseInt(parts[0], 10);
@@ -179,6 +181,11 @@ export class GameClientService {
 		var building: Building;
 
 		switch (msg.CommandKind) {
+			case MessageKind.Error:
+				//console.error(msg.Payload);
+				this.toastr.error(msg.Payload as any,'Command error');
+				break;
+
 			case MessageKind.StartBuilding:
 				slot = (msg.Payload as any).slot;
 				building = (msg.Payload as any).building;

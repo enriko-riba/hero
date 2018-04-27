@@ -11,7 +11,8 @@ export class Request{
   }
   
   export enum MessageKind{
-    Command  = 2,
+    Error = 0,
+    Command = 2,
     StartBuilding = 10,
     StartBuildingUpgrade = 11,
     StartBuildingDestroy = 12,

@@ -1,6 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -11,6 +11,8 @@ import { GameClientService } from './game-client.service';
 import { BackButtonComponent } from './shared/back-button/back-button.component';
 import { SharedModule } from './shared/shared.module';
 
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
 	declarations: [
 		AppComponent
@@ -19,7 +21,18 @@ import { SharedModule } from './shared/shared.module';
 		BrowserModule,
 		AppRoutingModule,
 		SharedModule,
-		ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
+		ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production },),
+		BrowserAnimationsModule,
+		ToastrModule.forRoot( {
+			"closeButton": false,
+			"newestOnTop": true,
+			"progressBar": true,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"timeOut": 5000,
+			"extendedTimeOut": 1000,
+			"easing": "swing"
+		  }),
 	],
 	providers: [LoginService, GameClientService, AuthGuard],
 	bootstrap: [AppComponent]
