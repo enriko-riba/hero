@@ -17,7 +17,7 @@
 .menu {
     margin: 5px;
     justify-content: flex-start;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 a {
@@ -43,11 +43,7 @@ a {
     }
 }
 
-.builder {
-    margin-top: 10px;
-    font-size: 14px;
-    display: flex;
-}
+
 
 .slot {
     margin: 5px;
@@ -58,6 +54,13 @@ a {
     width: 64px;
     height: 64px;
     
+    &.rotate img{
+        animation: rotate 2s infinite;
+    }
+    &.shake img {
+        animation: shake 2s linear infinite;
+    }
+
     img {
         display: block; //  show both images
         opacity: 0.6;
@@ -90,7 +93,7 @@ a {
     }
 }
 
-.builder-details {
+.details {
     margin: 5px;
     padding: 5px;
     flex: 1;
@@ -102,6 +105,34 @@ a {
     }
 }
 
+.builder {
+    margin-top: 10px;
+    font-size: 16px;
+    display: flex;
+}
+
+
+@keyframes rotate { 
+    0% { transform: rotateY(0deg);}
+    100%{ transform: rotateY(360deg);}
+}
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(1px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-2px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(2px, 0, 0);
+    }
+  }
 @keyframes builder-working {
     0% {
         transform: scale(1.0) rotate(-5deg);
@@ -119,7 +150,7 @@ a {
         background-color: #794580;
     }
     50% {
-        background-color: #a2d27e;
+        background-color: #6cb914;
     }
     100% {
         background-color: #794580;
