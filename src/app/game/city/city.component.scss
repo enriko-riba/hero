@@ -7,19 +7,15 @@
     background-size: cover; 
     align-content: flex-start;
     color: $text-color;
-    & div {
-        justify-content: flex-start;
-    }
-}
-
-.res-list {
-    margin: 4px 35px 4px 4px;
+    // & div {
+    //     justify-content: flex-start;
+    // }
 }
 
 .resource {
     background-color: $skin-color;
     border: solid 1px $text-color;
-    flex: 1 1 25%;
+    //flex: 1 1 25%;
     margin-left: 2px;
     text-align: left;
     padding: 3px 2px 3px 5px;

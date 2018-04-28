@@ -1,18 +1,37 @@
 <div class="content">
-	<div class="flex-container column">
-		<div class="flex-container row menu">
+	<div class="flex-container row main-margin">
+		<div>
 			<a class="" routerLink="/game/character" routerLinkActive="active">Hero</a>
+		</div>
+		<div>
 			<a class="" routerLink="/game/city" routerLinkActive="active">City</a>
+		</div>
+		<div>
 			<a class="" routerLink="/game/map" routerLinkActive="active">Map</a>
 		</div>
-
-		<div class="stat"><div class="slot shake"><img src="assets/images/gold.png" /></div><div class="details"><span>{{state?.gold}}</span></div></div>
-		<div class="stat"><div class="slot rotate"><img src="assets/images/exp.png" /></div><div class="details"><span>{{state?.exp}}</span></div></div>
+	</div>
+	<div class="flex-container column">
+		<div class="stat">
+			<div class="slot shake">
+				<img src="assets/images/gold.png" />
+			</div>
+			<div class="details">
+				<span>{{state?.gold}}</span>
+			</div>
+		</div>
+		<div class="stat">
+			<div class="slot rotate">
+				<img src="assets/images/exp.png" />
+			</div>
+			<div class="details">
+				<span>{{state?.exp}}</span>
+			</div>
+		</div>
 	</div>
 
 	<div *ngFor="let b of builders" class="builder">
 		<div class="slot" [class.progress]="isBuilding(b)">
-			<img src="assets/buttons/builder.png"  />
+			<img src="assets/buttons/builder.png" />
 			<img src="assets/buttons/sleep.png" class="zzz" />
 		</div>
 		<div class="details">
