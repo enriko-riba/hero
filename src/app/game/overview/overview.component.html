@@ -11,12 +11,14 @@
 		<div>
 			<img src="assets/images/city.png" width="128" />
 		</div> -->
-		<div class="stat"><span>gold:</span><span>{{state?.gold}}</span></div>
-		<div class="stat"><span>experience:</span><span>{{state?.exp}}</span></div>
+
+		<!-- <div class="stat"><span>gold:</span><span>{{state?.gold}}</span></div> -->
+		<div class="stat"><div class="slot"><img src="assets/images/gold.png" /></div><span>{{state?.gold}}</span></div>
+		<div class="stat"><div class="slot"><img src="assets/images/exp.png" /></div><span>{{state?.exp}}</span></div>
 	</div>
 
 	<div *ngFor="let b of builders" class="builder">
-		<div class="builder-icon" [class.progress]="isBuilding(b)">
+		<div class="slot" [class.progress]="isBuilding(b)">
 			<img src="assets/buttons/builder.png"  />
 			<img src="assets/buttons/sleep.png" class="zzz" />
 		</div>
