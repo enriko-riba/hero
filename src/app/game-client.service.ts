@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Subscription } from 'rxjs/Subscription';
 import { LoginService } from './login.service';
-import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData, Resources, ProductionType } from './shared';
+import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData, Resources, ProductionType, Kingdom } from './shared';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
@@ -18,6 +18,7 @@ export class GameClientService {
 
 	public buildingTemplates: Array<Building>;
 	public itemTemplates: Array<Item>;
+	public kingdoms: Array<Kingdom>;
 	public isConnected = false;
 
 
@@ -161,6 +162,7 @@ export class GameClientService {
 			case MessageType.WorldInit:
 				this.buildingTemplates = (msg.Payload as WorldInitData).BuildingData as Building[];
 				this.itemTemplates = (msg.Payload as WorldInitData).ItemData as Item[];
+				this.kingdoms = (msg.Payload as WorldInitData).KingdomData as Kingdom[];
 				break;
 
 			case MessageType.Sync:
