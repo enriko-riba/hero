@@ -162,7 +162,7 @@ export class GameClientService {
 			case MessageType.WorldInit:
 				this.buildingTemplates = (msg.Payload as WorldInitData).BuildingData as Building[];
 				this.itemTemplates = (msg.Payload as WorldInitData).ItemData as Item[];
-				this.kingdoms = (msg.Payload as WorldInitData).KingdomData as Kingdom[];
+				this.kingdoms = (msg.Payload as WorldInitData).KingdomsData as Kingdom[];
 				break;
 
 			case MessageType.Sync:
