@@ -33,17 +33,17 @@
     }
 
     div.lvl {
-        float: left;
         position: relative;
-        top: -59px;
-        left: 10px;
+        display: inline;
+        top: -61px;
+        left: 8px;        
+        text-align: left;
         padding: 0 2px 0 2px;
-        text-align: center;
         font-size: 22px;
         color: #a600b0;
         background-color: #fbfbb494;
-        height: 18px;
-        line-height: 18px;
+        //height: 18px;
+        //line-height: 18px;
     }
 }
 
@@ -71,9 +71,8 @@
 .time {
     background-color: #385858aa;
     position: relative;
-    top: -22px;
-    float: left;
-    margin-left: 9px;
+    top: -36px;
+    left: -7px;
 }
 
 @keyframes pulse {
