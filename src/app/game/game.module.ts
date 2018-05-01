@@ -9,11 +9,14 @@ import {
 import { AdventureComponent } from './adventure/adventure.component';
 import { TravelComponent } from './travel/travel.component';
 
+import { DragScrollModule } from 'ngx-drag-scroll';
+
 @NgModule({
 	imports: [
 		CommonModule,
 		GameRoutingModule,
-		SharedModule
+		SharedModule,
+		DragScrollModule,
 	],
 	declarations: [CharacterComponent, CityComponent, OverviewComponent, SlotComponent, BuildMenuComponent, OptionsMenuComponent, MapComponent, AdventureComponent, TravelComponent]
 })

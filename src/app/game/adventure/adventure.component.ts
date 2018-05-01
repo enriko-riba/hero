@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdventureComponent implements OnInit {
 
+  public items : Array<any> = [];
   constructor() { }
 
   ngOnInit() {

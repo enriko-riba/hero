@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DragScrollDirective } from 'ngx-drag-scroll';
 
 @Component({
   selector: 'app-map',

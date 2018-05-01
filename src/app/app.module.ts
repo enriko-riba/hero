@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { ToastrModule } from 'ngx-toastr';
 
+
 @NgModule({
 	declarations: [
 		AppComponent
@@ -29,7 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
 			"progressBar": true,
 			"positionClass": "toast-top-right",
 			"preventDuplicates": false,
-			"timeOut": 5000,
+			"timeOut": 6000,
 			"extendedTimeOut": 1000,
 			"easing": "swing"
 		  }),

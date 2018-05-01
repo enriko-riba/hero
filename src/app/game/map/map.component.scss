@@ -1,4 +1,7 @@
 .content {
     height: 100vh;
-    overflow:scroll;
+    img {
+        cursor: grab;
+        overflow: hidden;
+    }
 }
