@@ -1,9 +1,11 @@
+import { AdventureComponent } from './adventure/adventure.component';
 import { OverviewComponent } from './overview/overview.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CharacterComponent } from './character/character.component';
 import { CityComponent } from './city/city.component';
 import { MapComponent } from './map/map.component';
+import { TravelComponent } from './travel/travel.component';
 
 const routes: Routes = [
 	{
@@ -26,6 +28,15 @@ const routes: Routes = [
 	{
 		path: 'map',
 		component: MapComponent
+	},
+
+	{
+		path: 'adventure',
+		component: AdventureComponent
+	},
+	{
+		path: 'travel',
+		component: TravelComponent
 	},
 ];
 

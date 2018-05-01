@@ -16,9 +16,26 @@ export class GameClientService {
 
 	constructor(private loginSvc: LoginService, private toastr: ToastrService) { }
 
+	/**
+	 * Templates for buildings.
+	 */
 	public buildingTemplates: Array<Building>;
+
+	/**
+	 * Templates for items.
+	 */
 	public itemTemplates: Array<Item>;
+
+	/**
+	 * List of all kingdoms with all places.
+	 */
 	public kingdoms: Array<Kingdom>;
+
+	/**
+	 * The players home kingdom.
+	 */
+	public homeKingdom : Kingdom;
+
 	public isConnected = false;
 
 
@@ -163,10 +180,13 @@ export class GameClientService {
 				this.buildingTemplates = (msg.Payload as WorldInitData).BuildingData as Building[];
 				this.itemTemplates = (msg.Payload as WorldInitData).ItemData as Item[];
 				this.kingdoms = (msg.Payload as WorldInitData).KingdomsData as Kingdom[];
+				//	TODO: grab last login and other interesting stuff to display
+				this.toastr.info("Thy duties beseech thee, my liege!", "Welcome " + this.loginSvc.currentUser.displayName);
 				break;
 
 			case MessageType.Sync:
 				this.currentGameData = msg.Payload as SyncData;
+				this.homeKingdom = this.kingdoms.find( k=> k.id === this.currentGameData.kingdomId)
 				this.currentGameData.mid = ++this.mid;
 				this.currentState.next(this.currentGameData);
 				break;

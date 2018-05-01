@@ -25,7 +25,7 @@ a {
     display: flex;
     flex: 1;
     margin-left: 2px;
-    padding: 17px;
+    padding: 12px;
     border: solid 1px $text-color;
     background-color: $skin-color;
     color: $text-color;
@@ -111,7 +111,13 @@ a {
     display: flex;
 }
 
-
+.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 5px;
+}
 @keyframes rotate { 
     0% { transform: rotateY(0deg);}
     100%{ transform: rotateY(360deg);}

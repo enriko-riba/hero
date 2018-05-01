@@ -37,6 +37,8 @@ export class LoginService {
 	private googleProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
 	private fbProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
 
+	public currentUser: any;
+
 	public googleLoadedPromise: Promise<void>;
 
 	constructor(private ngZone: NgZone) {
@@ -106,8 +108,14 @@ export class LoginService {
 		if (user) {
 			this.authProviderStatus.next(AuthProvider.Google);
 			this.googleProviderStatus.next(ProviderStatus.SignedIn);
+			let bp = user.getBasicProfile();
+			this.currentUser = {
+				displayName : bp.getName(),
+				email : bp.getEmail(),
+			};
 		} else {
 			this.googleProviderStatus.next(ProviderStatus.SignedOut);
+			this.currentUser = null;
 		}
 	}
 	//----------------------------------------------//
@@ -183,12 +191,4 @@ export class AuthGuard implements CanActivate /*, CanLoad */ {
 		}
 		return this.isSignedIn;
 	}
-
-	// public canLoad(){
-	//   console.log('CanLoad guard: ', this.isSignedIn);
-	//   if(!this.isSignedIn){
-	//     this.router.navigate(['redirectToRoot']);
-	//   }
-	//   return Promise.resolve(this.isSignedIn);
-	// }
 }

@@ -20,6 +20,14 @@
 			</div>
 		</div>
 		<div class="stat">
+				<div class="slot shake">
+					<img src="assets/images/coins.png" />
+				</div>
+				<div class="details">
+					<span>{{state?.coins}}</span>
+				</div>
+			</div>
+		<div class="stat">
 			<div class="slot rotate">
 				<img src="assets/images/exp.png" />
 			</div>
@@ -41,6 +49,20 @@
 			<div>
 				<span>{{calcTimeLeft(b,'idle')}}</span>
 			</div>
+		</div>
+	</div>
+
+	<div class="bottom">
+		<div class="flex-container row">
+			<div>
+				<a class="" routerLink="/game/adventure" routerLinkActive="active">Adventure</a>
+			</div>
+			<div>
+				<a class="" routerLink="/game/travel" routerLinkActive="active">Travel</a>
+			</div>
+			<!-- <div>
+				<a class="" routerLink="/game/kingdoms" routerLinkActive="active">Kingdoms Map</a>
+			</div> -->
 		</div>
 	</div>
 </div>
