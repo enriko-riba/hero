@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { GameClientService } from './../../../game-client.service';
 import { Building, BuildingType, timeString, SyncData, calcTimeLeft, getImage } from '../../../shared';
-import { Observable } from 'rxjs/Observable';
-import "rxjs/add/operator/map";
+import { map } from 'rxjs/operators';
 
 @Component({
 	selector: 'city-slot',
@@ -30,7 +29,7 @@ export class SlotComponent implements AfterViewInit {
 
 	ngAfterViewInit() {
 		this.subscription = this.gcs.gameState
-			.map(s => s.city.buildings[this.id])
+			.pipe(map(s => s.city.buildings[this.id]))			
 			.subscribe(this.updateState.bind(this));
 	}
 

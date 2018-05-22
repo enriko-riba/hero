@@ -1,7 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { CanActivate, CanLoad, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 declare var gapi: any;
 

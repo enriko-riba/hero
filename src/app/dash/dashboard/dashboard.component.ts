@@ -1,6 +1,5 @@
 import { LoginService, ProviderStatus, AuthProvider } from './../../login.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 declare var gapi: any;
 
 @Component({

@@ -1,12 +1,9 @@
-import { ToastrService } from 'ngx-toastr';
+// import { ToastrService } from 'ngx-toastr';
 import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subscriber } from 'rxjs/Subscriber';
-import { Subscription } from 'rxjs/Subscription';
 import { LoginService } from './login.service';
 import { Building, Item, Request, SyncData, ServerMessage, MessageKind, MessageType, WorldInitData, Resources, ProductionType, Kingdom } from './shared';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable()
@@ -14,7 +11,7 @@ export class GameClientService {
 	private socket: WebSocket;
 	private cid = 1;
 
-	constructor(private loginSvc: LoginService, private toastr: ToastrService) { }
+	constructor(private loginSvc: LoginService/*, private toastr: ToastrService*/) { }
 
 	/**
 	 * Templates for buildings.
@@ -181,7 +178,7 @@ export class GameClientService {
 				this.itemTemplates = (msg.Payload as WorldInitData).ItemData as Item[];
 				this.kingdoms = (msg.Payload as WorldInitData).KingdomsData as Kingdom[];
 				//	TODO: grab last login and other interesting stuff to display
-				this.toastr.info("Thy duties beseech thee, my liege!", "Welcome " + this.loginSvc.currentUser.displayName);
+				//this.toastr.info("Thy duties beseech thee, my liege!", "Welcome " + this.loginSvc.currentUser.displayName);
 				break;
 
 			case MessageType.Sync:
@@ -204,8 +201,9 @@ export class GameClientService {
 
 		switch (msg.CommandKind) {
 			case MessageKind.Error:
+				//	TODO: notify
 				//console.error(msg.Payload);
-				this.toastr.error(msg.Payload as any,'Command error');
+				//this.toastr.error(msg.Payload as any,'Command error');
 				break;
 
 			case MessageKind.StartBuilding:
