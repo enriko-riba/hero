@@ -11,7 +11,7 @@ import { GameClientService } from './game-client.service';
 import { BackButtonComponent } from './shared/back-button/back-button.component';
 import { SharedModule } from './shared/shared.module';
 
-// import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -24,16 +24,16 @@ import { SharedModule } from './shared/shared.module';
 		SharedModule,
 		ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production },),
 		BrowserAnimationsModule,
-		// ToastrModule.forRoot( {
-		// 	"closeButton": false,
-		// 	"newestOnTop": true,
-		// 	"progressBar": true,
-		// 	"positionClass": "toast-top-right",
-		// 	"preventDuplicates": false,
-		// 	"timeOut": 6000,
-		// 	"extendedTimeOut": 1000,
-		// 	"easing": "swing"
-		//   }),
+		ToastrModule.forRoot( {
+			"closeButton": false,
+			"newestOnTop": true,
+			"progressBar": true,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"timeOut": 6000,
+			"extendedTimeOut": 1000,
+			"easing": "swing"
+		  }),
 	],
 	providers: [LoginService, GameClientService, AuthGuard],
 	bootstrap: [AppComponent]
