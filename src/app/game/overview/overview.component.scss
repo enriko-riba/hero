@@ -7,7 +7,7 @@
     color: $text-color;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url('assets/images/overview_back.png');
+    background-image: url('../../../assets/images/overview_back.png');
 
     .flex-container.column {
         align-items: flex-start;
@@ -47,7 +47,7 @@ a {
 
 .slot {
     margin: 5px;
-    background-image: url('assets/images/slot.png');
+    background-image: url('../../../assets/images/slot.png');
     background-repeat: no-repeat;
     background-color: $slot-back-color;
     border-radius: 6px;
