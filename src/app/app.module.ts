@@ -6,7 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { AppComponent } from './app.component';
-import { LoginService, AuthGuard } from './login.service';
+import { LoginService } from './login.service';
+import { AuthGuardService } from './authguard.service';
 import { GameClientService } from './game-client.service';
 import { SharedModule } from './shared/shared.module';
 
@@ -34,7 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
 			"easing": "swing"
 		  }),
 	],
-	providers: [LoginService, GameClientService, AuthGuard],
+	providers: [LoginService, GameClientService, AuthGuardService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

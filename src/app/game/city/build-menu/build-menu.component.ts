@@ -11,7 +11,7 @@ export class BuildMenuComponent implements OnInit {
   public visible = false;
   public items: Building[];
   public buildTime = (b: Building) => timeString(b.upgradeTime,'ms');
-public getImage = getImage;
+  public getImage = getImage;
   private slotIndex: number;
   constructor(private gcs: GameClientService) { }
 

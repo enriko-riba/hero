@@ -1,22 +1,21 @@
 import { Injectable, NgZone } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
 declare var gapi: any;
 
 export var clientId = "679482392778-8gu33hgl4v7jaq8irc4ct9mi3u8o5g59.apps.googleusercontent.com";
 
-const data = {
-	supportedAuthMethods: [
-		"https://accounts.google.com",
-		"googleyolo://id-and-password"
-	],
-	supportedIdTokenProviders: [
-		{
-			uri: "https://accounts.google.com",
-			clientId: clientId
-		}]
-};
+// const data = {
+// 	supportedAuthMethods: [
+// 		"https://accounts.google.com",
+// 		"googleyolo://id-and-password"
+// 	],
+// 	supportedIdTokenProviders: [
+// 		{
+// 			uri: "https://accounts.google.com",
+// 			clientId: clientId
+// 		}]
+// };
 
 export enum AuthProvider {
 	None,
@@ -34,19 +33,19 @@ export enum ProviderStatus {
 export class LoginService {
 	private authProviderStatus: BehaviorSubject<AuthProvider> = new BehaviorSubject(AuthProvider.None);
 	private googleProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
-	private fbProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
+	//private fbProviderStatus: BehaviorSubject<ProviderStatus> = new BehaviorSubject(ProviderStatus.Initializing);
 
 	public currentUser: any;
 
 	public googleLoadedPromise: Promise<void>;
 
-	constructor(private ngZone: NgZone) {
+	constructor(private zone: NgZone) {
 		this.googleLoadedPromise = new Promise((resolve, reject) => {
 			gapi.load('auth2', () => {
 				gapi.auth2.init({
 					client_id: clientId,
 					scope: 'email profile openid'
-				}).then(() => this.ngZone.run(() => {
+				}).then(() => this.zone.run(() => {
 					//  check google user status
 					if (gapi.auth2.getAuthInstance().isSignedIn.get()) {
 						this.googleProviderStatus.next(ProviderStatus.SignedIn);
@@ -171,23 +170,5 @@ export class LoginService {
 			//  TODO: sign out FB
 		}
 		this.authProviderStatus.next(AuthProvider.None);
-	}
-}
-
-export class AuthGuard implements CanActivate /*, CanLoad */ {
-	constructor(
-		private loginSvc: LoginService,
-		private router: Router) {
-		this.loginSvc.authStatus.subscribe(ap => this.isSignedIn = ap != AuthProvider.None);
-	}
-
-	private isSignedIn: boolean;
-
-	public canActivate() {
-		if (!this.isSignedIn) {
-			console.log('CanActivate guard prevented navigation!');
-			this.router.navigate(['redirectToRoot']);
-		}
-		return this.isSignedIn;
 	}
 }
